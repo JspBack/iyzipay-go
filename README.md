@@ -36,7 +36,7 @@ go get github.com/JspBack/iyzipay-go
 
 ## Örnekler
 
-Şu anda yalnızca test klasöründe örnekler bulunmaktadır.
+Örnekler /examples dosyasında.
 
 ## Notlar
 

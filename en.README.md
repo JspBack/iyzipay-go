@@ -36,7 +36,7 @@ go get github.com/JspBack/iyzipay-go
 
 ## Examples
 
-Only examples are in test folder for now.
+Examples are in the /examples file.
 
 ## Notes
 

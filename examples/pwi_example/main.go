@@ -1,22 +1,22 @@
-package test
+package main
 
 import (
-	"testing"
+	"fmt"
+	"os"
 
 	"github.com/JspBack/iyzipay-go"
 )
 
-func TestInitPWIPaymentRequest(t *testing.T) {
-	ApiKey := "sandbox-..."
-	SecretKey := "sandbox-..."
+func main() {
+	apikey := os.Getenv("IYZIPAY_API_KEY")
+	apiSecret := os.Getenv("IYZIPAY_API_SECRET")
 
-	client, err := iyzipay.New(ApiKey, SecretKey)
+	client, err := iyzipay.New(apikey, apiSecret)
 	if err != nil {
-		t.Errorf("Error creating client: %v", err)
-		return
+		panic(err)
 	}
 
-	InitRequest := &iyzipay.InitPWIRequest{
+	req := &iyzipay.InitPWIRequest{
 		Locale:              "tr",
 		ConversationID:      "123456789",
 		Price:               "1.0",
@@ -82,18 +82,32 @@ func TestInitPWIPaymentRequest(t *testing.T) {
 		},
 	}
 
-	response, err := client.InitilizePWIPaymentRequest(InitRequest)
+	res, err := client.InitilizePWIPaymentRequest(req)
 	if err != nil {
-		t.Errorf("Error creating payment: %v", err)
+		panic(err)
+	}
+
+	if res.Status == "success" {
+		fmt.Println("Token: ", res.Token)
+		fmt.Println("PayWithIyzicoPageUrl: ", res.PayWithIyzicoPageUrl)
+	}
+
+	CheckReq := &iyzipay.CheckPWIRequest{
+		Locale:         "tr",
+		ConversationID: "123456789",
+		Token:          res.Token,
+	}
+
+	// Bu örneği direk çalıştırırsanız hata alırsınız. Öncelikle PayWithIyzicoPageUrl adresine gidip işlemi tamamlamanız gerekmektedir.
+	CheckRes, err := client.CheckPWIPaymentRequest(CheckReq)
+	if err != nil {
+		panic(err)
+	}
+
+	if CheckRes.Status == "success" {
+		fmt.Println("PaymentId: ", CheckRes.PaymentID)
 		return
 	}
 
-	if response.Status != "success" {
-		t.Errorf("Error creating payment request: %v", response)
-		return
-	}
-
-	t.Logf("Response: %v", response)
-	t.Logf("Token: %v", response.Token)
-	t.Logf("PayWithIyzicoPageUrl: %v", response.PayWithIyzicoPageUrl)
+	panic("PWI Payment Request Failed")
 }

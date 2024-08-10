@@ -1,31 +1,39 @@
-package test
+package main
 
 import (
-	"testing"
+	"fmt"
+	"os"
 
 	"github.com/JspBack/iyzipay-go"
 )
 
-func TestInitPWIPaymentRequest(t *testing.T) {
-	ApiKey := "sandbox-..."
-	SecretKey := "sandbox-..."
+func main() {
+	apikey := os.Getenv("IYZIPAY_API_KEY")
+	apiSecret := os.Getenv("IYZIPAY_API_SECRET")
 
-	client, err := iyzipay.New(ApiKey, SecretKey)
+	client, err := iyzipay.New(apikey, apiSecret)
 	if err != nil {
-		t.Errorf("Error creating client: %v", err)
+		fmt.Println("Error creating client: ", err)
 		return
 	}
 
-	InitRequest := &iyzipay.InitPWIRequest{
-		Locale:              "tr",
-		ConversationID:      "123456789",
-		Price:               "1.0",
-		BasketId:            "B67832",
-		PaymentGroup:        "PRODUCT",
-		CallbackUrl:         "https://www.merchant.com/callback",
-		Currency:            "TRY",
-		PaidPrice:           "1.0",
-		EnabledInstallments: []string{"2", "3", "6", "9"},
+	ntdsReq := &iyzipay.PaymentRequest{
+		Locale:         "tr",
+		ConversationID: "123456789",
+		Price:          "1.0",
+		PaidPrice:      "1.0",
+		Installment:    1,
+		PaymentChannel: "WEB",
+		BasketID:       "B67832",
+		PaymentGroup:   "PRODUCT",
+		PaymentCard: iyzipay.PaymentCard{
+			CardHolderName: "John Doe",
+			CardNumber:     "5528790000000008",
+			ExpireYear:     "2030",
+			ExpireMonth:    "12",
+			CVC:            "123",
+			RegisterCard:   0,
+		},
 		Buyer: iyzipay.Buyer{
 			ID:                  "BY789",
 			Name:                "John",
@@ -39,7 +47,8 @@ func TestInitPWIPaymentRequest(t *testing.T) {
 			City:                "Istanbul",
 			Country:             "Turkey",
 			ZipCode:             "34732",
-			IP:                  "85.34.78.112"},
+			IP:                  "85.34.78.112",
+		},
 		ShippingAddress: iyzipay.Address{
 			Address:     "Nidakule Göztepe, Merdivenköy Mah. Bora Sok. No:1",
 			ContactName: "Jane Doe",
@@ -80,20 +89,20 @@ func TestInitPWIPaymentRequest(t *testing.T) {
 				Price:     "0.2",
 			},
 		},
+		Currency: "TRY",
 	}
 
-	response, err := client.InitilizePWIPaymentRequest(InitRequest)
+	response, err := client.NonTDSPaymentRequest(ntdsReq)
+
 	if err != nil {
-		t.Errorf("Error creating payment: %v", err)
+		fmt.Println("Error creating payment request: ", err)
 		return
 	}
 
-	if response.Status != "success" {
-		t.Errorf("Error creating payment request: %v", response)
+	if response.Status == "success" {
+		fmt.Println("Payment: ", response)
 		return
 	}
 
-	t.Logf("Response: %v", response)
-	t.Logf("Token: %v", response.Token)
-	t.Logf("PayWithIyzicoPageUrl: %v", response.PayWithIyzicoPageUrl)
+	panic("Payment failed")
 }

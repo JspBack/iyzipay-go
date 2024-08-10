@@ -9,7 +9,7 @@ import (
 
 // TROY, MASTERCARD, VISA ve AMEX markalı kartlarla yapılan işlemleri destekler.
 // BONUS, WORLD, MAXIMUM, AXESS, CARDFINANS, PARAF, ADVANTAGE gibi taksit programlarına katılmış olan kartlara 2, 3, 6, 9 ve 12 taksit seçenekleri sunulmaktadır.
-// Response da dönen html içeriği ve paymentId saklanmalıdır.
+// Response da dönen paymentId saklanmalıdır.
 //
 // Bincontrol işlemi otomatik olarak yapılyor eğer bin kontrol yapmak istemiyorsanız binRequest parametresini false yapabilirsiniz.
 // Html içeriği otomatik olarak decode ediliyor eğer decode etmek istemiyorsanız htmlDecodeRequest parametresini false yapabilirsiniz.

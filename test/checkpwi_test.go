@@ -23,7 +23,7 @@ func TestCheckPWIPaymentRequest(t *testing.T) {
 		Token:          Token,
 	}
 
-	response, err := client.CheckPWIPaymentRequest(*CheckRequest)
+	response, err := client.CheckPWIPaymentRequest(CheckRequest)
 	if err != nil {
 		t.Errorf("Error creating payment request: %v", err)
 		return
