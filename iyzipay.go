@@ -8,9 +8,13 @@ import (
 
 type Option func(*iyzipayClient)
 
-// Iyzipay, Iyzipay API ile etkileşim kurmak için kullanılan istemciyi temsil eder.
+// (TR) Iyzipay, Iyzipay API ile etkileşim kurmak için kullanılan istemciyi temsil eder.
+//
+// (EN) Iyzipay, creates a client to interact with IYzipay API.
 type iyzipayClient struct {
-	// APIKey, Iyzipay'den aldığınız anahtardır.
+	// (TR) APIKey, Iyzipay'den aldığınız API anahtarıdır.
+	// 
+	// (EN) APIKey, is the API key you get from Iyzipay.
 	apiKey string
 
 	// APISecret, Iyzipay'den aldığınız gizli anahtardır.
