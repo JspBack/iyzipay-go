@@ -10,7 +10,7 @@ import (
 // PWI ile ödeme başlatma isteği yapılır.
 //
 // Response içerisinde gelen token ve payWithIyzicoPageUrl saklanmalıdır.
-func (i iyzipayClient) InitPWIPaymentRequest(req InitPWIRequest) (response InitPWIResponse, err error) {
+func (i iyzipayClient) InitPWIPaymentRequest(req *InitPWIRequest) (response InitPWIResponse, err error) {
 	if err = req.validate(); err != nil {
 		return response, err
 	}

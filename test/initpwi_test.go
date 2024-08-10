@@ -82,7 +82,7 @@ func TestInitPWIPaymentRequest(t *testing.T) {
 		},
 	}
 
-	response, err := client.InitPWIPaymentRequest(*InitRequest)
+	response, err := client.InitPWIPaymentRequest(InitRequest)
 	if err != nil {
 		t.Errorf("Error creating payment: %v", err)
 		return

@@ -25,7 +25,7 @@ func TestFinalizeTDSPaymentRequest(t *testing.T) {
 		PaymentConversationId: ConversationID,
 	}
 
-	response, err := client.FinalizeTDSPayment(*FinalizeRequest)
+	response, err := client.FinalizeTDSPayment(FinalizeRequest)
 	if err != nil {
 		t.Errorf("Error creating payment request: %v", err)
 		return

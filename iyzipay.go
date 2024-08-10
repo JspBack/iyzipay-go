@@ -60,10 +60,12 @@ func New(apiKey, apiSecret string, opts ...Option) (*iyzipayClient, error) {
 	}
 
 	client := &iyzipayClient{
-		apiKey:    apiKey,
-		apiSecret: apiSecret,
-		baseURI:   baseURI,
-		client:    &http.Client{},
+		apiKey:            apiKey,
+		apiSecret:         apiSecret,
+		baseURI:           baseURI,
+		client:            &http.Client{},
+		binRequest:        true, // Default olarak true
+		htmlDecodeRequest: true, // Default olarak true
 	}
 
 	for _, opt := range opts {

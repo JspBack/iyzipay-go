@@ -94,7 +94,7 @@ func TestInitTDSPaymentRequest(t *testing.T) {
 		CallbackUrl: "https://www.merchant.com/callback",
 	}
 
-	response, decodedHtmlContent, err := client.InitilizeTDSPayment(*InitRequest)
+	response, decodedHtmlContent, err := client.InitilizeTDSPayment(InitRequest)
 	if err != nil {
 		t.Errorf("Error creating payment request: %v", err)
 		return
