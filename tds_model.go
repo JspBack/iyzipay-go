@@ -2,6 +2,7 @@ package iyzipay
 
 import (
 	"fmt"
+	"net/url"
 	"strings"
 	"time"
 
@@ -14,18 +15,17 @@ type InitTDSRequest struct {
 	// 3D Secure işlemi başlatıldığında, banka tarafından kullanıcıya gösterilecek sayfa URL'si.(https olamlıdır.)
 	//
 	// zorunlu.
-	CallbackUrl string `json:"callbackUrl" validate:"required"`
+	CallbackUrl string `json:"callbackUrl" validate:"required,httpsurl"`
 }
 
 type InitTDSResponse struct {
-
 	// Servis yanıt sonucu (başarılı/başarısız)
 	Status string `json:"status"`
 
 	// Dil bilgisi
 	Locale string `json:"locale"`
 
-	// Sistemdeki zamanı ?
+	// Dönen sonucun o anki unix timestamp değeridir
 	SystemTime int64 `json:"systemTime"`
 
 	// Konuşma Id'si
@@ -79,6 +79,16 @@ func (r *InitTDSRequest) validate() error {
 		return err == nil
 	})
 
+	// https url kontrolü
+	validate.RegisterValidation("httpsurl", func(fl validator.FieldLevel) bool {
+		field := fl.Field().String()
+		parsedURL, err := url.Parse(field)
+		if err != nil {
+			return false
+		}
+		return parsedURL.Scheme == "https"
+	})
+
 	// Luhn algoritması ile kredi kartı numarası doğrulaması (https://en.wikipedia.org/wiki/Luhn_algorithm)
 	validate.RegisterValidation("creditcard", func(fl validator.FieldLevel) bool {
 		cardNumber := fl.Field().String()
@@ -126,5 +136,17 @@ func (r *InitTDSRequest) validate() error {
 
 func (r TDSPaymentRequest) validate() error {
 	validate := validator.New()
-	return validate.Struct(r)
+
+	// Eğer doğrulamada hata oluşursa hata mesajını döndürür.
+	err := validate.Struct(r)
+	if err != nil {
+		var errs []string
+		for _, e := range err.(validator.ValidationErrors) {
+			field := e.Field()
+			tag := e.Tag()
+			errs = append(errs, fmt.Sprintf("Validation error at field '%s' with tag '%s'", field, tag))
+		}
+		return fmt.Errorf("validation errors: %s", strings.Join(errs, ", "))
+	}
+	return nil
 }

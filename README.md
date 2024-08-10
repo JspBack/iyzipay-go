@@ -23,10 +23,10 @@ go get github.com/JspBack/iyzipay-go
 - BIN Kontrolü: Kredi kartı BIN'lerini doğrulayın.
 - Ödeme Sorgulama: Ödeme durumlarını sorgulayın.
 - 3DS İstekleri: 3D Secure işlemleri desteği.
+- PWI Desteği: Ödeme Penceresi Entegrasyonu (ödemek için yeni bir ekran açar).
 
 ## Planlanan Özellikler
 
-- PWI Desteği: Ödeme Penceresi Entegrasyonu (ödemek için yeni bir ekran açar).
 - Ödeme Formu Entegrasyonu: Sorunsuz ödeme işleme için ödeme formlarını entegre edin.
 - MerchantPlace API'leri: MerchantPlace API'leri ile etkileşim.
 - Abonelik API'leri: Abonelik hizmetlerini yönetin.

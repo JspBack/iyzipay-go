@@ -6,7 +6,7 @@ import (
 	"github.com/JspBack/iyzipay-go"
 )
 
-func TestInguiryRequest(t *testing.T) {
+func TestInquiryRequest(t *testing.T) {
 	ApiKey := "sandbox-..."
 	SecretKey := "sandbox-..."
 	PaymentId := "1"

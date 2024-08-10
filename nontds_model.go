@@ -300,7 +300,9 @@ type Non3DSPaymentResponse struct {
 	BasketID string `json:"basketId"`
 
 	// Ödemenin alındığı para birimi
-	Currency         string            `json:"currency"`
+	Currency string `json:"currency"`
+
+	// Sepetteki ürünlerin listesi
 	ItemTransactions []ItemTransaction `json:"itemTransactions"`
 
 	// Metadata (Dökümantasyona eklenmemiş ama response içinde var)

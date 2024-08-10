@@ -6,11 +6,10 @@ import (
 	"github.com/JspBack/iyzipay-go"
 )
 
-func TestFinalizeTDSPaymentRequest(t *testing.T) {
+func TestCheckPWIPaymentRequest(t *testing.T) {
 	ApiKey := "sandbox-..."
 	SecretKey := "sandbox-..."
-	PaymentID := "1"
-	ConversationID := "123456789"
+	Token := "1"
 
 	client, err := iyzipay.New(ApiKey, SecretKey)
 	if err != nil {
@@ -18,14 +17,13 @@ func TestFinalizeTDSPaymentRequest(t *testing.T) {
 		return
 	}
 
-	FinalizeRequest := &iyzipay.TDSPaymentRequest{
-		Locale:                "tr",
-		ConversationId:        "123456789",
-		PaymentId:             PaymentID,
-		PaymentConversationId: ConversationID,
+	CheckRequest := &iyzipay.CheckPWIRequest{
+		Locale:         "tr",
+		ConversationID: "123456789",
+		Token:          Token,
 	}
 
-	response, err := client.FinalizeTDSPayment(*FinalizeRequest)
+	response, err := client.CheckPWIPaymentRequest(*CheckRequest)
 	if err != nil {
 		t.Errorf("Error creating payment request: %v", err)
 		return
