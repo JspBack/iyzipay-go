@@ -22,11 +22,11 @@ go get github.com/JspBack/iyzipay-go
 - Non3DS İstekleri: Non3DS ödeme isteklerini işleyin.
 - BIN Kontrolü: Kredi kartı BIN'lerini doğrulayın.
 - Ödeme Sorgulama: Ödeme durumlarını sorgulayın.
+- 3DS İstekleri: 3D Secure işlemleri desteği.
+- PWI Desteği: Ödeme Penceresi Entegrasyonu (ödemek için yeni bir ekran açar).
 
 ## Planlanan Özellikler
 
-- 3DS İstekleri: 3D Secure işlemleri desteği.
-- PWI Desteği: Ödeme Penceresi Entegrasyonu (ödemek için yeni bir ekran açar).
 - Ödeme Formu Entegrasyonu: Sorunsuz ödeme işleme için ödeme formlarını entegre edin.
 - MerchantPlace API'leri: MerchantPlace API'leri ile etkileşim.
 - Abonelik API'leri: Abonelik hizmetlerini yönetin.
@@ -40,11 +40,11 @@ go get github.com/JspBack/iyzipay-go
 
 ## Notlar
 
-Şu an hala geliştirme aşamasında muhtemelen hatalara denk gelebilrisiniz.(Ayrıca ilk go paketim 😄)
+Şu an hala geliştirme aşamasında muhtemelen hatalara denk gelebilirsiniz.(Ayrıca ilk go paketim 😄)
 
 ## Katkıda Bulunma
 
-Katkılarınızı memnuniyetle karşılıyoruz! Lütfen bir çekme isteği (pull request) oluşturun.
+Bir pull request oluşturarak projeye destek olabilrisiniz. 🙂
 
 ## Lisans
 

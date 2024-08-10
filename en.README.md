@@ -14,7 +14,7 @@ Package `iyzipay` provides a Go client for interacting with the Iyzico API. It s
 Use `go get` to install the package:
 
 ```bash
-go get github.com/JspBack/iyzico-client-go
+go get github.com/JspBack/iyzipay-go
 ```
 
 ## Features
@@ -22,11 +22,11 @@ go get github.com/JspBack/iyzico-client-go
 - Non3DS Requests: Handle Non3DS payment requests.
 - BIN Checks: Validate credit card BINs.
 - Payment Inquiry: Query payment statuses.
+- 3DS Requests: Support for 3D Secure transactions.
+- PWI Support: Payment Window Integration (opens a new screen for payment).
 
 ## Planned Features
 
-- 3DS Requests: Support for 3D Secure transactions.
-- PWI Support: Payment Window Integration (opens a new screen for payment).
 - Checkout Form Integration: Integrate checkout forms for seamless payment processing.
 - MerchantPlace APIs: Interaction with MerchantPlace APIs.
 - Subscription APIs: Manage subscription services.
@@ -44,7 +44,7 @@ This project is still in development, and you may encounter some issues. (Also, 
 
 ## How to Contribute
 
-Contributions are welcome! Please make a pull request
+You can support the project by creating a pull request. 🙂
 
 ## License
 

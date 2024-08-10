@@ -11,6 +11,9 @@ type errorModel struct {
 	// İşlem başarısız ise hata mesajını döner.
 	ErrorMessage string `json:"errorMessage"`
 
+	// Hata grubunu döner.
+	Errorgroup string `json:"errorGroup"`
+
 	// Requeste göre dönen response'un dili.
 	Locale string `json:"locale"`
 

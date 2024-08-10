@@ -8,24 +8,24 @@ import (
 )
 
 // 3D Secure olmayan ödeme işlemi için istek oluşturur
-func (i Iyzipay) NTdsPaymentRequest(req *Non3DSPaymentRequest) (response Non3DSPaymentResponse, err error) {
+func (i iyzipayClient) NonTDSPaymentRequest(req *PaymentRequest) (response Non3DSPaymentResponse, err error) {
 	if err = req.validate(); err != nil {
-		return Non3DSPaymentResponse{}, err
+		return response, err
 	}
 
 	requestData, err := json.Marshal(req)
 	if err != nil {
-		return Non3DSPaymentResponse{}, errors.New("failed to marshal request")
+		return response, errors.New("failed to marshal request")
 	}
 
 	httpresp, err := utils.DoRequest(requestData, i.client, i.baseURI, i.apiKey, i.apiSecret, utils.NonTDSURI)
 	if err != nil {
-		return Non3DSPaymentResponse{}, err
+		return response, err
 	}
 
 	err = json.Unmarshal(httpresp, &response)
 	if err != nil {
-		return Non3DSPaymentResponse{}, errors.New("failed to unmarshal response")
+		return response, errors.New("failed to unmarshal response")
 	}
 
 	// Mükemmel hata yönetimi XD
@@ -33,9 +33,9 @@ func (i Iyzipay) NTdsPaymentRequest(req *Non3DSPaymentRequest) (response Non3DSP
 		var respError errorModel
 		err = json.Unmarshal(httpresp, &respError)
 		if err != nil {
-			return Non3DSPaymentResponse{}, errors.New("failed to unmarshal response")
+			return response, errors.New("failed to unmarshal response")
 		}
-		return Non3DSPaymentResponse{}, errors.New(
+		return response, errors.New(
 			"{" +
 				"Status: " + respError.Status + "," +
 				"ErrorCode: " + respError.ErrorCode + "," +

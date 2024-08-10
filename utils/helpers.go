@@ -81,3 +81,13 @@ func generateAuthorizationString(apiKey, secretKey, requestData, uriPath string)
 
 	return "IYZWSv2 " + base64EncodedAuthorization
 }
+
+// Base64 decode işlemi (string alıp string döndürür)
+func Base64Decode(data string) (res string, err error) {
+	ba, err := base64.StdEncoding.DecodeString(data)
+	if err != nil {
+		return "", err
+	}
+
+	return string(ba), nil
+}

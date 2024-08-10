@@ -8,7 +8,7 @@ import (
 	"gopkg.in/go-playground/validator.v9"
 )
 
-type Non3DSPaymentRequest struct {
+type PaymentRequest struct {
 	// iyzico istek sonucunda dönen metinlerin dilini ayarlamak için kullanılır. Varsayılan değeri tr’dir. en olarak kullanılabilir.
 	//
 	// zorunlu değil.
@@ -300,19 +300,21 @@ type Non3DSPaymentResponse struct {
 	BasketID string `json:"basketId"`
 
 	// Ödemenin alındığı para birimi
-	Currency         string            `json:"currency"`
+	Currency string `json:"currency"`
+
+	// Sepetteki ürünlerin listesi
 	ItemTransactions []ItemTransaction `json:"itemTransactions"`
 
-	// Metadata (Dökümantasyona eklenmemiş ama reponse içinde var)
+	// Metadata (Dökümantasyona eklenmemiş ama response içinde var)
 	AuthCode string `json:"authCode"`
 
-	// Metadata (Dökümantasyona eklenmemiş ama reponse içinde var)
+	// Metadata (Dökümantasyona eklenmemiş ama response içinde var)
 	Phase string `json:"phase"`
 
-	// Metadata (Dökümantasyona eklenmemiş ama reponse içinde var)
+	// Metadata (Dökümantasyona eklenmemiş ama response içinde var)
 	HostReference string `json:"hostReference"`
 
-	// Metadata (Dökümantasyona eklenmemiş ama reponse içinde var)
+	// Metadata (Dökümantasyona eklenmemiş ama response içinde var)
 	Signature string `json:"signature"`
 }
 
@@ -410,7 +412,7 @@ type ConvertedPayout struct {
 	Currency string `json:"currency"`
 }
 
-func (r *Non3DSPaymentRequest) validate() error {
+func (r *PaymentRequest) validate() error {
 	validate := validator.New()
 
 	// Tarih formatı doğrulaması

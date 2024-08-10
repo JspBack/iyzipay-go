@@ -6,7 +6,7 @@ import (
 	"github.com/JspBack/iyzipay-go"
 )
 
-func TestNTdsPaymentRequest(t *testing.T) {
+func TestInitPWIPaymentRequest(t *testing.T) {
 	ApiKey := "sandbox-..."
 	SecretKey := "sandbox-..."
 
@@ -16,23 +16,16 @@ func TestNTdsPaymentRequest(t *testing.T) {
 		return
 	}
 
-	request := &iyzipay.PaymentRequest{
-		Locale:         "tr",
-		ConversationID: "123456789",
-		Price:          "1.0",
-		PaidPrice:      "1.0",
-		Installment:    1,
-		PaymentChannel: "WEB",
-		BasketID:       "B67832",
-		PaymentGroup:   "PRODUCT",
-		PaymentCard: iyzipay.PaymentCard{
-			CardHolderName: "John Doe",
-			CardNumber:     "5528790000000008",
-			ExpireYear:     "2030",
-			ExpireMonth:    "12",
-			CVC:            "123",
-			RegisterCard:   0,
-		},
+	InitRequest := &iyzipay.InitPWIRequest{
+		Locale:              "tr",
+		ConversationID:      "123456789",
+		Price:               "1.0",
+		BasketId:            "B67832",
+		PaymentGroup:        "PRODUCT",
+		CallbackUrl:         "https://www.merchant.com/callback",
+		Currency:            "TRY",
+		PaidPrice:           "1.0",
+		EnabledInstallments: []string{"2", "3", "6", "9"},
 		Buyer: iyzipay.Buyer{
 			ID:                  "BY789",
 			Name:                "John",
@@ -46,8 +39,7 @@ func TestNTdsPaymentRequest(t *testing.T) {
 			City:                "Istanbul",
 			Country:             "Turkey",
 			ZipCode:             "34732",
-			IP:                  "85.34.78.112",
-		},
+			IP:                  "85.34.78.112"},
 		ShippingAddress: iyzipay.Address{
 			Address:     "Nidakule Göztepe, Merdivenköy Mah. Bora Sok. No:1",
 			ContactName: "Jane Doe",
@@ -88,18 +80,20 @@ func TestNTdsPaymentRequest(t *testing.T) {
 				Price:     "0.2",
 			},
 		},
-		Currency: "TRY",
 	}
-	response, err := client.NonTDSPaymentRequest(request)
+
+	response, err := client.InitPWIPaymentRequest(*InitRequest)
 	if err != nil {
 		t.Errorf("Error creating payment: %v", err)
 		return
 	}
 
 	if response.Status != "success" {
-		t.Errorf("Error creating payment: %v", response)
+		t.Errorf("Error creating payment request: %v", response)
 		return
 	}
 
-	t.Logf("Payment created: %v", response)
+	t.Logf("Response: %v", response)
+	t.Logf("Token: %v", response.Token)
+	t.Logf("PayWithIyzicoPageUrl: %v", response.PayWithIyzicoPageUrl)
 }

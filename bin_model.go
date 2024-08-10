@@ -47,7 +47,7 @@ type BinResponse struct {
 	// İstek sonucun dilini belirten parametre.
 	Locale string `json:"locale"`
 
-	// Sistem zamanı ?
+	// Dönen sonucun o anki unix timestamp değeridir
 	SystemTime int `json:"systemTime"`
 
 	// İstek ve yanıtı eşleştirmek için kullanılan Konuşma ID'si.
