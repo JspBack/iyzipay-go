@@ -2,9 +2,9 @@
 
 <img align="right" width="300" src="gopher.png" alt="gopher">
 
-![Project status](https://img.shields.io/badge/version-1.0.0-green.svg)
-[![Go Report Card](https://goreportcard.com/badge/github.com/yourusername/iyzico-client-go)](https://goreportcard.com/report/github.com/yourusername/iyzico-client-go)
-[![GoDoc](https://godoc.org/github.com/yourusername/iyzico-client-go?status.svg)](https://pkg.go.dev/github.com/yourusername/iyzico-client-go)
+![Project Status](https://img.shields.io/badge/version-1.0.0-green.svg)
+[![Go Report Card](https://goreportcard.com/badge/github.com/JspBack/iyzipay-go)](https://goreportcard.com/report/github.com/JspBack/iyzipay-go)
+[![GoDoc](https://godoc.org/github.com/JspBack/iyzipay-go?status.svg)](https://pkg.go.dev/github.com/JspBack/iyzipay-go)
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
 
 Package `iyzipay` provides a Go client for interacting with the Iyzico API. It supports various functionalities including Non3DS requests, BIN checks, and payment inquiries.
