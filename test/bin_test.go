@@ -1,0 +1,37 @@
+package test
+
+import (
+	"testing"
+
+	"github.com/JspBack/iyzipay-go"
+)
+
+func TestBinControlRequest(t *testing.T) {
+	ApiKey := "sandbox-..."
+	SecretKey := "sandbox-..."
+
+	client, err := iyzipay.New(ApiKey, SecretKey)
+	if err != nil {
+		t.Errorf("Error creating client: %v", err)
+		return
+	}
+
+	request := iyzipay.BinRequest{
+		Locale:         "tr",
+		BinNumber:      "454360",
+		ConversationId: "123456789",
+	}
+
+	response, err := client.BinControlRequest(&request)
+	if err != nil {
+		t.Errorf("Error creating payment: %v", err)
+		return
+	}
+
+	if response.Status != "success" {
+		t.Errorf("Error creating payment: %v", response)
+		return
+	}
+
+	t.Logf("Bin Control Response: %v", response)
+}

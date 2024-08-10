@@ -1,0 +1,18 @@
+name: Gitleaks Pipeline
+
+on:
+  pull_request:
+  push:
+  workflow_dispatch:
+  # schedule:
+  #   - cron: "0 4 * * *" # run once a day at 4 AM
+jobs:
+  pre-commit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        name: Checkout code
+      - uses: actions/setup-python@v3
+        name: Setup Python
+      - uses: pre-commit/action@v3.0.1
+        name: Run pre-commit
