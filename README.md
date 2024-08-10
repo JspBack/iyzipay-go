@@ -14,7 +14,7 @@
 Paketi yüklemek için `go get` komutunu kullanın:
 
 ```bash
-go get github.com/JspBack/iyzico-client-go
+go get github.com/JspBack/iyzipay-go
 ```
 
 ## Özellikler
