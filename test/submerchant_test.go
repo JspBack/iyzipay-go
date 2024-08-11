@@ -7,8 +7,8 @@ import (
 )
 
 var (
-	apikey    = "sandbox-H1pFBNawbh1ClEFAKRTc85CM6owLYL0V"
-	secretkey = "sandbox-8DML0ph5wDn37KUJMoKLgQdHpXIJH7OE"
+	apikey    = "sandbox-..."
+	secretkey = "sandbox-..."
 	client, _ = iyzipay.New(apikey, secretkey)
 )
 
