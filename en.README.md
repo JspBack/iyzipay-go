@@ -46,6 +46,10 @@ This project is still in development, and you may encounter some issues. (Also, 
 
 You can support the project by creating a pull request. 🙂
 
+## Known Problems
+
+We have to use different method for registered cards
+
 ## License
 
 Distributed under MIT License, please see license file within the code for more details.

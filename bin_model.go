@@ -1,6 +1,11 @@
 package iyzipay
 
-import "gopkg.in/go-playground/validator.v9"
+import (
+	"fmt"
+	"strings"
+
+	"gopkg.in/go-playground/validator.v9"
+)
 
 type BinRequest struct {
 	// Dil (default: tr).
@@ -56,5 +61,18 @@ type BinResponse struct {
 
 func (r BinRequest) validate() error {
 	validate := validator.New()
-	return validate.Struct(r)
+
+	// Eğer doğrulamada hata oluşursa hata mesajını döndürür.
+	err := validate.Struct(r)
+	if err != nil {
+		var errs []string
+		for _, e := range err.(validator.ValidationErrors) {
+			field := e.Field()
+			tag := e.Tag()
+			errs = append(errs, fmt.Sprintf("Validation error at field '%s' with tag '%s'", field, tag))
+		}
+		return fmt.Errorf("validation errors: %s", strings.Join(errs, ", "))
+	}
+
+	return nil
 }

@@ -7,11 +7,11 @@ import (
 )
 
 func TestCheckPWIPaymentRequest(t *testing.T) {
-	ApiKey := "sandbox-..."
-	SecretKey := "sandbox-..."
+	apikey := "sandbox-..."
+	secretkey := "sandbox-..."
 	Token := "1"
 
-	client, err := iyzipay.New(ApiKey, SecretKey)
+	client, err := iyzipay.New(apikey, secretkey)
 	if err != nil {
 		t.Errorf("Error creating client: %v", err)
 		return

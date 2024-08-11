@@ -7,12 +7,12 @@ import (
 )
 
 func TestInguiryRequest(t *testing.T) {
-	ApiKey := "sandbox-..."
-	SecretKey := "sandbox-..."
+	apikey := "sandbox-..."
+	secretkey := "sandbox-..."
 	PaymentId := "1"
 	Ip := "85.34.78.112"
 
-	client, err := iyzipay.New(ApiKey, SecretKey)
+	client, err := iyzipay.New(apikey, secretkey)
 	if err != nil {
 		t.Errorf("Error creating client: %v", err)
 		return

@@ -7,12 +7,12 @@ import (
 )
 
 func TestFinalizeTDSPaymentRequest(t *testing.T) {
-	ApiKey := "sandbox-..."
-	SecretKey := "sandbox-..."
+	apikey := "sandbox-..."
+	secretkey := "sandbox-..."
 	PaymentID := "1"
 	ConversationID := "123456789"
 
-	client, err := iyzipay.New(ApiKey, SecretKey)
+	client, err := iyzipay.New(apikey, secretkey)
 	if err != nil {
 		t.Errorf("Error creating client: %v", err)
 		return

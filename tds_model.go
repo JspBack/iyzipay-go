@@ -12,7 +12,7 @@ import (
 type InitTDSRequest struct {
 	PaymentRequest `validate:"dive"`
 
-	// 3D Secure işlemi başlatıldığında, banka tarafından kullanıcıya gösterilecek sayfa URL'si.(https olamlıdır.)
+	// 3D Secure işlemi başlatıldığında, banka tarafından kullanıcıya gösterilecek sayfa URL'si.(https olmalıdır.)
 	//
 	// zorunlu.
 	CallbackUrl string `json:"callbackUrl" validate:"required,httpsurl"`

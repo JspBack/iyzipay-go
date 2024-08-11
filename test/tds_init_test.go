@@ -7,10 +7,10 @@ import (
 )
 
 func TestInitTDSPaymentRequest(t *testing.T) {
-	ApiKey := "sandbox-..."
-	SecretKey := "sandbox-..."
+	apikey := "sandbox-..."
+	secretkey := "sandbox-..."
 
-	client, err := iyzipay.New(ApiKey, SecretKey, iyzipay.WithBinRequest(true), iyzipay.WithHtmlDecodeRequest(true))
+	client, err := iyzipay.New(apikey, secretkey, iyzipay.WithBinRequest(true), iyzipay.WithHtmlDecodeRequest(true))
 	if err != nil {
 		t.Errorf("Error creating client: %v", err)
 		return

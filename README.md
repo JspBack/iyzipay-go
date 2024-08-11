@@ -46,6 +46,10 @@ go get github.com/JspBack/iyzipay-go
 
 Bir pull request oluşturarak projeye destek olabilrisiniz. 🙂
 
+## Bilinen Problemler
+
+Saklı kartlarla ödeme için ayrı bir yöntem kullanılmalı.
+
 ## Lisans
 
 MIT Lisansı altında dağıtılmaktadır, daha fazla ayrıntı için lütfen kod içindeki lisans dosyasına bakın.
