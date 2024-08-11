@@ -24,10 +24,10 @@ go get github.com/JspBack/iyzipay-go
 - Payment Inquiry: Query payment statuses.
 - 3DS Requests: Support for 3D Secure transactions.
 - PWI Support: Payment Window Integration (opens a new screen for payment).
+- Checkout Form Integration: Integrate checkout forms for seamless payment processing.
 
 ## Planned Features
 
-- Checkout Form Integration: Integrate checkout forms for seamless payment processing.
 - MerchantPlace APIs: Interaction with MerchantPlace APIs.
 - Subscription APIs: Manage subscription services.
 - Iyzilink APIs: Integration with Iyzilink services.

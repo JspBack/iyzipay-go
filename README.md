@@ -24,10 +24,10 @@ go get github.com/JspBack/iyzipay-go
 - Ödeme Sorgulama: Ödeme durumlarını sorgulayın.
 - 3DS İstekleri: 3D Secure işlemleri desteği.
 - PWI Desteği: Ödeme Penceresi Entegrasyonu (ödemek için yeni bir ekran açar).
+- Ödeme Formu Entegrasyonu: Sorunsuz ödeme işleme için ödeme formlarını entegre edin.
 
 ## Planlanan Özellikler
 
-- Ödeme Formu Entegrasyonu: Sorunsuz ödeme işleme için ödeme formlarını entegre edin.
 - MerchantPlace API'leri: MerchantPlace API'leri ile etkileşim.
 - Abonelik API'leri: Abonelik hizmetlerini yönetin.
 - Iyzilink API'leri: Iyzilink hizmetleri ile entegrasyon.
@@ -36,7 +36,7 @@ go get github.com/JspBack/iyzipay-go
 
 ## Örnekler
 
-Örnekler /examples dosyasında.
+Örnekler /examples dosyası içerisinde.
 
 ## Notlar
 
