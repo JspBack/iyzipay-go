@@ -25,10 +25,10 @@ go get github.com/JspBack/iyzipay-go
 - 3DS Requests: Support for 3D Secure transactions.
 - PWI Support: Payment Window Integration (opens a new screen for payment).
 - Checkout Form Integration: Integrate checkout forms for seamless payment processing.
+- MarketPlace APIs: Interaction with MarketPlace APIs. (or MerchantPlace)
 
 ## Planned Features
 
-- MerchantPlace APIs: Interaction with MerchantPlace APIs.
 - Subscription APIs: Manage subscription services.
 - Iyzilink APIs: Integration with Iyzilink services.
 - EFT APIs: Support for Electronic Funds Transfer.
@@ -48,7 +48,8 @@ You can support the project by creating a pull request. 🙂
 
 ## Known Problems
 
-We have to use different method for registered cards
+- A separate method should be used for payments with registered cards.
+- The carduserKey parameter inside the checkout form that is present in Postman but not documented.
 
 ## License
 

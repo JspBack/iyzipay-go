@@ -16,9 +16,11 @@ const (
 	CheckoutFormURI        = "/payment/iyzipos/checkoutform/initialize/auth/ecom" // Checkout form ödeme isteği için URI yolu
 	CheckoutFormInquiryURI = "/payment/iyzipos/checkoutform/auth/ecom/detail"     // Checkout form ödeme sorgulama isteği için URI yolu
 
-	SubMerchantURI        = "/onboarding/submerchant"        // Alt üye işyeri oluşturma isteği için URI yolu
-	SubMerchantInquiryURI = "/onboarding/submerchant/detail" // Alt üye işyeri sorgulama isteği için URI yolu
-	SubMerchantProductURI = "/payment/item"                  // Alt üye işyeri ürün oluşturma isteği için URI yolu
+	SubMerchantURI        = "/onboarding/submerchant"          // Alt üye işyeri oluşturma isteği için URI yolu
+	SubMerchantInquiryURI = "/onboarding/submerchant/detail"   // Alt üye işyeri sorgulama isteği için URI yolu
+	SubMerchantProductURI = "/payment/item"                    // Alt üye işyeri ürün oluşturma isteği için URI yolu
+	ApproveProductURI     = "/payment/iyzipos/item/approve"    // Ürün onaylama isteği için URI yolu
+	DisapproveProductURI  = "/payment/iyzipos/item/disapprove" // Ürün onay kaldırma isteği için URI yolu
 )
 
 var (

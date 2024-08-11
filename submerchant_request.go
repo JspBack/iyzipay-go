@@ -27,25 +27,12 @@ func (i iyzipayClient) CreateIndividualSubMerchant(req IndividualSubMerchantRequ
 
 	err = json.Unmarshal(httpresp, &response)
 	if err != nil {
-		return response, errors.New("failed to unmarshal response")
-	}
-
-	if response.Status == "failure" {
-		var respError errorModel
-		err = json.Unmarshal(httpresp, &respError)
+		errorResp, err := utils.HandleError(httpresp)
 		if err != nil {
-			return response, errors.New("failed to unmarshal response")
+			return response, err
+		} else {
+			return response, errors.Join(errors.New(errorResp.ErrorCode), errors.New(errorResp.ErrorMessage), errors.New(errorResp.Errorgroup), errors.New(errorResp.Locale), errors.New(errorResp.Status), errors.New(errorResp.ConversationID))
 		}
-		return response, errors.New(
-			"{" +
-				"Status: " + respError.Status + "," +
-				"ErrorCode: " + respError.ErrorCode + "," +
-				"ErrorMessage: " + respError.ErrorMessage + "," +
-				"Locale: " + respError.Locale + "," +
-				"SystemTime: " + string(rune(respError.SystemTime)) + "," +
-				"ConversationID: " + respError.ConversationID +
-				"}",
-		)
 	}
 
 	return response, nil
@@ -71,25 +58,12 @@ func (i iyzipayClient) CreatePrivateSubMerchant(req PrivateSubMerchantRequest) (
 
 	err = json.Unmarshal(httpresp, &response)
 	if err != nil {
-		return response, errors.New("failed to unmarshal response")
-	}
-
-	if response.Status == "failure" {
-		var respError errorModel
-		err = json.Unmarshal(httpresp, &respError)
+		errorResp, err := utils.HandleError(httpresp)
 		if err != nil {
-			return response, errors.New("failed to unmarshal response")
+			return response, err
+		} else {
+			return response, errors.Join(errors.New(errorResp.ErrorCode), errors.New(errorResp.ErrorMessage), errors.New(errorResp.Errorgroup), errors.New(errorResp.Locale), errors.New(errorResp.Status), errors.New(errorResp.ConversationID))
 		}
-		return response, errors.New(
-			"{" +
-				"Status: " + respError.Status + "," +
-				"ErrorCode: " + respError.ErrorCode + "," +
-				"ErrorMessage: " + respError.ErrorMessage + "," +
-				"Locale: " + respError.Locale + "," +
-				"SystemTime: " + string(rune(respError.SystemTime)) + "," +
-				"ConversationID: " + respError.ConversationID +
-				"}",
-		)
 	}
 
 	return response, nil
@@ -115,25 +89,12 @@ func (i iyzipayClient) CreateLimitedCompanySubMerchant(req LimitedCompanySubMerc
 
 	err = json.Unmarshal(httpresp, &response)
 	if err != nil {
-		return response, errors.New("failed to unmarshal response")
-	}
-
-	if response.Status == "failure" {
-		var respError errorModel
-		err = json.Unmarshal(httpresp, &respError)
+		errorResp, err := utils.HandleError(httpresp)
 		if err != nil {
-			return response, errors.New("failed to unmarshal response")
+			return response, err
+		} else {
+			return response, errors.Join(errors.New(errorResp.ErrorCode), errors.New(errorResp.ErrorMessage), errors.New(errorResp.Errorgroup), errors.New(errorResp.Locale), errors.New(errorResp.Status), errors.New(errorResp.ConversationID))
 		}
-		return response, errors.New(
-			"{" +
-				"Status: " + respError.Status + "," +
-				"ErrorCode: " + respError.ErrorCode + "," +
-				"ErrorMessage: " + respError.ErrorMessage + "," +
-				"Locale: " + respError.Locale + "," +
-				"SystemTime: " + string(rune(respError.SystemTime)) + "," +
-				"ConversationID: " + respError.ConversationID +
-				"}",
-		)
 	}
 
 	return response, nil
@@ -157,25 +118,12 @@ func (i iyzipayClient) UpdateIndividualSubMerchant(req IndividualSubMerchantUpda
 
 	err = json.Unmarshal(httpresp, &response)
 	if err != nil {
-		return response, errors.New("failed to unmarshal response")
-	}
-
-	if response.Status == "failure" {
-		var respError errorModel
-		err = json.Unmarshal(httpresp, &respError)
+		errorResp, err := utils.HandleError(httpresp)
 		if err != nil {
-			return response, errors.New("failed to unmarshal response")
+			return response, err
+		} else {
+			return response, errors.Join(errors.New(errorResp.ErrorCode), errors.New(errorResp.ErrorMessage), errors.New(errorResp.Errorgroup), errors.New(errorResp.Locale), errors.New(errorResp.Status), errors.New(errorResp.ConversationID))
 		}
-		return response, errors.New(
-			"{" +
-				"Status: " + respError.Status + "," +
-				"ErrorCode: " + respError.ErrorCode + "," +
-				"ErrorMessage: " + respError.ErrorMessage + "," +
-				"Locale: " + respError.Locale + "," +
-				"SystemTime: " + string(rune(respError.SystemTime)) + "," +
-				"ConversationID: " + respError.ConversationID +
-				"}",
-		)
 	}
 
 	return response, nil
@@ -199,25 +147,12 @@ func (i iyzipayClient) UpdatePrivateSubMerchant(req PrivateSubMerchantUpdateRequ
 
 	err = json.Unmarshal(httpresp, &response)
 	if err != nil {
-		return response, errors.New("failed to unmarshal response")
-	}
-
-	if response.Status == "failure" {
-		var respError errorModel
-		err = json.Unmarshal(httpresp, &respError)
+		errorResp, err := utils.HandleError(httpresp)
 		if err != nil {
-			return response, errors.New("failed to unmarshal response")
+			return response, err
+		} else {
+			return response, errors.Join(errors.New(errorResp.ErrorCode), errors.New(errorResp.ErrorMessage), errors.New(errorResp.Errorgroup), errors.New(errorResp.Locale), errors.New(errorResp.Status), errors.New(errorResp.ConversationID))
 		}
-		return response, errors.New(
-			"{" +
-				"Status: " + respError.Status + "," +
-				"ErrorCode: " + respError.ErrorCode + "," +
-				"ErrorMessage: " + respError.ErrorMessage + "," +
-				"Locale: " + respError.Locale + "," +
-				"SystemTime: " + string(rune(respError.SystemTime)) + "," +
-				"ConversationID: " + respError.ConversationID +
-				"}",
-		)
 	}
 
 	return response, nil
@@ -241,25 +176,12 @@ func (i iyzipayClient) UpdateLimitedCompanySubMerchant(req LimitedCompanySubMerc
 
 	err = json.Unmarshal(httpresp, &response)
 	if err != nil {
-		return response, errors.New("failed to unmarshal response")
-	}
-
-	if response.Status == "failure" {
-		var respError errorModel
-		err = json.Unmarshal(httpresp, &respError)
+		errorResp, err := utils.HandleError(httpresp)
 		if err != nil {
-			return response, errors.New("failed to unmarshal response")
+			return response, err
+		} else {
+			return response, errors.Join(errors.New(errorResp.ErrorCode), errors.New(errorResp.ErrorMessage), errors.New(errorResp.Errorgroup), errors.New(errorResp.Locale), errors.New(errorResp.Status), errors.New(errorResp.ConversationID))
 		}
-		return response, errors.New(
-			"{" +
-				"Status: " + respError.Status + "," +
-				"ErrorCode: " + respError.ErrorCode + "," +
-				"ErrorMessage: " + respError.ErrorMessage + "," +
-				"Locale: " + respError.Locale + "," +
-				"SystemTime: " + string(rune(respError.SystemTime)) + "," +
-				"ConversationID: " + respError.ConversationID +
-				"}",
-		)
 	}
 
 	return response, nil
@@ -283,25 +205,12 @@ func (i iyzipayClient) SubMerchantInquiry(req SubMerchantInquiryRequest) (respon
 
 	err = json.Unmarshal(httpresp, &response)
 	if err != nil {
-		return response, errors.New("failed to unmarshal response")
-	}
-
-	if response.Status == "failure" {
-		var respError errorModel
-		err = json.Unmarshal(httpresp, &respError)
+		errorResp, err := utils.HandleError(httpresp)
 		if err != nil {
-			return response, errors.New("failed to unmarshal response")
+			return response, err
+		} else {
+			return response, errors.Join(errors.New(errorResp.ErrorCode), errors.New(errorResp.ErrorMessage), errors.New(errorResp.Errorgroup), errors.New(errorResp.Locale), errors.New(errorResp.Status), errors.New(errorResp.ConversationID))
 		}
-		return response, errors.New(
-			"{" +
-				"Status: " + respError.Status + "," +
-				"ErrorCode: " + respError.ErrorCode + "," +
-				"ErrorMessage: " + respError.ErrorMessage + "," +
-				"Locale: " + respError.Locale + "," +
-				"SystemTime: " + string(rune(respError.SystemTime)) + "," +
-				"ConversationID: " + respError.ConversationID +
-				"}",
-		)
 	}
 
 	return response, nil
@@ -324,25 +233,12 @@ func (i iyzipayClient) UpdateSubMerchantProduct(req SubMerchantProductUpdateRequ
 
 	err = json.Unmarshal(httpresp, &response)
 	if err != nil {
-		return response, errors.New("failed to unmarshal response")
-	}
-
-	if response.Status == "failure" {
-		var respError errorModel
-		err = json.Unmarshal(httpresp, &respError)
+		errorResp, err := utils.HandleError(httpresp)
 		if err != nil {
-			return response, errors.New("failed to unmarshal response")
+			return response, err
+		} else {
+			return response, errors.Join(errors.New(errorResp.ErrorCode), errors.New(errorResp.ErrorMessage), errors.New(errorResp.Errorgroup), errors.New(errorResp.Locale), errors.New(errorResp.Status), errors.New(errorResp.ConversationID))
 		}
-		return response, errors.New(
-			"{" +
-				"Status: " + respError.Status + "," +
-				"ErrorCode: " + respError.ErrorCode + "," +
-				"ErrorMessage: " + respError.ErrorMessage + "," +
-				"Locale: " + respError.Locale + "," +
-				"SystemTime: " + string(rune(respError.SystemTime)) + "," +
-				"ConversationID: " + respError.ConversationID +
-				"}",
-		)
 	}
 
 	return response, nil

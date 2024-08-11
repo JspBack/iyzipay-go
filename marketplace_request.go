@@ -7,10 +7,11 @@ import (
 	"github.com/JspBack/iyzipay-go/utils"
 )
 
-// PWI ile ödeme başlatma isteği yapılır.
+// Pazaryeri çözümünde, ödeme iyzico’dan geçtikten sonra, üye işyeri ödeme içinde yer alan kırılıma / ürüne onay verene dek para korumalı havuz hesapta bekletilir.
+// Üye işyeri bu sürede ödemeyi iptal edebilir, ödemenin kırılımını iade edebilir ya da ürün alıcıya ulaştı ve işlem sorunsuz tamamlandıysa para transferi için ürüne onay verebilir veya verdiği ürün onayını geri çekebilir.
 //
-// Response içerisinde gelen token ve payWithIyzicoPageUrl saklanmalıdır.
-func (i iyzipayClient) InitilizePWIPaymentRequest(req *InitPWIRequest) (response InitPWIResponse, err error) {
+// Ürün onayı vermek için kullanılır.
+func (i iyzipayClient) ApproveProduct(req MarketplaceProductRequest) (response MarketplaceProductResponse, err error) {
 	if err = req.validate(); err != nil {
 		return response, err
 	}
@@ -20,7 +21,7 @@ func (i iyzipayClient) InitilizePWIPaymentRequest(req *InitPWIRequest) (response
 		return response, errors.New("failed to marshal request")
 	}
 
-	httpresp, err := utils.DoRequest(requestData, i.client, "POST", i.baseURI, i.apiKey, i.apiSecret, utils.InitPWIURI)
+	httpresp, err := utils.DoRequest(requestData, i.client, "POST", i.baseURI, i.apiKey, i.apiSecret, utils.ApproveProductURI)
 	if err != nil {
 		return response, err
 	}
@@ -38,10 +39,8 @@ func (i iyzipayClient) InitilizePWIPaymentRequest(req *InitPWIRequest) (response
 	return response, nil
 }
 
-// PWI ile gerçekleştirilen ödeme sorgulama isteği yapılır.
-//
-// Response içerisinde gelen paymentId saklanmalıdır.
-func (i iyzipayClient) CheckPWIPaymentRequest(req *PWIInquiryRequest) (response PWIInquiryResponse, err error) {
+// Ürün onayını geri çekmek için kullanılır.
+func (i iyzipayClient) DisapproveProduct(req MarketplaceProductRequest) (response MarketplaceProductResponse, err error) {
 	if err = req.validate(); err != nil {
 		return response, err
 	}
@@ -51,7 +50,7 @@ func (i iyzipayClient) CheckPWIPaymentRequest(req *PWIInquiryRequest) (response 
 		return response, errors.New("failed to marshal request")
 	}
 
-	httpresp, err := utils.DoRequest(requestData, i.client, "POST", i.baseURI, i.apiKey, i.apiSecret, utils.CheckPWIURI)
+	httpresp, err := utils.DoRequest(requestData, i.client, "POST", i.baseURI, i.apiKey, i.apiSecret, utils.DisapproveProductURI)
 	if err != nil {
 		return response, err
 	}

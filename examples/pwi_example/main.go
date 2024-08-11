@@ -13,7 +13,8 @@ func main() {
 
 	client, err := iyzipay.New(apikey, apiSecret)
 	if err != nil {
-		panic(err)
+		fmt.Println(err)
+		return
 	}
 
 	req := &iyzipay.InitPWIRequest{
@@ -84,7 +85,8 @@ func main() {
 
 	res, err := client.InitilizePWIPaymentRequest(req)
 	if err != nil {
-		panic(err)
+		fmt.Println(err)
+		return
 	}
 
 	if res.Status == "success" {
@@ -101,7 +103,8 @@ func main() {
 	// Bu örneği direk çalıştırırsanız hata alırsınız. Öncelikle PayWithIyzicoPageUrl adresine gidip işlemi tamamlamanız gerekmektedir.
 	CheckRes, err := client.CheckPWIPaymentRequest(CheckReq)
 	if err != nil {
-		panic(err)
+		fmt.Println(err)
+		return
 	}
 
 	if CheckRes.Status == "success" {
@@ -109,5 +112,5 @@ func main() {
 		return
 	}
 
-	panic("PWI Payment Request Failed")
+	fmt.Println("PWI Payment Request Failed")
 }

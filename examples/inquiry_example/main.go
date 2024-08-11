@@ -15,7 +15,8 @@ func main() {
 
 	client, err := iyzipay.New(apikey, apiSecret)
 	if err != nil {
-		panic(err)
+		fmt.Println(err)
+		return
 	}
 
 	request := iyzipay.InquiryRequest{
@@ -37,5 +38,5 @@ func main() {
 		return
 	}
 
-	panic("Payment Inquiry Request Failed")
+	fmt.Println("Payment Inquiry Request Failed")
 }

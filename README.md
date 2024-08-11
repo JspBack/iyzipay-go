@@ -25,10 +25,10 @@ go get github.com/JspBack/iyzipay-go
 - 3DS İstekleri: 3D Secure işlemleri desteği.
 - PWI Desteği: Ödeme Penceresi Entegrasyonu (ödemek için yeni bir ekran açar).
 - Ödeme Formu Entegrasyonu: Sorunsuz ödeme işleme için ödeme formlarını entegre edin.
+- MarketPlace API'leri: MarketPlace API'leri ile etkileşim. (yada MerchantPlace)
 
 ## Planlanan Özellikler
 
-- MerchantPlace API'leri: MerchantPlace API'leri ile etkileşim.
 - Abonelik API'leri: Abonelik hizmetlerini yönetin.
 - Iyzilink API'leri: Iyzilink hizmetleri ile entegrasyon.
 - EFT API'leri: Elektronik Fon Transferi desteği.
@@ -44,11 +44,12 @@ go get github.com/JspBack/iyzipay-go
 
 ## Katkıda Bulunma
 
-Bir pull request oluşturarak projeye destek olabilrisiniz. 🙂
+Bir pull request oluşturarak projeye destek olabilirsiniz. 🙂
 
 ## Bilinen Problemler
 
-Saklı kartlarla ödeme için ayrı bir yöntem kullanılmalı.
+- Saklı kartlarla ödeme için ayrı bir yöntem kullanılmalı.
+- Postmande olan ama dökümantasyon da olmayan checkout form içindeki carduserKey parametresi.
 
 ## Lisans
 

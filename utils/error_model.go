@@ -1,7 +1,6 @@
-package iyzipay
+package utils
 
 type errorModel struct {
-
 	// İşlem sonucu başarılı ise success, başarısız ise failure döner.
 	Status string `json:"status"`
 

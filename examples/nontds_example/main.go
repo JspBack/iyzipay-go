@@ -104,5 +104,5 @@ func main() {
 		return
 	}
 
-	panic("Payment failed")
+	fmt.Println("Payment failed")
 }

@@ -5,6 +5,8 @@ import (
 	"crypto/hmac"
 	"crypto/sha256"
 	"encoding/base64"
+	"encoding/json"
+	"errors"
 	"fmt"
 	"io"
 	"math/rand"
@@ -94,4 +96,13 @@ func Base64Decode(data string) (res string, err error) {
 	}
 
 	return string(ba), nil
+}
+
+// Hataları yönetmek için kullanılan fonksiyon
+func HandleError(httpResp []byte) (response errorModel, err error) {
+	err = json.Unmarshal(httpResp, &response)
+	if err != nil {
+		return response, errors.New("failed to unmarshal response")
+	}
+	return response, nil
 }

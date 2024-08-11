@@ -13,7 +13,7 @@ func main() {
 
 	client, err := iyzipay.New(apikey, apiSecret)
 	if err != nil {
-		panic(err)
+		fmt.Println(err)
 	}
 
 	req := &iyzipay.BinRequest{
@@ -24,7 +24,7 @@ func main() {
 
 	res, err := client.BinControlRequest(req)
 	if err != nil {
-		panic(err)
+		fmt.Println(err)
 	}
 
 	if res.Status == "success" {
@@ -32,5 +32,5 @@ func main() {
 		return
 	}
 
-	panic("Bin Control Request Failed")
+	fmt.Println("Bin Control Request Failed")
 }

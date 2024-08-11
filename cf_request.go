@@ -27,25 +27,12 @@ func (i iyzipayClient) CheckoutFormPaymentRequest(req *CFRequest, CFFormType str
 
 	err = json.Unmarshal(httpresp, &response)
 	if err != nil {
-		return response, errors.New("failed to unmarshal response")
-	}
-
-	if response.Status == "failure" {
-		var respError errorModel
-		err = json.Unmarshal(httpresp, &respError)
+		errorResp, err := utils.HandleError(httpresp)
 		if err != nil {
-			return response, errors.New("failed to unmarshal response")
+			return response, err
+		} else {
+			return response, errors.Join(errors.New(errorResp.ErrorCode), errors.New(errorResp.ErrorMessage), errors.New(errorResp.Errorgroup), errors.New(errorResp.Locale), errors.New(errorResp.Status), errors.New(errorResp.ConversationID))
 		}
-		return response, errors.New(
-			"{" +
-				"Status: " + respError.Status + "," +
-				"ErrorCode: " + respError.ErrorCode + "," +
-				"ErrorMessage: " + respError.ErrorMessage + "," +
-				"Locale: " + respError.Locale + "," +
-				"SystemTime: " + string(rune(respError.SystemTime)) + "," +
-				"ConversationID: " + respError.ConversationID +
-				"}",
-		)
 	}
 
 	if utils.AcceptedCFTypes[CFFormType] {
@@ -78,25 +65,12 @@ func (i iyzipayClient) CheckoutFormPaymentInquiryRequest(req *CFInquiryRequest) 
 
 	err = json.Unmarshal(httpresp, &response)
 	if err != nil {
-		return response, errors.New("failed to unmarshal response")
-	}
-
-	if response.Status == "failure" {
-		var respError errorModel
-		err = json.Unmarshal(httpresp, &respError)
+		errorResp, err := utils.HandleError(httpresp)
 		if err != nil {
-			return response, errors.New("failed to unmarshal response")
+			return response, err
+		} else {
+			return response, errors.Join(errors.New(errorResp.ErrorCode), errors.New(errorResp.ErrorMessage), errors.New(errorResp.Errorgroup), errors.New(errorResp.Locale), errors.New(errorResp.Status), errors.New(errorResp.ConversationID))
 		}
-		return response, errors.New(
-			"{" +
-				"Status: " + respError.Status + "," +
-				"ErrorCode: " + respError.ErrorCode + "," +
-				"ErrorMessage: " + respError.ErrorMessage + "," +
-				"Locale: " + respError.Locale + "," +
-				"SystemTime: " + string(rune(respError.SystemTime)) + "," +
-				"ConversationID: " + respError.ConversationID +
-				"}",
-		)
 	}
 
 	return response, err

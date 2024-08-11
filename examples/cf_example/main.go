@@ -10,37 +10,24 @@ import (
 func main() {
 	apikey := os.Getenv("IYZIPAY_API_KEY")
 	apiSecret := os.Getenv("IYZIPAY_API_SECRET")
-	conversationID := "123456789"
 
-	client, err := iyzipay.New(
-		apikey,
-		apiSecret,
-		// iyzipay.WithBinRequest(false), // Bin kontrolü yapmak istemiyorsanız false yapabilirsiniz.
-		// iyzipay.WithHtmlDecodeRequest(false), // Html içeriğini decode etmek istemiyorsanız false yapabilirsiniz.
-	)
+	client, err := iyzipay.New(apikey, apiSecret)
 	if err != nil {
 		fmt.Println(err)
 		return
 	}
 
-	req := &iyzipay.InitTDSRequest{
-		PaymentRequest: iyzipay.PaymentRequest{
-			Locale:         "tr",
-			ConversationID: conversationID,
-			Price:          "1.0",
-			PaidPrice:      "1.0",
-			Installment:    1,
-			PaymentChannel: "WEB",
-			BasketID:       "B67832",
-			PaymentGroup:   "PRODUCT",
-			PaymentCard: iyzipay.PaymentCard{
-				CardHolderName: "John Doe",
-				CardNumber:     "5528790000000008",
-				ExpireYear:     "2030",
-				ExpireMonth:    "12",
-				CVC:            "123",
-				RegisterCard:   0,
-			},
+	req := &iyzipay.CFRequest{
+		InitPWIRequest: iyzipay.InitPWIRequest{
+			Locale:              "tr",
+			ConversationID:      "123456789",
+			Price:               "1.0",
+			BasketId:            "B67832",
+			PaymentGroup:        "PRODUCT",
+			CallbackUrl:         "https://www.merchant.com/callback",
+			Currency:            "TRY",
+			PaidPrice:           "1.0",
+			EnabledInstallments: []string{"2", "3", "6", "9"},
 			Buyer: iyzipay.Buyer{
 				ID:                  "BY789",
 				Name:                "John",
@@ -54,8 +41,7 @@ func main() {
 				City:                "Istanbul",
 				Country:             "Turkey",
 				ZipCode:             "34732",
-				IP:                  "85.34.78.112",
-			},
+				IP:                  "85.34.78.112"},
 			ShippingAddress: iyzipay.Address{
 				Address:     "Nidakule Göztepe, Merdivenköy Mah. Bora Sok. No:1",
 				ContactName: "Jane Doe",
@@ -96,40 +82,38 @@ func main() {
 					Price:     "0.2",
 				},
 			},
-			Currency: "TRY",
 		},
-		CallbackUrl: "https://www.merchant.com/callback",
+		PaymentSource: "SHOPIFY",
+		// CardUserKey:  "cardUserKey", // Bu keyin ne yaptığını henüz çözemedim dökümantasyona da eklenmemiş.
 	}
 
-	res, decodedHtmlContent, err := client.InitilizeTDSPayment(req)
+	resp, err := client.CheckoutFormPaymentRequest(req, "iframe")
 	if err != nil {
 		fmt.Println(err)
 		return
 	}
 
-	if res.Status == "success" {
-		fmt.Println("PaymentId: ", res.PaymentID)
-		fmt.Println("DecodedHtmlContent: ", decodedHtmlContent)
+	if resp.Status != "success" {
+		fmt.Println("Checkout Form Payment Request Failed, Response: ", resp)
+		return
 	}
 
-	finalizeReq := &iyzipay.TDSPaymentRequest{
-		Locale:                "tr",
-		ConversationId:        "123456789",
-		PaymentId:             res.PaymentID,
-		PaymentConversationId: conversationID,
+	InquiryReq := &iyzipay.CFInquiryRequest{
+		Locale:         "tr",
+		Token:          resp.Token,
+		ConversationId: "123456789",
 	}
-	// Bu örneği direk çalıştırırsanız hata alırsınız. Öncelikle decodedHtmlContent'e gidip işlemi tamamlamanız gerekmektedir.
-	finalizeRes, err := client.FinalizeTDSPayment(finalizeReq)
+
+	InquiryResp, err := client.CheckoutFormPaymentInquiryRequest(InquiryReq)
 	if err != nil {
 		fmt.Println(err)
 		return
 	}
 
-	if finalizeRes.Status == "success" {
-		fmt.Println("Status: ", finalizeRes.Status)
-		fmt.Println("Response: ", finalizeRes)
+	if InquiryResp.Status == "success" {
+		fmt.Println("PaymentId: ", InquiryResp.PaymentID)
 		return
 	}
 
-	fmt.Println("TDS Payment Request Failed")
+	fmt.Println("Checkout Form Payment Inquiry Request Failed")
 }
