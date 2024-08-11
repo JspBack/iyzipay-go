@@ -45,5 +45,4 @@ func TestCFPaymentInquiryRequest(t *testing.T) {
 	}
 
 	t.Logf("Response: %v", response)
-
 }

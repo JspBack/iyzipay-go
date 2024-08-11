@@ -15,6 +15,8 @@ const (
 	CheckPWIURI            = "/payment/iyzipos/checkoutform/auth/ecom/detail"     // PWI ödeme isteği için URI yolu
 	CheckoutFormURI        = "/payment/iyzipos/checkoutform/initialize/auth/ecom" // Checkout form ödeme isteği için URI yolu
 	CheckoutFormInquiryURI = "/payment/iyzipos/checkoutform/auth/ecom/detail"     // Checkout form ödeme sorgulama isteği için URI yolu
+
+	SubmerchantCreateURI = "/onboarding/submerchant" // Alt üye işyeri oluşturma isteği için URI yolu
 )
 
 var (
