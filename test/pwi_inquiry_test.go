@@ -17,7 +17,7 @@ func TestCheckPWIPaymentRequest(t *testing.T) {
 		return
 	}
 
-	CheckRequest := &iyzipay.CheckPWIRequest{
+	CheckRequest := &iyzipay.PWIInquiryRequest{
 		Locale:         "tr",
 		ConversationID: "123456789",
 		Token:          Token,

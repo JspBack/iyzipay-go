@@ -92,7 +92,7 @@ func main() {
 		fmt.Println("PayWithIyzicoPageUrl: ", res.PayWithIyzicoPageUrl)
 	}
 
-	CheckReq := &iyzipay.CheckPWIRequest{
+	CheckReq := &iyzipay.PWIInquiryRequest{
 		Locale:         "tr",
 		ConversationID: "123456789",
 		Token:          res.Token,

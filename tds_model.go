@@ -63,7 +63,12 @@ type TDSPaymentRequest struct {
 	PaymentConversationId string `json:"paymentConversationId" validate:"required"`
 }
 
-type TDSPaymentResponse Non3DSPaymentResponse
+type TDSPaymentResponse struct {
+	Non3DSPaymentResponse
+
+	//Bankadan dönen değerdir. Sadece ödeme başarısız ise ve işlem 3ds ile yapılmışsa bu değer döner. 0,2,3,4,5,6,7 değerlerini alabilir.
+	MdStatus int `json:"mdStatus"`
+}
 
 func (r *InitTDSRequest) validate() error {
 	validate := validator.New()

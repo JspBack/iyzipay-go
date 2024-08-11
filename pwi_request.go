@@ -54,7 +54,7 @@ func (i iyzipayClient) InitilizePWIPaymentRequest(req *InitPWIRequest) (response
 // PWI ile gerçekleştirilen ödeme sorgulama isteği yapılır.
 //
 // Response içerisinde gelen paymentId saklanmalıdır.
-func (i iyzipayClient) CheckPWIPaymentRequest(req *CheckPWIRequest) (response CheckPWIResponse, err error) {
+func (i iyzipayClient) CheckPWIPaymentRequest(req *PWIInquiryRequest) (response PWIInquiryResponse, err error) {
 	if err = req.validate(); err != nil {
 		return response, err
 	}

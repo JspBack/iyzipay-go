@@ -95,7 +95,7 @@ type InitPWIResponse struct {
 	Signature string `json:"signature"`
 }
 
-type CheckPWIRequest struct {
+type PWIInquiryRequest struct {
 	// İstek yapılan dil bilgisidir. İki karakterli dil kodu olarak gönderilir. Örnek: tr, en
 	//
 	// zorunlu değil
@@ -112,7 +112,12 @@ type CheckPWIRequest struct {
 	Token string `json:"token" validate:"required"`
 }
 
-type CheckPWIResponse Non3DSPaymentResponse
+type PWIInquiryResponse struct {
+	Non3DSPaymentResponse
+
+	//Bankadan dönen değerdir. Sadece ödeme başarısız ise ve işlem 3ds ile yapılmışsa bu değer döner. 0,2,3,4,5,6,7 değerlerini alabilir.
+	MdStatus int `json:"mdStatus"`
+}
 
 func (r *InitPWIRequest) validate() error {
 	validate := validator.New()
@@ -152,7 +157,7 @@ func (r *InitPWIRequest) validate() error {
 	return nil
 }
 
-func (r *CheckPWIRequest) validate() error {
+func (r *PWIInquiryRequest) validate() error {
 	validate := validator.New()
 
 	// Eğer doğrulamada hata oluşursa hata mesajını döndürür.
