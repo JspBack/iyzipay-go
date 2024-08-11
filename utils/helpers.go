@@ -14,11 +14,15 @@ import (
 )
 
 // İstek oluşturmak için kullanılan fonksiyon
-func DoRequest(requestData []byte, client *http.Client, baseURI, apiKey, secretKey, uriPath string) (response []byte, err error) {
+func DoRequest(requestData []byte, client *http.Client, method, baseURI, apiKey, secretKey, uriPath string) (response []byte, err error) {
 	randomStr := randString(8)
 	authorizationString := generateAuthorizationString(apiKey, secretKey, string(requestData), uriPath)
 
-	req, err := http.NewRequest("POST", baseURI+uriPath, bytes.NewBuffer(requestData))
+	if !AcceptedRequestMethods[method] {
+		return nil, fmt.Errorf("invalid request method: %s", method)
+	}
+
+	req, err := http.NewRequest(method, baseURI+uriPath, bytes.NewBuffer(requestData))
 	if err != nil {
 		return nil, err
 	}

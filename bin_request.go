@@ -18,7 +18,7 @@ func (i iyzipayClient) BinControlRequest(req *BinRequest) (response BinResponse,
 		return response, errors.New("failed to marshal request")
 	}
 
-	httpresp, err := utils.DoRequest(requestData, i.client, i.baseURI, i.apiKey, i.apiSecret, utils.BinControlURI)
+	httpresp, err := utils.DoRequest(requestData, i.client, "POST", i.baseURI, i.apiKey, i.apiSecret, utils.BinControlURI)
 	if err != nil {
 		return response, err
 	}

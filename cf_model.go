@@ -16,6 +16,11 @@ type CFRequest struct {
 	//
 	// zorunlu değil.
 	PaymentSource string `json:"paymentSource" validate:"omitempty,oneof=SHOPIFY MAGENTO PRESTASHOP WOOCOMMERCE OPENCART"`
+
+	// Kayıtlı kullanıcı ID’si Veya key'i ? (Dökümantasyon belirsiz)
+	//
+	// zorunlu değil.
+	CardUserKey string `json:"cardUserKey" validate:"omitempty"`
 }
 
 type CFResponse struct {

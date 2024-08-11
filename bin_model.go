@@ -46,7 +46,7 @@ type BinResponse struct {
 	// ???
 	Commercial int `json:"commercial"`
 
-	// İstek sonucu.
+	// İşlem sonucu başarılı ise success, başarısız ise failure döner.
 	Status string `json:"status"`
 
 	// İstek sonucun dilini belirten parametre.

@@ -85,7 +85,7 @@ func TestCFPaymentRequest(t *testing.T) {
 		PaymentSource: "SHOPIFY",
 	}
 
-	response, htmlElement, err := client.CheckoutFormPaymentRequest(request, "responsive")
+	response, err := client.CheckoutFormPaymentRequest(request, "iframe")
 	if err != nil {
 		t.Errorf("Error creating payment: %v", err)
 		return
@@ -96,7 +96,7 @@ func TestCFPaymentRequest(t *testing.T) {
 		return
 	}
 
-	t.Logf("Html Element: %v", htmlElement)
 	t.Logf("Token: %v", response.Token)
-	t.Logf("Response: %v", response)
+	t.Logf("PayWithIyzicoPageUrl: %v", response.PayWithIyzicoPageUrl)
+	t.Logf("PaymentPageUrl: %v", response.PaymentPageUrl)
 }

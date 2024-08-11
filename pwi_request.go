@@ -20,7 +20,7 @@ func (i iyzipayClient) InitilizePWIPaymentRequest(req *InitPWIRequest) (response
 		return response, errors.New("failed to marshal request")
 	}
 
-	httpresp, err := utils.DoRequest(requestData, i.client, i.baseURI, i.apiKey, i.apiSecret, utils.InitPWIURI)
+	httpresp, err := utils.DoRequest(requestData, i.client, "POST", i.baseURI, i.apiKey, i.apiSecret, utils.InitPWIURI)
 	if err != nil {
 		return response, err
 	}
@@ -64,7 +64,7 @@ func (i iyzipayClient) CheckPWIPaymentRequest(req *PWIInquiryRequest) (response 
 		return response, errors.New("failed to marshal request")
 	}
 
-	httpresp, err := utils.DoRequest(requestData, i.client, i.baseURI, i.apiKey, i.apiSecret, utils.CheckPWIURI)
+	httpresp, err := utils.DoRequest(requestData, i.client, "POST", i.baseURI, i.apiKey, i.apiSecret, utils.CheckPWIURI)
 	if err != nil {
 		return response, err
 	}

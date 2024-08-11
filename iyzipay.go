@@ -6,6 +6,9 @@ import (
 	"strings"
 )
 
+// Iyzıco's documentation is whole another level. Words can't describe the struggle 💀
+// (https://docs.iyzico.com)
+
 type Option func(*iyzipayClient)
 
 // Iyzipay, Iyzipay API ile etkileşim kurmak için kullanılan istemciyi temsil eder.

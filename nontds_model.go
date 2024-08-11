@@ -363,7 +363,7 @@ type ItemTransaction struct {
 	// İşlem bazında blokaj çözülme tarihi. yyyy-MM-dd HH:mm:ss formatındadır, örneğin 2015-10-19 14:36:52
 	BlockageResolvedDate string `json:"blockageResolvedDate"`
 
-	// Dökümantasyonda belirtilmemiş
+	// Alt üye işyerine IBAN adresine gönderilmiş tutar.
 	SubMerchantPrice float64 `json:"subMerchantPrice"`
 
 	// Dökümantasyonda belirtilmemiş

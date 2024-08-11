@@ -18,7 +18,7 @@ func (i iyzipayClient) NonTDSPaymentRequest(req *PaymentRequest) (response Non3D
 		return response, errors.New("failed to marshal request")
 	}
 
-	httpresp, err := utils.DoRequest(requestData, i.client, i.baseURI, i.apiKey, i.apiSecret, utils.NonTDSURI)
+	httpresp, err := utils.DoRequest(requestData, i.client, "POST", i.baseURI, i.apiKey, i.apiSecret, utils.NonTDSURI)
 	if err != nil {
 		return response, err
 	}
