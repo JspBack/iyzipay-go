@@ -17,37 +17,53 @@ type iyzipayClient struct {
 	// (EN) APIKey, is the API key you get from Iyzipay.
 	apiKey string
 
-	// APISecret, Iyzipay'den aldığınız gizli anahtardır.
+	// (TR) APISecret, Iyzipay'den aldığınız gizli anahtardır.
+	// 
+	// (EN) APISecret, is the secret key you get from Iyzipay.
 	apiSecret string
 
-	// BaseURI, Iyzipay API'si için temel URI'dir.
+	// (TR) BaseURI, Iyzipay API'si için temel URI'dir.
+	// 
+	// (EN) BaseURI, is the base URI for Iyzipay API.
 	baseURI string
 
-	// Istekler için kullanılacak client
+	// (TR) Istekler için kullanılacak client
+	// 
+	// (EN) The client used for requests
 	client *http.Client
 
-	// 3DS işlemlerinde kart konrolü yapılmasını isteyip istemediğinizi belirten değer.
+	// (TR) 3DS işlemlerinde kart konrolü yapılmasını isteyip istemediğinizi belirten değer.
+	// 
+	// (EN) Value indicating whether you want card control in 3DS transactions.
 	binRequest bool
 
-	// 3DS işlemlerinde html içeriğini decode etmek isteyip istemediğinizi belirten değer.
+	// (TR) 3DS işlemlerinde html içeriğini decode etmek isteyip istemediğinizi belirten değer.
+	// 
+	// (EN) Value indicating whether you want to decode HTML contents in 3DS transactions.
 	htmlDecodeRequest bool
 }
 
-// WithBinRequest, 3DS işlemlerinde kart konrolü yapılmasını isteyip istemediğinizi belirtir.
+// (TR) WithBinRequest, 3DS işlemlerinde kart konrolü yapılmasını isteyip istemediğinizi belirtir.
+// 
+// (EN) WithBinRequest, indicates whether you want card control in 3DS transactions.
 func WithBinRequest(binRequest bool) Option {
 	return func(c *iyzipayClient) {
 		c.binRequest = binRequest
 	}
 }
 
-// WithHtmlDecodeRequest, 3DS işlemlerinde html içeriğini decode etmek isteyip istemediğinizi belirtir.
+// (TR) WithHtmlDecodeRequest, 3DS işlemlerinde html içeriğini decode etmek isteyip istemediğinizi belirtir.
+// 
+// (EN) WithHtmlDecodeRequest, indicates whether you want to decode html contents in 3DS transactions.
 func WithHtmlDecodeRequest(htmlDecodeRequest bool) Option {
 	return func(c *iyzipayClient) {
 		c.htmlDecodeRequest = htmlDecodeRequest
 	}
 }
 
-// New, yeni bir Iyzipay clientı oluşturur.
+// (TR) New, yeni bir Iyzipay clientı oluşturur.
+//
+// (EN) New, creates a new Iyzipay client.
 func New(apiKey, apiSecret string, opts ...Option) (*iyzipayClient, error) {
 	if apiKey == "" {
 		return nil, errors.New("API key is required")
@@ -68,8 +84,8 @@ func New(apiKey, apiSecret string, opts ...Option) (*iyzipayClient, error) {
 		apiSecret:         apiSecret,
 		baseURI:           baseURI,
 		client:            &http.Client{},
-		binRequest:        true, // Default olarak true
-		htmlDecodeRequest: true, // Default olarak true
+		binRequest:        true, // (TR) Varsayılan olarak true - (EN) True by default
+		htmlDecodeRequest: true, // (TR) Varsayılan olarak true - (EN) True by default
 	}
 
 	for _, opt := range opts {

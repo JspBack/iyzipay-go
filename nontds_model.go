@@ -9,208 +9,286 @@ import (
 )
 
 type PaymentRequest struct {
-	// iyzico istek sonucunda dönen metinlerin dilini ayarlamak için kullanılır. Varsayılan değeri tr’dir. en olarak kullanılabilir.
+	// (TR) API isteklerinde dönmesini istediğin dil. Varsayılan değeri tr’dir. en olarak kullanılabilir.
 	//
-	// zorunlu değil.
+	// (EN) The language you want to return on API requests. Default is tr, can be used in en.
+	//
+	// (TR) zorunlu değil. (EN) Not required.
 	Locale string `json:"locale" validate:"omitempty,oneof=tr en"`
 
-	// İstek esnasında gönderip, sonuçta alabileceğiniz bir değer, request/response eşleşmesi yapmak için kullanılabilir. En yaygın kullanış biçimi üye iş yerinin sipariş numarasıdır.
+	// (TR) İstek esnasında gönderip, sonuçta alabileceğiniz bir değer, request/response eşleşmesi yapmak için kullanılabilir. En yaygın kullanım biçimi sipariş numarasıdır.
 	//
-	// zorunlu değil.
+	// (EN) A value you send during a request and get in the response, can be used to match request/response. Mostly used for shipping numbers.
+	//
+	// (TR) zorunlu değil. (EN) Not required.
 	ConversationID string `json:"conversationId" validate:"omitempty"`
 
-	// Ödeme sepet tutarı. Kırılım (sepetin içerisindeki ürünler) tutarlar toplamı sepet tutarına eşit olmalı.
+	// (TR) Ödeme sepet tutarı. Kırılım (sepetin içerisindeki ürünler) tutarlar toplamı sepet tutarına eşit olmalı.
 	//
-	// zorunlu.
+	// (EN) Basket payment total. Total must be equal to the price.
+	//
+	// (TR) zorunlu. (EN) Required.
 	Price string `json:"price" validate:"required,numeric"`
 
-	// İndirim vade farkı vs. hesaplanmış POS’tan geçecek nihai tutar. Price değerinden küçük, büyük veya eşit olabilir
+	// (TR) İndirim vade farkı vs. hesaplanmış POS’tan geçecek nihai tutar. Price değerinden küçük, büyük veya eşit olabilir
 	//
-	// zorunlu.
+	// (EN) The final price total after discounts, interest etc.. Can be larger, smaller or equal to the price value.
+	//
+	// (TR) zorunlu. (EN) Required.
 	PaidPrice string `json:"paidPrice" validate:"required,numeric"`
 
-	// Taksit bilgisi, tek çekim için 1 gönderilmelidir. Geçerli değerler: 1, 2, 3, 6, 9, 12
+	// (TR) Taksit bilgisi, tek çekim için 1 olmalıdır. Geçerli değerler: 1, 2, 3, 6, 9, 12
 	//
-	// zorunlu.
+	// (EN) Installment count, must be 1 for a one time transaction. Valid values: 1, 2, 3, 6, 9, 12
+	//
+	// (TR) zorunlu. (EN) Required.
 	Installment int `json:"installment" validate:"required,numeric,gte=1,lte=12"`
 
-	// Ödeme kanalı. Geçerli değerler enum içinde sunulmaktadır: WEB, MOBILE, MOBILE_WEB, MOBILE_IOS, MOBILE_ANDROID, MOBILE_WINDOWS, MOBILE_TABLET, MOBILE_PHONE
+	// (TR) Ödeme kanalı. Geçerli değerler enum içinde sunulmaktadır: WEB, MOBILE, MOBILE_WEB, MOBILE_IOS, MOBILE_ANDROID, MOBILE_WINDOWS, MOBILE_TABLET, MOBILE_PHONE
 	//
-	// zorunlu değil.
+	// (EN) Payment channel. Valid values are in enum: WEB, MOBILE, MOBILE_WEB, MOBILE_IOS, MOBILE_ANDROID, MOBILE_WINDOWS, MOBILE_TABLET, MOBILE_PHONE
+	//
+	// (TR) zorunlu değil. (EN) Not required.
 	PaymentChannel string `json:"paymentChannel" validate:"omitempty,oneof=WEB MOBILE MOBILE_WEB MOBILE_IOS MOBILE_ANDROID MOBILE_WINDOWS MOBILE_TABLET MOBILE_PHONE"`
 
-	// Üye işyeri tarafından ilgili ödemenin sepetini tanımlamak için kullanılan id'dir. Sipariş numarası ya da anlamlı bir değer olabilir.
+	// (TR) Ürünlerin bulunduğu sepetin ID'si. Sipariş numarası ya da anlamlı bir değer olabilir.
 	//
-	// zorunlu değil.
+	// (EN) ID of products' basket. May contain order id or other important information.
+	//
+	// (TR) zorunlu değil. (EN) Not required.
 	BasketID string `json:"basketId" validate:"omitempty"`
 
-	// Ödeme grubu, varsayılan PRODUCT. Geçerli değerler enum içinde sunulmaktadır: PRODUCT, LISTING, SUBSCRIPTION, OTHER.
+	// (TR) Ödeme grubu, varsayılan PRODUCT. Geçerli değerler enum içinde sunulmaktadır: PRODUCT, LISTING, SUBSCRIPTION, OTHER.
 	//
-	// zorunlu değil.
+	// (EN) Payment group, default is PRODUCT. Valid values are in enum: PRODUCT, LISTING, SUBSCRIPTION, OTHER.
+	//
+	// (TR) zorunlu değil. (EN) Not required.
 	PaymentGroup string `json:"paymentGroup" validate:"omitempty,oneof=PRODUCT LISTING SUBSCRIPTION OTHER"`
 
-	// Müşterinin ödeme işlemi için kullanılacak bilgiler
+	// (TR) Müşterinin ödeme işlemi için kullanılacak bilgiler
 	//
-	// zorunlu.
+	// (EN) Information used for the customer's payment process.
+	//
+	// (TR) zorunlu. (EN) Required.
 	Buyer Buyer `json:"buyer" validate:"required,dive"`
 
-	// Ödeme kartı bilgileri
+	// (TR) Ödeme kartı bilgileri
 	//
-	// zorunlu.
+	// (EN) Payment card information.
+	//
+	// (TR) zorunlu. (EN) Required.
 	PaymentCard PaymentCard `json:"paymentCard" validate:"required,dive"`
 
-	// Müşterinin ödeme işlemi sırasında seçtiği teslimat adresi (Sepetteki ürünlerden en az 1 tanesi fiziksel ürün (itemType=PHYSICAL) ise zorunludur.)
+	// (TR) Müşterinin ödeme işlemi sırasında seçtiği teslimat adresi (Sepetteki ürünlerden en az 1 tanesi fiziksel ürün (itemType=PHYSICAL) ise zorunludur.)
 	//
-	// zorunlu değil.
+	// (EN) Customer's shipping adress ((itemType=PHYSICAL) is required when at least one of the items in the basket is physical)
+	//
+	// (TR) zorunlu değil. (EN) Not required.
 	ShippingAddress Address `json:"shippingAddress" validate:"omitempty"`
 
-	// Müşterinin ödeme işlemi sırasında seçtiği fatura adresi
+	// (TR) Müşterinin ödeme işlemi sırasında seçtiği fatura adresi
 	//
-	// zorunlu.
+	// (EN) Customer's billing address.
+	//
+	// (TR) zorunlu. (EN) Required.
 	BillingAddress Address `json:"billingAddress" validate:"required,dive"`
 
-	// Sepet içerisindeki ürünlerin listesi
+	// (TR) Sepet içerisindeki ürünlerin listesi
 	//
-	// zorunlu.
+	// (EN) List of items in the basket
+	//
+	// (TR) zorunlu. (EN) Required.
 	BasketItems []BasketItem `json:"basketItems" validate:"required,dive"`
 
-	// Ödemenin alınacağı para birimi default TL olarak belirlenmiştir. Diğer değerler ise USD, EUR, GBP olmak üzere, farklı para birimleri ile alışverişin hesabınıza tanımlandığından emin olunuz.
+	// (EN) Ödemenin alınacağı para birimi default TL olarak belirlenmiştir. Diğer değerler ise USD, EUR, GBP olmak üzere, farklı para birimleri ile alışverişin hesabınıza tanımlandığından emin olunuz.
 	//
-	// zorunlu.
+	// (TR) The currency the transaction will be made with is TL by default. Other values are USD, EUR, GBP. Make sure that the currency is defined in your account.
+	//
+	// (TR) zorunlu. (EN) Required.
 	Currency string `json:"currency" validate:"required"`
 }
 
 type Buyer struct {
-	// Üye işyeri tarafındaki alıcıya ait id.
+	// (TR) Üye işyeri tarafındaki alıcıya ait id.
 	//
-	// zorunlu.
+	// (EN) Customer's ID
+	//
+	// (TR) zorunlu. (EN) Required.
 	ID string `json:"id" validate:"required"`
 
-	// Üye işyeri tarafındaki alıcıya ait ad.
+	// (TR) Üye işyeri tarafındaki alıcıya ait ad.
 	//
-	// zorunlu.
+	// (EN) Customer's name
+	//
+	// (TR) zorunlu. (EN) Required.
 	Name string `json:"name" validate:"required"`
 
-	// Üye işyeri tarafındaki alıcıya ait soyad.
+	// (TR) Üye işyeri tarafındaki alıcıya ait soyad.
 	//
-	// zorunlu.
+	// (EN) Customer's surname
+	//
+	// (TR) zorunlu. (EN) Required.
 	Surname string `json:"surname" validate:"required"`
 
-	// Üye işyeri tarafındaki alıcıya ait kimlik (TCKN) numarası
+	// (TR) Üye işyeri tarafındaki alıcıya ait kimlik (TCKN) numarası
 	//
-	// zorunlu.
+	// (EN) Customer's identity number
+	//
+	// (TR) zorunlu. (EN) Required.
 	IdentityNumber string `json:"identityNumber" validate:"required,numeric"`
 
-	// Üye işyeri tarafındaki alıcıya ait e-posta bilgisi. E-posta adresi alıcıya ait geçerli ve erişilebilir bir adres olmalıdır
+	// (TR) Üye işyeri tarafındaki alıcıya ait e-posta bilgisi. E-posta adresi alıcıya ait geçerli ve erişilebilir bir adres olmalıdır
 	//
-	// zorunlu.
+	// (EN) Customer's Email information. Email must be valid.
+	//
+	// (TR) zorunlu. (EN) Required.
 	Email string `json:"email" validate:"required,email"`
 
-	// Üye işyeri tarafındaki alıcıya ait GSM numarası
+	// (TR) Üye işyeri tarafındaki alıcıya ait GSM numarası (+..)
 	//
-	// zorunlu değil.
+	// (EN) Customer's GSM number (+..)
+	//
+	// (TR) zorunlu değil. (EN)  Not required.
 	GSMNumber string `json:"gsmNumber" validate:"omitempty"`
 
-	// Üye işyeri tarafındaki alıcıya ait kayıt tarihi. Tarih formatı 2015-09-17 23:45:06 şeklinde olmalıdır.
+	// (TR) Üye işyeri tarafındaki alıcıya ait kayıt tarihi. Tarih formatı 2015-09-17 23:45:06 şeklinde olmalıdır.
 	//
-	// zorunlu değil.
+	// (EN) Customer's registration date. Date should be in 2015-09-17 23:45:06 format.
+	//
+	// (TR) zorunlu değil. (EN) Not required.
 	RegistrationDate string `json:"registrationDate" validate:"omitempty,iyziDate"`
 
-	// Üye işyeri tarafındaki alıcıya ait son giriş tarihi. Tarih formatı 2015-09-17 23:45:06 şeklinde olmalıdır.
+	// (TR) Üye işyeri tarafındaki alıcıya ait son giriş tarihi. Tarih formatı 2015-09-17 23:45:06 şeklinde olmalıdır.
 	//
-	// zorunlu değil.
+	// (EN) Customer's last login date to your implementation. Date should be in 2015-09-17 23:45:06 format.
+	//
+	// (TR) zorunlu değil. (EN) Not required.
 	LastLoginDate string `json:"lastLoginDate" validate:"omitempty,iyziDate"`
 
-	// Üye işyeri tarafındaki alıcıya ait kayıt adresi.
+	// (TR) Üye işyeri tarafındaki alıcıya ait kayıt adresi.
 	//
-	// zorunlu.
+	// (EN) Customer's registration adress.
+	//
+	// (TR) zorunlu. (EN) Required.
 	RegistrationAddress string `json:"registrationAddress" validate:"required"`
 
-	// Üye işyeri tarafındaki alıcıya ait şehir bilgisi.
+	// (TR) Üye işyeri tarafındaki alıcıya ait şehir bilgisi.
 	//
-	// zorunlu.
+	// (EN) Customer's city information.
+	//
+	// (TR) zorunlu. (EN) Required.
 	City string `json:"city" validate:"required"`
 
-	// Üye işyeri tarafındaki alıcıya ait ülke bilgisi.
+	// (TR) Üye işyeri tarafındaki alıcıya ait ülke bilgisi.
 	//
-	// zorunlu.
+	// (EN) Customer's country information.
+	//
+	// (TR) zorunlu. (EN) Required
 	Country string `json:"country" validate:"required"`
 
-	// Üye işyeri tarafındaki alıcıya ait posta kodu.
+	// (TR) Üye işyeri tarafındaki alıcıya ait posta kodu.
 	//
-	// zorunlu değil.
+	// (EN) Customer's zip code.
+	//
+	// (TR) zorunlu değil. (EN) Not required.
 	ZipCode string `json:"zipCode" validate:"omitempty,numeric"`
 
-	// Üye işyeri tarafındaki alıcıya ait IP adresi.
+	// (TR) Üye işyeri tarafındaki alıcıya ait IP adresi.
 	//
-	// zorunlu.
+	// (EN) Customer's IP adress.
+	//
+	// (TR) zorunlu. (EN) Required.
 	IP string `json:"ip" validate:"required,ip"`
 }
 
 type PaymentCard struct {
 
-	// Ödemenin alınacağı kart sahibinin adı soyadı. Eğer saklı kart ile ödeme yapılmıyorsa zorunludur.
+	// (TR) Ödemenin alınacağı kart sahibinin adı soyadı. Eğer kayıtlı kart ile ödeme yapılmıyorsa zorunludur.
 	//
-	// zorunlu.
+	// (EN) Name and surname of the card holder. Required if the card is not stored.
+	//
+	// (TR) zorunlu. (EN) Required.
 	CardHolderName string `json:"cardHolderName" validate:"required"`
 
-	// Ödemenin alınacağı kart numarası. Eğer saklı kart ile ödeme yapılmıyorsa zorunludur.
+	// (TR) Ödemenin alınacağı kart numarası. Eğer saklı kart ile ödeme yapılmıyorsa zorunludur.
 	//
-	// zorunlu.
+	// (EN) Card number. Required if the card is not stored.
+	//
+	// (TR) zorunlu. (EN) Required
 	CardNumber string `json:"cardNumber" validate:"required,creditcard"`
 
-	// Ödemenin alınacağı kartın son kullanma tarihi yılı. Eğer saklı kart ile ödeme yapılmıyorsa zorunludur
+	// (TR) Ödemenin alınacağı kartın son kullanma tarihi yılı. Eğer saklı kart ile ödeme yapılmıyorsa zorunludur
 	//
-	// zorunlu.
+	// (EN) Card's expiration year. Required if the card is not stored.
+	//
+	// (TR) zorunlu. (EN) Required.
 	ExpireYear string `json:"expireYear" validate:"required,numeric,len=4"`
 
-	// Ödemenin alınacağı kartın son kullanma tarihi ayı. Eğer saklı kart ile ödeme yapılmıyorsa zorunludur.
+	// (TR) Ödemenin alınacağı kartın son kullanma tarihi ayı. Eğer saklı kart ile ödeme yapılmıyorsa zorunludur.
 	//
-	// zorunlu.
+	// (EN) Card's expiration month. Required if the card is not stored.
+	//
+	// (TR) zorunlu. (EN) Required.
 	ExpireMonth string `json:"expireMonth" validate:"required,numeric,len=2,oneof=01 02 03 04 05 06 07 08 09 10 11 12"`
 
-	// Ödemenin alınacağı kartın güvenlik kodu. Eğer saklı kart ile ödeme yapılmıyorsa zorunludur. Saklı kartla ödeme yapılırken gönderilirse aynen bankaya iletilir
+	// (TR) Ödemenin alınacağı kartın güvenlik kodu. Eğer saklı kart ile ödeme yapılmıyorsa zorunludur.
 	//
-	// zorunlu.
+	// (EN) Card's security code. Required if the card is not stored.
+	//
+	// (TR) zorunlu. (EN) Required
 	CVC string `json:"cvc" validate:"required,numeric,len=3"`
 
-	// Ödeme esnasında kartın kaydedilip kaydedilmeyeceğini belirleyen parametre. Varsayılan değeri 0 olup, geçerli değerler 0 ve 1’dir
+	// (TR) Ödeme esnasında kartın kaydedilip kaydedilmeyeceğini belirleyen parametre. Varsayılan değeri 0 olup, geçerli değerler 0 ve 1’dir
 	//
-	// zorunlu değil.
+	// (EN) Parameter that indicates whether the card will be registered or not. Default value is 0, valid values are 0 and 1.
+	//
+	// (TR) zorunlu değil. (EN) Not required.
 	RegisterCard int `json:"registerCard" validate:"omitempty,oneof=0 1"`
 }
 
 type Address struct {
-	// Üye işyeri tarafındaki alıcıya ait adres bilgisi.
+	// (TR) Üye işyeri tarafındaki alıcıya ait adres bilgisi.
 	//
-	// zorunlu.
+	// (EN) Customer's address information.
+	//
+	// (TR) zorunlu. (EN) Required.
 	Address string `json:"address" validate:"required"`
 
-	// Üye işyeri tarafındaki alıcıya ait posta kodu.
+	// (TR) Üye işyeri tarafındaki alıcıya ait posta kodu.
 	//
-	// zorunlu değil.
+	// (EN) Customer's zipcode
+	//
+	// (TR) zorunlu değil. (EN) Not required.
 	ZipCode string `json:"zipCode,omitempty" validate:"omitempty,numeric"`
 
-	// Üye işyeri tarafındaki alıcıya ait iletişim adı.
+	// (TR) Üye işyeri tarafındaki alıcıya ait iletişim adı.
 	//
-	// zorunlu.
+	// (EN) Customer's contact name.
+	//
+	// (TR) zorunlu. (EN) Required.
 	ContactName string `json:"contactName" validate:"required"`
 
-	// Üye işyeri tarafındaki alıcıya ait şehir bilgisi.
+	// (TR) Üye işyeri tarafındaki alıcıya ait şehir bilgisi.
 	//
-	// zorunlu.
+	// (EN) Customer's city information.
+	//
+	// (TR) zorunlu. (EN) Required.
 	City string `json:"city" validate:"required"`
 
-	// Üye işyeri tarafındaki alıcıya ait ülke bilgisi.
+	// (TR) Üye işyeri tarafındaki alıcıya ait ülke bilgisi.
 	//
-	// zorunlu.
+	// (EN) Customer's country information
+	//
+	// (TR) zorunlu. (EN) Required
 	Country string `json:"country" validate:"required"`
 }
 
 type BasketItem struct {
-	// Üye işyeri tarafındaki sepetteki ürüne ait id. Not: Bir ödeme isteğine maksimum 500 basketItem eklenebilir
+	// (TR) Üye işyeri tarafındaki sepetteki ürüne ait id. Not: Bir ödeme isteğine maksimum 500 basketItem eklenebilir
 	//
-	// zorunlu.
+	// (EN) ID of the product in the basket. Note: only 500 basketItem can be added to a single transaction.
+	//
+	// (TR) zorunlu. (EN) Required.
 	ID string `json:"id" validate:"required"`
 
 	// Üye işyeri tarafındaki sepetteki ürüne ait tutar. 0 ve 0’dan küçük olamaz; tutarlar toplamı sepet tutarına (price) eşit olmalıdır.
