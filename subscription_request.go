@@ -104,3 +104,11 @@ func (i iyzipayClient) DeleteSubscriptionProduct(req DeleteSubscriptionProductRe
 
 	return response, nil
 }
+
+func (i iyzipayClient) GetSubscriptionProductDetail(req GetSubscriptionProductDetailRequest) (response GetSubscriptionProductDetailResponse, err error) {
+	return response, nil
+}
+
+func (i iyzipayClient) GetSubscriptionProductList(req GetSubscriptionProductListRequest) (response GetSubscriptionProductListResponse, err error) {
+	return response, nil
+}

@@ -56,6 +56,14 @@ type DeleteSubscriptionProductRequest struct {
 	ProductReferenceCode string `json:"productReferenceCode" validate:"required"`
 }
 
+type GetSubscriptionProductDetailRequest struct{}
+
+type GetSubscriptionProductListRequest struct{}
+
+type GetSubscriptionProductDetailResponse struct{}
+
+type GetSubscriptionProductListResponse struct{}
+
 type SubscriptionProductResponse struct {
 	// Yapılan isteğin sonucunu belirtir. İşlem başarılı ise success değeri döner.
 	Status string `json:"status"`
