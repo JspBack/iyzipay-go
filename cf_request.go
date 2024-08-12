@@ -26,7 +26,7 @@ func (i iyzipayClient) CheckoutFormPaymentRequest(req *CFRequest, CFFormType str
 	}
 
 	err = json.Unmarshal(httpresp, &response)
-	if err != nil {
+	if err != nil || response.Status != "success" {
 		errorResp, err := utils.HandleError(httpresp)
 		if err != nil {
 			return response, err
@@ -64,7 +64,7 @@ func (i iyzipayClient) CheckoutFormPaymentInquiryRequest(req *CFInquiryRequest) 
 	}
 
 	err = json.Unmarshal(httpresp, &response)
-	if err != nil {
+	if err != nil || response.Status != "success" {
 		errorResp, err := utils.HandleError(httpresp)
 		if err != nil {
 			return response, err

@@ -28,11 +28,6 @@ func TestApproveProduct(t *testing.T) {
 		return
 	}
 
-	if response.Status != "success" {
-		t.Errorf("Error creating payment: %v", response)
-		return
-	}
-
 	t.Logf("ApproveProduct: %v", response)
 }
 
@@ -55,11 +50,6 @@ func TestDisapproveProduct(t *testing.T) {
 	response, err := client.DisapproveProduct(*request)
 	if err != nil {
 		t.Errorf("Error approving product: %v", err)
-		return
-	}
-
-	if response.Status != "success" {
-		t.Errorf("Error creating payment: %v", response)
 		return
 	}
 

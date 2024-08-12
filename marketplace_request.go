@@ -27,7 +27,7 @@ func (i iyzipayClient) ApproveProduct(req MarketplaceProductRequest) (response M
 	}
 
 	err = json.Unmarshal(httpresp, &response)
-	if err != nil {
+	if err != nil || response.Status != "success" {
 		errorResp, err := utils.HandleError(httpresp)
 		if err != nil {
 			return response, err
@@ -56,7 +56,7 @@ func (i iyzipayClient) DisapproveProduct(req MarketplaceProductRequest) (respons
 	}
 
 	err = json.Unmarshal(httpresp, &response)
-	if err != nil {
+	if err != nil || response.Status != "success" {
 		errorResp, err := utils.HandleError(httpresp)
 		if err != nil {
 			return response, err
