@@ -59,10 +59,10 @@ type InitPWIRequest struct {
 	Buyer Buyer `json:"buyer" validate:"required,dive"`
 
 	// Kargo adresi (PHYSICAL product tipi seçilmişse zorunlu)
-	ShippingAddress Address `json:"shippingAddress" validate:"omitempty,dive"`
+	ShippingAddress ShippingAddress `json:"shippingAddress" validate:"omitempty,dive"`
 
 	// Fatura adresi
-	BillingAddress Address `json:"billingAddress" validate:"required,dive"`
+	BillingAddress BillingAddress `json:"billingAddress" validate:"required,dive"`
 
 	// Sepet içerikleri
 	BasketItems []BasketItem `json:"basketItems" validate:"required,dive"`

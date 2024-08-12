@@ -62,12 +62,12 @@ type PaymentRequest struct {
 	// Müşterinin ödeme işlemi sırasında seçtiği teslimat adresi (Sepetteki ürünlerden en az 1 tanesi fiziksel ürün (itemType=PHYSICAL) ise zorunludur.)
 	//
 	// zorunlu değil.
-	ShippingAddress Address `json:"shippingAddress" validate:"omitempty"`
+	ShippingAddress ShippingAddress `json:"shippingAddress,omitempty" validate:"omitempty"`
 
 	// Müşterinin ödeme işlemi sırasında seçtiği fatura adresi
 	//
 	// zorunlu.
-	BillingAddress Address `json:"billingAddress" validate:"required,dive"`
+	BillingAddress BillingAddress `json:"billingAddress" validate:"required,dive"`
 
 	// Sepet içerisindeki ürünlerin listesi
 	//
@@ -180,7 +180,7 @@ type PaymentCard struct {
 	RegisterCard int `json:"registerCard" validate:"omitempty,oneof=0 1"`
 }
 
-type Address struct {
+type BillingAddress struct {
 	// Üye işyeri tarafındaki alıcıya ait adres bilgisi.
 	//
 	// zorunlu.
@@ -205,6 +205,33 @@ type Address struct {
 	//
 	// zorunlu.
 	Country string `json:"country" validate:"required"`
+}
+
+type ShippingAddress struct {
+	// Üye işyeri tarafındaki alıcıya ait adres bilgisi.
+	//
+	// zorunlu.
+	Address string `json:"address" validate:"omitempty"`
+
+	// Üye işyeri tarafındaki alıcıya ait posta kodu.
+	//
+	// zorunlu değil.
+	ZipCode string `json:"zipCode,omitempty" validate:"omitempty,numeric"`
+
+	// Üye işyeri tarafındaki alıcıya ait iletişim adı.
+	//
+	// zorunlu.
+	ContactName string `json:"contactName" validate:"omitempty"`
+
+	// Üye işyeri tarafındaki alıcıya ait şehir bilgisi.
+	//
+	// zorunlu.
+	City string `json:"city" validate:"omitempty"`
+
+	// Üye işyeri tarafındaki alıcıya ait ülke bilgisi.
+	//
+	// zorunlu.
+	Country string `json:"country" validate:"omitempty"`
 }
 
 type BasketItem struct {

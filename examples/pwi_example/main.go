@@ -41,14 +41,14 @@ func main() {
 			Country:             "Turkey",
 			ZipCode:             "34732",
 			IP:                  "85.34.78.112"},
-		ShippingAddress: iyzipay.Address{
+		ShippingAddress: iyzipay.ShippingAddress{
 			Address:     "Nidakule Göztepe, Merdivenköy Mah. Bora Sok. No:1",
 			ContactName: "Jane Doe",
 			City:        "Istanbul",
 			Country:     "Turkey",
 			ZipCode:     "34742",
 		},
-		BillingAddress: iyzipay.Address{
+		BillingAddress: iyzipay.BillingAddress{
 			Address:     "Nidakule Göztepe, Merdivenköy Mah. Bora Sok. No:1",
 			ContactName: "Jane Doe",
 			City:        "Istanbul",

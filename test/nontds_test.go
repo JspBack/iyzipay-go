@@ -19,7 +19,7 @@ func TestNTdsPaymentRequest(t *testing.T) {
 	request := &iyzipay.PaymentRequest{
 		Locale:         "tr",
 		ConversationID: "123456789",
-		Price:          "1.0",
+		Price:          "0.5",
 		PaidPrice:      "1.0",
 		Installment:    1,
 		PaymentChannel: "WEB",
@@ -48,14 +48,14 @@ func TestNTdsPaymentRequest(t *testing.T) {
 			ZipCode:             "34732",
 			IP:                  "85.34.78.112",
 		},
-		ShippingAddress: iyzipay.Address{
-			Address:     "Nidakule Göztepe, Merdivenköy Mah. Bora Sok. No:1",
-			ContactName: "Jane Doe",
-			City:        "Istanbul",
-			Country:     "Turkey",
-			ZipCode:     "34742",
-		},
-		BillingAddress: iyzipay.Address{
+		// ShippingAddress: iyzipay.Address{
+		// 	Address:     "Nidakule Göztepe, Merdivenköy Mah. Bora Sok. No:1",
+		// 	ContactName: "Jane Doe",
+		// 	City:        "Istanbul",
+		// 	Country:     "Turkey",
+		// 	ZipCode:     "34742",
+		// },
+		BillingAddress: iyzipay.BillingAddress{
 			Address:     "Nidakule Göztepe, Merdivenköy Mah. Bora Sok. No:1",
 			ContactName: "Jane Doe",
 			City:        "Istanbul",
@@ -63,14 +63,14 @@ func TestNTdsPaymentRequest(t *testing.T) {
 			ZipCode:     "34742",
 		},
 		BasketItems: []iyzipay.BasketItem{
-			{
-				ID:        "BI101",
-				Name:      "Binocular",
-				Category1: "Collectibles",
-				Category2: "Hobby",
-				ItemType:  "PHYSICAL",
-				Price:     "0.3",
-			},
+			// {
+			// 	ID:        "BI101",
+			// 	Name:      "Binocular",
+			// 	Category1: "Collectibles",
+			// 	Category2: "Hobby",
+			// 	ItemType:  "PHYSICAL",
+			// 	Price:     "0.3",
+			// },
 			{
 				ID:        "BI102",
 				Name:      "Game code",
@@ -79,14 +79,14 @@ func TestNTdsPaymentRequest(t *testing.T) {
 				ItemType:  "VIRTUAL",
 				Price:     "0.5",
 			},
-			{
-				ID:        "BI103",
-				Name:      "Usb",
-				Category1: "Electronics",
-				Category2: "Usb",
-				ItemType:  "PHYSICAL",
-				Price:     "0.2",
-			},
+			// {
+			// 	ID:        "BI103",
+			// 	Name:      "Usb",
+			// 	Category1: "Electronics",
+			// 	Category2: "Usb",
+			// 	ItemType:  "PHYSICAL",
+			// 	Price:     "0.2",
+			// },
 		},
 		Currency: "TRY",
 	}
