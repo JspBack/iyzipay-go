@@ -10,7 +10,7 @@ func TestInitTDSPaymentRequest(t *testing.T) {
 	apikey := "sandbox-..."
 	secretkey := "sandbox-..."
 
-	client, err := iyzipay.New(apikey, secretkey, iyzipay.WithBinRequest(true), iyzipay.WithHtmlDecodeRequest(true))
+	client, err := iyzipay.New(apikey, secretkey)
 	if err != nil {
 		t.Errorf("Error creating client: %v", err)
 		return
@@ -94,7 +94,7 @@ func TestInitTDSPaymentRequest(t *testing.T) {
 		CallbackUrl: "https://www.merchant.com/callback",
 	}
 
-	response, decodedHtmlContent, err := client.InitilizeTDSPayment(InitRequest)
+	response, decodedHtmlContent, err := client.InitializeTDSPayment(InitRequest, iyzipay.WithBinRequest(true), iyzipay.WithHtmlDecodeRequest(true))
 	if err != nil {
 		t.Errorf("Error creating payment request: %v", err)
 		return

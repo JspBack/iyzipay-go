@@ -15,8 +15,6 @@ func main() {
 	client, err := iyzipay.New(
 		apikey,
 		apiSecret,
-		// iyzipay.WithBinRequest(false), // Bin kontrolü yapmak istemiyorsanız false yapabilirsiniz.
-		// iyzipay.WithHtmlDecodeRequest(false), // Html içeriğini decode etmek istemiyorsanız false yapabilirsiniz.
 	)
 	if err != nil {
 		fmt.Println(err)
@@ -101,7 +99,12 @@ func main() {
 		CallbackUrl: "https://www.merchant.com/callback",
 	}
 
-	res, decodedHtmlContent, err := client.InitilizeTDSPayment(req)
+	res, decodedHtmlContent, err := client.InitializeTDSPayment(
+		req,
+		iyzipay.WithBinRequest(false),        // Bin kontrolü yapmak istemiyorsanız false yapabilirsiniz.
+		iyzipay.WithHtmlDecodeRequest(false), // Html içeriğini decode etmek istemiyorsanız false yapabilirsiniz.
+	)
+
 	if err != nil {
 		fmt.Println(err)
 		return
@@ -118,6 +121,7 @@ func main() {
 		PaymentId:             res.PaymentID,
 		PaymentConversationId: conversationID,
 	}
+
 	// Bu örneği direk çalıştırırsanız hata alırsınız. Öncelikle decodedHtmlContent'e gidip işlemi tamamlamanız gerekmektedir.
 	finalizeRes, err := client.FinalizeTDSPayment(finalizeReq)
 	if err != nil {

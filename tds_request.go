@@ -7,18 +7,48 @@ import (
 	"github.com/JspBack/iyzipay-go/utils"
 )
 
+type tdsOptions func(*tdsRequestOptions)
+
+type tdsRequestOptions struct {
+	binRequest        bool
+	htmlDecodeRequest bool
+}
+
+// Otomatik olarak bin kontrolü yapar. Eğer bin kontrol yapmak istemiyorsanız binRequest parametresini false yapabilirsiniz.
+func WithBinRequest(binRequest bool) tdsOptions {
+	return func(o *tdsRequestOptions) {
+		o.binRequest = binRequest
+	}
+}
+
+// Otomatik olarak html içeriğini decode eder. Eğer decode etmek istemiyorsanız htmlDecodeRequest parametresini false yapabilirsiniz.
+func WithHtmlDecodeRequest(htmlDecodeRequest bool) tdsOptions {
+	return func(o *tdsRequestOptions) {
+		o.htmlDecodeRequest = htmlDecodeRequest
+	}
+}
+
 // TROY, MASTERCARD, VISA ve AMEX markalı kartlarla yapılan işlemleri destekler.
 // BONUS, WORLD, MAXIMUM, AXESS, CARDFINANS, PARAF, ADVANTAGE gibi taksit programlarına katılmış olan kartlara 2, 3, 6, 9 ve 12 taksit seçenekleri sunulmaktadır.
 // Response da dönen paymentId saklanmalıdır.
 //
 // Bincontrol işlemi otomatik olarak yapılyor eğer bin kontrol yapmak istemiyorsanız binRequest parametresini false yapabilirsiniz.
 // Html içeriği otomatik olarak decode ediliyor eğer decode etmek istemiyorsanız htmlDecodeRequest parametresini false yapabilirsiniz.
-func (i iyzipayClient) InitilizeTDSPayment(req *InitTDSRequest) (response InitTDSResponse, decodedHtmlContent string, err error) {
+func (i iyzipayClient) InitializeTDSPayment(req *InitTDSRequest, opts ...tdsOptions) (response InitTDSResponse, decodedHtmlContent string, err error) {
+	options := &tdsRequestOptions{
+		binRequest:        true, // default
+		htmlDecodeRequest: true, // default
+	}
+
+	for _, opt := range opts {
+		opt(options)
+	}
+
 	if err = req.validate(); err != nil {
 		return response, decodedHtmlContent, err
 	}
 
-	if i.binRequest {
+	if options.binRequest {
 		binReq := BinRequest{
 			Locale:         req.Locale,
 			BinNumber:      req.PaymentCard.CardNumber[:6],
@@ -59,7 +89,7 @@ func (i iyzipayClient) InitilizeTDSPayment(req *InitTDSRequest) (response InitTD
 		}
 	}
 
-	if i.htmlDecodeRequest {
+	if options.htmlDecodeRequest {
 		decodedHtmlContent, err = utils.Base64Decode(response.ThreeDSHtmlContent)
 		if err != nil {
 			return response, decodedHtmlContent, errors.New("failed to decode html content")
