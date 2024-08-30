@@ -26,7 +26,7 @@ func (i iyzipayClient) InitilizePWIPaymentRequest(req *InitPWIRequest) (response
 	}
 
 	err = json.Unmarshal(httpresp, &response)
-	if err != nil {
+	if err != nil || response.Status != "success" {
 		errorResp, err := utils.HandleError(httpresp)
 		if err != nil {
 			return response, err
@@ -57,7 +57,7 @@ func (i iyzipayClient) CheckPWIPaymentRequest(req *PWIInquiryRequest) (response 
 	}
 
 	err = json.Unmarshal(httpresp, &response)
-	if err != nil {
+	if err != nil || response.Status != "success" {
 		errorResp, err := utils.HandleError(httpresp)
 		if err != nil {
 			return response, err

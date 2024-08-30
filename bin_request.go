@@ -24,7 +24,7 @@ func (i iyzipayClient) BinControlRequest(req *BinRequest) (response BinResponse,
 	}
 
 	err = json.Unmarshal(httpresp, &response)
-	if err != nil {
+	if err != nil || response.Status != "success" {
 		errorResp, err := utils.HandleError(httpresp)
 		if err != nil {
 			return response, err

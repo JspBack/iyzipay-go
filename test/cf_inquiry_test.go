@@ -29,11 +29,6 @@ func TestCFPaymentInquiryRequest(t *testing.T) {
 		return
 	}
 
-	if response.Status != "success" {
-		t.Errorf("Error getting response: %v", response.Status)
-		return
-	}
-
 	if response.Token != token {
 		t.Errorf("Error getting response: %v", response.Token)
 		return

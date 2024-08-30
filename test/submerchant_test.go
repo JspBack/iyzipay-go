@@ -38,11 +38,6 @@ func TestCreateIndividualSubMerchant(t *testing.T) {
 		return
 	}
 
-	if response.Status != "success" {
-		t.Errorf("Error getting response: %v", response.Status)
-		return
-	}
-
 	t.Logf("Response: %v", response)
 }
 
@@ -72,11 +67,6 @@ func TestCreatePrivateSubMerchant(t *testing.T) {
 		return
 	}
 
-	if response.Status != "success" {
-		t.Errorf("Error getting response: %v", response.Status)
-		return
-	}
-
 	t.Logf("Response: %v", response)
 }
 
@@ -89,11 +79,6 @@ func TestCreateLimitedCompanySubMerchant(t *testing.T) {
 	response, err := client.CreateLimitedCompanySubMerchant(*req)
 	if err != nil {
 		t.Errorf("Error getting response: %v", err)
-		return
-	}
-
-	if response.Status != "success" {
-		t.Errorf("Error getting response: %v", response.Status)
 		return
 	}
 
@@ -122,11 +107,6 @@ func TestUpdateIndividualSubMerchant(t *testing.T) {
 		return
 	}
 
-	if response.Status != "success" {
-		t.Errorf("Error getting response: %v", response.Status)
-		return
-	}
-
 	t.Logf("Response: %v", response)
 }
 
@@ -149,11 +129,6 @@ func TestUpdatePrivateSubMerchant(t *testing.T) {
 	response, err := client.UpdatePrivateSubMerchant(*req)
 	if err != nil {
 		t.Errorf("Error getting response: %v", err)
-		return
-	}
-
-	if response.Status != "success" {
-		t.Errorf("Error getting response: %v", response.Status)
 		return
 	}
 
@@ -182,11 +157,6 @@ func TestUpdateLimitedCompanySubMerchant(t *testing.T) {
 		return
 	}
 
-	if response.Status != "success" {
-		t.Errorf("Error getting response: %v", response.Status)
-		return
-	}
-
 	t.Logf("Response: %v", response)
 }
 
@@ -200,11 +170,6 @@ func TestSubMerchantInquiry(t *testing.T) {
 	response, err := client.SubMerchantInquiry(*req)
 	if err != nil {
 		t.Errorf("Error getting response: %v", err)
-		return
-	}
-
-	if response.Status != "success" {
-		t.Errorf("Error getting response: %v", response.Status)
 		return
 	}
 
@@ -223,11 +188,6 @@ func TestUpdateSubMerchantProduct(t *testing.T) {
 	response, err := client.UpdateSubMerchantProduct(*req)
 	if err != nil {
 		t.Errorf("Error getting response: %v", err)
-		return
-	}
-
-	if response.Status != "success" {
-		t.Errorf("Error getting response: %v", response.Status)
 		return
 	}
 

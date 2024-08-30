@@ -26,7 +26,7 @@ func (i iyzipayClient) CreateIndividualSubMerchant(req IndividualSubMerchantRequ
 	}
 
 	err = json.Unmarshal(httpresp, &response)
-	if err != nil {
+	if err != nil || response.Status != "success" {
 		errorResp, err := utils.HandleError(httpresp)
 		if err != nil {
 			return response, err
@@ -57,7 +57,7 @@ func (i iyzipayClient) CreatePrivateSubMerchant(req PrivateSubMerchantRequest) (
 	}
 
 	err = json.Unmarshal(httpresp, &response)
-	if err != nil {
+	if err != nil || response.Status != "success" {
 		errorResp, err := utils.HandleError(httpresp)
 		if err != nil {
 			return response, err
@@ -88,7 +88,7 @@ func (i iyzipayClient) CreateLimitedCompanySubMerchant(req LimitedCompanySubMerc
 	}
 
 	err = json.Unmarshal(httpresp, &response)
-	if err != nil {
+	if err != nil || response.Status != "success" {
 		errorResp, err := utils.HandleError(httpresp)
 		if err != nil {
 			return response, err
@@ -117,7 +117,7 @@ func (i iyzipayClient) UpdateIndividualSubMerchant(req IndividualSubMerchantUpda
 	}
 
 	err = json.Unmarshal(httpresp, &response)
-	if err != nil {
+	if err != nil || response.Status != "success" {
 		errorResp, err := utils.HandleError(httpresp)
 		if err != nil {
 			return response, err
@@ -146,7 +146,7 @@ func (i iyzipayClient) UpdatePrivateSubMerchant(req PrivateSubMerchantUpdateRequ
 	}
 
 	err = json.Unmarshal(httpresp, &response)
-	if err != nil {
+	if err != nil || response.Status != "success" {
 		errorResp, err := utils.HandleError(httpresp)
 		if err != nil {
 			return response, err
@@ -175,7 +175,7 @@ func (i iyzipayClient) UpdateLimitedCompanySubMerchant(req LimitedCompanySubMerc
 	}
 
 	err = json.Unmarshal(httpresp, &response)
-	if err != nil {
+	if err != nil || response.Status != "success" {
 		errorResp, err := utils.HandleError(httpresp)
 		if err != nil {
 			return response, err
@@ -204,7 +204,7 @@ func (i iyzipayClient) SubMerchantInquiry(req SubMerchantInquiryRequest) (respon
 	}
 
 	err = json.Unmarshal(httpresp, &response)
-	if err != nil {
+	if err != nil || response.Status != "success" {
 		errorResp, err := utils.HandleError(httpresp)
 		if err != nil {
 			return response, err
@@ -232,7 +232,7 @@ func (i iyzipayClient) UpdateSubMerchantProduct(req SubMerchantProductUpdateRequ
 	}
 
 	err = json.Unmarshal(httpresp, &response)
-	if err != nil {
+	if err != nil || response.Status != "success" {
 		errorResp, err := utils.HandleError(httpresp)
 		if err != nil {
 			return response, err
