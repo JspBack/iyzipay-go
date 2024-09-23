@@ -10,8 +10,8 @@ import (
 //
 // Dökümantasyonda YOK.
 func TestCreateSubscriptionProduct(t *testing.T) {
-	apikey = "sandbox-H1pFBNawbh1ClEFAKRTc85CM6owLYL0V"
-	secretkey = "IQho1I1Swd98yNbecmmCIjLJKN4zypHv"
+	apikey = "sandbox-..."
+	secretkey = ""
 	client, _ = iyzipay.New(apikey, secretkey)
 
 	req := &iyzipay.CreateSubscriptionProductRequest{

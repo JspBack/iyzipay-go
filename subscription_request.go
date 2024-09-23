@@ -10,7 +10,7 @@ import (
 // Abonelik ürünü oluşturmak için kullanılır.
 //
 // Şuan hata dönmektedir.
-func (i iyzipayClient) CreatSubscriptionProduct(req CreateSubscriptionProductRequest) (response SubscriptionProductResponse, err error) {
+func (i *IyzipayClient) CreatSubscriptionProduct(req CreateSubscriptionProductRequest) (response SubscriptionProductResponse, err error) {
 	if err = req.validate(); err != nil {
 		return response, err
 	}
@@ -41,7 +41,7 @@ func (i iyzipayClient) CreatSubscriptionProduct(req CreateSubscriptionProductReq
 // Abonelik ürünü güncellemek için kullanılır.
 //
 // Şuan hata dönmektedir.
-func (i iyzipayClient) UpdateSubscriptionProduct(req UpdateSubscriptionProductRequest) (response SubscriptionProductResponse, err error) {
+func (i *IyzipayClient) UpdateSubscriptionProduct(req UpdateSubscriptionProductRequest) (response SubscriptionProductResponse, err error) {
 	if err = req.validate(); err != nil {
 		return response, err
 	}
@@ -74,7 +74,7 @@ func (i iyzipayClient) UpdateSubscriptionProduct(req UpdateSubscriptionProductRe
 // Abonelik ürünü silmek için kullanılır.
 //
 // Şuan hata dönmektedir.
-func (i iyzipayClient) DeleteSubscriptionProduct(req DeleteSubscriptionProductRequest) (response SubscriptionProductResponse, err error) {
+func (i *IyzipayClient) DeleteSubscriptionProduct(req DeleteSubscriptionProductRequest) (response SubscriptionProductResponse, err error) {
 	if err = req.validate(); err != nil {
 		return response, err
 	}
@@ -105,10 +105,10 @@ func (i iyzipayClient) DeleteSubscriptionProduct(req DeleteSubscriptionProductRe
 	return response, nil
 }
 
-func (i iyzipayClient) GetSubscriptionProductDetail(req GetSubscriptionProductDetailRequest) (response GetSubscriptionProductDetailResponse, err error) {
+func (i *IyzipayClient) GetSubscriptionProductDetail(req GetSubscriptionProductDetailRequest) (response GetSubscriptionProductDetailResponse, err error) {
 	return response, nil
 }
 
-func (i iyzipayClient) GetSubscriptionProductList(req GetSubscriptionProductListRequest) (response GetSubscriptionProductListResponse, err error) {
+func (i *IyzipayClient) GetSubscriptionProductList(req GetSubscriptionProductListRequest) (response GetSubscriptionProductListResponse, err error) {
 	return response, nil
 }

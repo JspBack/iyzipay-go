@@ -8,7 +8,7 @@ import (
 )
 
 // Kart taksit bilgileri gibi bilgilerin alınabilmesi için kullanılır.
-func (i iyzipayClient) BinControlRequest(req *BinRequest) (response BinResponse, err error) {
+func (i *IyzipayClient) BinControlRequest(req *BinRequest) (response BinResponse, err error) {
 	if err = req.validate(); err != nil {
 		return response, err
 	}

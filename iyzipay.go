@@ -10,7 +10,7 @@ import (
 // (https://docs.iyzico.com)
 
 // Iyzipay, Iyzipay API ile etkileşim kurmak için kullanılan istemciyi temsil eder.
-type iyzipayClient struct {
+type IyzipayClient struct {
 	// APIKey, Iyzipay'den aldığınız anahtardır.
 	apiKey string
 
@@ -25,7 +25,7 @@ type iyzipayClient struct {
 }
 
 // New, yeni bir Iyzipay clientı oluşturur.
-func New(apiKey, apiSecret string) (*iyzipayClient, error) {
+func New(apiKey, apiSecret string) (*IyzipayClient, error) {
 	if apiKey == "" {
 		return nil, errors.New("API key is required")
 	}
@@ -40,7 +40,7 @@ func New(apiKey, apiSecret string) (*iyzipayClient, error) {
 		baseURI = "https://sandbox-api.iyzipay.com"
 	}
 
-	client := &iyzipayClient{
+	client := &IyzipayClient{
 		apiKey:    apiKey,
 		apiSecret: apiSecret,
 		baseURI:   baseURI,

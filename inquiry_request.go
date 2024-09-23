@@ -8,7 +8,7 @@ import (
 )
 
 // İşlem sorgulama isteği
-func (i iyzipayClient) PaymentInquiryRequest(req *InquiryRequest) (response InquiryResponse, err error) {
+func (i *IyzipayClient) PaymentInquiryRequest(req *InquiryRequest) (response InquiryResponse, err error) {
 	if err = req.validate(); err != nil {
 		return response, err
 	}

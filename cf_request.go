@@ -10,7 +10,7 @@ import (
 // Checkout Fom ile ödeme isteği yapmak için kullanılır.
 //
 // Bu istekte dönecek olan html elementi için 3 farklı CFFormType belirleyebilirsiniz. "responsive", "popup", "iframe".
-func (i iyzipayClient) CheckoutFormPaymentRequest(req *CFRequest, CFFormType string) (response *CFResponse, err error) {
+func (i *IyzipayClient) CheckoutFormPaymentRequest(req *CFRequest, CFFormType string) (response *CFResponse, err error) {
 	if err = req.validate(); err != nil {
 		return response, err
 	}
@@ -48,7 +48,7 @@ func (i iyzipayClient) CheckoutFormPaymentRequest(req *CFRequest, CFFormType str
 // Checkout Form ile yapılan ödeme isteği için sorgulama yapmak için kullanılır.
 //
 // Ödemenin tamamlanması gerekli.
-func (i iyzipayClient) CheckoutFormPaymentInquiryRequest(req *CFInquiryRequest) (response *CFInquiryResponse, err error) {
+func (i *IyzipayClient) CheckoutFormPaymentInquiryRequest(req *CFInquiryRequest) (response *CFInquiryResponse, err error) {
 	if err = req.validate(); err != nil {
 		return response, err
 	}

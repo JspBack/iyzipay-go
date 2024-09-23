@@ -8,7 +8,7 @@ import (
 )
 
 // 3D Secure olmayan ödeme işlemi için istek oluşturur
-func (i iyzipayClient) NonTDSPaymentRequest(req *PaymentRequest) (response Non3DSPaymentResponse, err error) {
+func (i *IyzipayClient) NonTDSPaymentRequest(req *PaymentRequest) (response Non3DSPaymentResponse, err error) {
 	if err = req.validate(); err != nil {
 		return response, err
 	}

@@ -11,7 +11,7 @@ import (
 // Üye işyeri bu sürede ödemeyi iptal edebilir, ödemenin kırılımını iade edebilir ya da ürün alıcıya ulaştı ve işlem sorunsuz tamamlandıysa para transferi için ürüne onay verebilir veya verdiği ürün onayını geri çekebilir.
 //
 // Ürün onayı vermek için kullanılır.
-func (i iyzipayClient) ApproveProduct(req MarketplaceProductRequest) (response MarketplaceProductResponse, err error) {
+func (i *IyzipayClient) ApproveProduct(req MarketplaceProductRequest) (response MarketplaceProductResponse, err error) {
 	if err = req.validate(); err != nil {
 		return response, err
 	}
@@ -40,7 +40,7 @@ func (i iyzipayClient) ApproveProduct(req MarketplaceProductRequest) (response M
 }
 
 // Ürün onayını geri çekmek için kullanılır.
-func (i iyzipayClient) DisapproveProduct(req MarketplaceProductRequest) (response MarketplaceProductResponse, err error) {
+func (i *IyzipayClient) DisapproveProduct(req MarketplaceProductRequest) (response MarketplaceProductResponse, err error) {
 	if err = req.validate(); err != nil {
 		return response, err
 	}

@@ -34,7 +34,7 @@ func WithHtmlDecodeRequest(htmlDecodeRequest bool) tdsOptions {
 //
 // Bincontrol işlemi otomatik olarak yapılyor eğer bin kontrol yapmak istemiyorsanız binRequest parametresini false yapabilirsiniz.
 // Html içeriği otomatik olarak decode ediliyor eğer decode etmek istemiyorsanız htmlDecodeRequest parametresini false yapabilirsiniz.
-func (i iyzipayClient) InitializeTDSPayment(req *InitTDSRequest, opts ...tdsOptions) (response InitTDSResponse, decodedHtmlContent string, err error) {
+func (i *IyzipayClient) InitializeTDSPayment(req *InitTDSRequest, opts ...tdsOptions) (response InitTDSResponse, decodedHtmlContent string, err error) {
 	options := &tdsRequestOptions{
 		binRequest:        true, // default
 		htmlDecodeRequest: true, // default
@@ -102,7 +102,7 @@ func (i iyzipayClient) InitializeTDSPayment(req *InitTDSRequest, opts ...tdsOpti
 // 3DS işlemlerinin tamamlanması için kullanılır.
 //
 // ÖNEMLİ: Size geri dönen htmlde 3D Secure işlemini tamamlamanız gerekmektedir.
-func (i iyzipayClient) FinalizeTDSPayment(req *TDSPaymentRequest) (response TDSPaymentResponse, err error) {
+func (i *IyzipayClient) FinalizeTDSPayment(req *TDSPaymentRequest) (response TDSPaymentResponse, err error) {
 	if err = req.validate(); err != nil {
 		return response, err
 	}
