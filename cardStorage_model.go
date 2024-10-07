@@ -71,6 +71,11 @@ type CardStorageExUserRequest struct {
 
 	Card *CardStorageCard `json:"card" validate:"dive"`
 
+	// Saklanacak kart için özel Id.
+	//
+	// zorunlu değil.
+	ExternalId string `json:"externalId" validate:"omitempty"`
+
 	// Iyzico istek sonucunda dönen metinlerin dilini ayarlamak için kullanılır
 	//
 	// zorunlu değil.

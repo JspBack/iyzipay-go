@@ -26,6 +26,7 @@ go get github.com/JspBack/iyzipay-go
 - PWI Support: Payment Window Integration (opens a new screen for payment).
 - Checkout Form Integration: Integrate checkout forms for seamless payment processing.
 - MarketPlace APIs: Interaction with MarketPlace APIs. (or MerchantPlace)
+- Card Storage: Securely store users' credit card information and use it for recurring payments.
 
 ## Planned Features
 

@@ -60,6 +60,7 @@ func TestCardStorageExUser(t *testing.T) {
 			CardNumber:     "5528790000000008",
 			CardHolderName: "John Doe",
 		},
+		ExternalId: "12345",
 	}
 
 	response, err := client.CreateCardStorageExUser(&request)

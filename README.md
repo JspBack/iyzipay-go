@@ -26,6 +26,7 @@ go get github.com/JspBack/iyzipay-go
 - PWI Desteği: Ödeme Penceresi Entegrasyonu (ödemek için yeni bir ekran açar).
 - Ödeme Formu Entegrasyonu: Sorunsuz ödeme işleme için ödeme formlarını entegre edin.
 - MarketPlace API'leri: MarketPlace API'leri ile etkileşim. (yada MerchantPlace)
+- Kart Saklama: Kullanıcıların kredi kartı bilgilerini güvenli bir şekilde saklayın ve tekrar eden ödemeler için kullanın.
 
 ## Planlanan Özellikler
 
