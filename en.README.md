@@ -50,6 +50,7 @@ You can support the project by creating a pull request. 🙂
 
 - A separate method should be used for payments with registered cards.
 - The carduserKey parameter inside the checkout form that is present in Postman but not documented.
+- Unauthorized (401) errors cause panic (because the error format is different).
 
 ## License
 
