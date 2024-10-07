@@ -6,13 +6,15 @@ import (
 	"github.com/JspBack/iyzipay-go"
 )
 
-var (
-	apikey    = "sandbox-..."
-	secretkey = "sandbox-..."
-	client, _ = iyzipay.New(apikey, secretkey)
-)
-
 func TestCreateIndividualSubMerchant(t *testing.T) {
+	apikey := "sandbox-..."
+	secretkey := "sandbox-..."
+
+	client, err := iyzipay.New(apikey, secretkey)
+	if err != nil {
+		t.Errorf("Error creating client: %v", err)
+		return
+	}
 
 	req := &iyzipay.IndividualSubMerchantRequest{
 		IndividualSubMerchantUpdateRequest: iyzipay.IndividualSubMerchantUpdateRequest{
@@ -42,6 +44,14 @@ func TestCreateIndividualSubMerchant(t *testing.T) {
 }
 
 func TestCreatePrivateSubMerchant(t *testing.T) {
+	apikey := "sandbox-..."
+	secretkey := "sandbox-..."
+
+	client, err := iyzipay.New(apikey, secretkey)
+	if err != nil {
+		t.Errorf("Error creating client: %v", err)
+		return
+	}
 
 	req := &iyzipay.PrivateSubMerchantRequest{
 		PrivateSubMerchantUpdateRequest: iyzipay.PrivateSubMerchantUpdateRequest{
@@ -71,6 +81,15 @@ func TestCreatePrivateSubMerchant(t *testing.T) {
 }
 
 func TestCreateLimitedCompanySubMerchant(t *testing.T) {
+	apikey := "sandbox-..."
+	secretkey := "sandbox-..."
+
+	client, err := iyzipay.New(apikey, secretkey)
+	if err != nil {
+		t.Errorf("Error creating client: %v", err)
+		return
+	}
+
 	req := &iyzipay.LimitedCompanySubMerchantRequest{
 		LimitedCompanySubMerchantUpdateRequest: iyzipay.LimitedCompanySubMerchantUpdateRequest{},
 		SubMerchantType:                        "LIMITED_OR_JOINT_STOCK_COMPANY",
@@ -86,6 +105,15 @@ func TestCreateLimitedCompanySubMerchant(t *testing.T) {
 }
 
 func TestUpdateIndividualSubMerchant(t *testing.T) {
+	apikey := "sandbox-..."
+	secretkey := "sandbox-..."
+
+	client, err := iyzipay.New(apikey, secretkey)
+	if err != nil {
+		t.Errorf("Error creating client: %v", err)
+		return
+	}
+
 	req := &iyzipay.IndividualSubMerchantUpdateRequest{
 		Locale:                "tr",
 		ConversationId:        "123456789",
@@ -111,6 +139,15 @@ func TestUpdateIndividualSubMerchant(t *testing.T) {
 }
 
 func TestUpdatePrivateSubMerchant(t *testing.T) {
+	apikey := "sandbox-..."
+	secretkey := "sandbox-..."
+
+	client, err := iyzipay.New(apikey, secretkey)
+	if err != nil {
+		t.Errorf("Error creating client: %v", err)
+		return
+	}
+
 	req := &iyzipay.PrivateSubMerchantUpdateRequest{
 		Locale:                "tr",
 		ConversationId:        "123456789",
@@ -136,6 +173,15 @@ func TestUpdatePrivateSubMerchant(t *testing.T) {
 }
 
 func TestUpdateLimitedCompanySubMerchant(t *testing.T) {
+	apikey := "sandbox-..."
+	secretkey := "sandbox-..."
+
+	client, err := iyzipay.New(apikey, secretkey)
+	if err != nil {
+		t.Errorf("Error creating client: %v", err)
+		return
+	}
+
 	req := &iyzipay.LimitedCompanySubMerchantUpdateRequest{
 		Locale:                "tr",
 		ConversationId:        "123456789",
@@ -161,6 +207,15 @@ func TestUpdateLimitedCompanySubMerchant(t *testing.T) {
 }
 
 func TestSubMerchantInquiry(t *testing.T) {
+	apikey := "sandbox-..."
+	secretkey := "sandbox-..."
+
+	client, err := iyzipay.New(apikey, secretkey)
+	if err != nil {
+		t.Errorf("Error creating client: %v", err)
+		return
+	}
+
 	req := &iyzipay.SubMerchantInquiryRequest{
 		Locale:                "tr",
 		ConversationID:        "123456789",
@@ -177,6 +232,15 @@ func TestSubMerchantInquiry(t *testing.T) {
 }
 
 func TestUpdateSubMerchantProduct(t *testing.T) {
+	apikey := "sandbox-..."
+	secretkey := "sandbox-..."
+
+	client, err := iyzipay.New(apikey, secretkey)
+	if err != nil {
+		t.Errorf("Error creating client: %v", err)
+		return
+	}
+
 	req := &iyzipay.SubMerchantProductUpdateRequest{
 		Locale:               "tr",
 		ConversationId:       "123456789",

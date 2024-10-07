@@ -308,7 +308,7 @@ type Non3DSPaymentResponse struct {
 	// Ödemeye ait iyzico işlem ücreti
 	IyziCommissionFee float64 `json:"iyziCommissionFee"`
 
-	// Eğer ödeme yapılan kart yerel bir kart ise, kartın ait olduğu tipi. Geçerli değerler: CREDIT_CARD, DEBIT_CARD, PREPAID_CARD.
+	// Eğer ödeme yapılan kart yerel bir kart ise, kartın ait olduğu kart tipi. Geçerli değerler: CREDIT_CARD, DEBIT_CARD, PREPAID_CARD.
 	CardType string `json:"cardType"`
 
 	// Eğer ödeme yapılan kart yerel bir kart ise, kartın ait olduğu kuruluş. Geçerli değerler: VISA, MASTER_CARD, AMERICAN_EXPRESS, TROY

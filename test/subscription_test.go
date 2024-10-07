@@ -10,9 +10,14 @@ import (
 //
 // Dökümantasyonda YOK.
 func TestCreateSubscriptionProduct(t *testing.T) {
-	apikey = "sandbox-..."
-	secretkey = ""
-	client, _ = iyzipay.New(apikey, secretkey)
+	apikey := "sandbox-..."
+	secretkey := "sandbox-..."
+
+	client, err := iyzipay.New(apikey, secretkey)
+	if err != nil {
+		t.Errorf("Error creating client: %v", err)
+		return
+	}
 
 	req := &iyzipay.CreateSubscriptionProductRequest{
 		Locale:         "tr",
@@ -34,9 +39,14 @@ func TestCreateSubscriptionProduct(t *testing.T) {
 //
 // Dökümantasyonda YOK.
 func TestUpdateSubscriptionProduct(t *testing.T) {
-	apikey = "sandbox-H1pFBNawbh1ClEFAKRTc85CM6owLYL0V"
-	secretkey = "IQho1I1Swd98yNbecmmCIjLJKN4zypHv"
-	client, _ = iyzipay.New(apikey, secretkey)
+	apikey := "sandbox-..."
+	secretkey := "sandbox-..."
+
+	client, err := iyzipay.New(apikey, secretkey)
+	if err != nil {
+		t.Errorf("Error creating client: %v", err)
+		return
+	}
 
 	req := &iyzipay.UpdateSubscriptionProductRequest{
 		Locale:               "tr",
@@ -58,9 +68,14 @@ func TestUpdateSubscriptionProduct(t *testing.T) {
 //
 // Dökümantasyonda YOK.
 func TestDeleteSubscriptionProduct(t *testing.T) {
-	apikey = "sandbox-H1pFBNawbh1ClEFAKRTc85CM6owLYL0V"
-	secretkey = "IQho1I1Swd98yNbecmmCIjLJKN4zypHv"
-	client, _ = iyzipay.New(apikey, secretkey)
+	apikey := "sandbox-..."
+	secretkey := "sandbox-..."
+
+	client, err := iyzipay.New(apikey, secretkey)
+	if err != nil {
+		t.Errorf("Error creating client: %v", err)
+		return
+	}
 
 	req := &iyzipay.DeleteSubscriptionProductRequest{
 		ProductReferenceCode: "S49222",

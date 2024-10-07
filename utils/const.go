@@ -7,7 +7,7 @@ const (
 	letterIdxMax  = 63 / letterIdxBits
 
 	NonTDSURI              = "/payment/auth"                                      // 3DS olmayan ödeme isteği için URI yolu
-	InguiryURI             = "/payment/detail"                                    // Ödeme sorgulama isteği için URI yolu
+	InquiryURI             = "/payment/detail"                                    // Ödeme sorgulama isteği için URI yolu
 	BinControlURI          = "/payment/bin/check"                                 // Bin kontrol isteği için URI yolu
 	TDSInitilizeURI        = "/payment/3dsecure/initialize"                       // 3DS ödeme başlatma isteği için URI yolu
 	TDSFinalizeURI         = "/payment/3dsecure/auth"                             // 3DS ödeme isteği için URI yolu
@@ -22,6 +22,8 @@ const (
 	ApproveProductURI      = "/payment/iyzipos/item/approve"    // Ürün onaylama isteği için URI yolu
 	DisapproveProductURI   = "/payment/iyzipos/item/disapprove" // Ürün onay kaldırma isteği için URI yolu
 	SubscriptionProductURI = "/v2/subscription/products"        // Abonelik ürün oluşturma, düzenleme ve silme isteği için URI yolu
+
+	CardStorageURI = "/cardstorage/card" // Kart saklama isteği için URI yolu
 )
 
 var (
@@ -39,7 +41,7 @@ var (
 		"popup":      true,
 	}
 
-	AcceptedRequestMethods = map[string]bool{ // İstek metotları
+	AcceptedRequestMethods = map[string]bool{ // İstek metodları
 		"POST":   true,
 		"GET":    true,
 		"PUT":    true,

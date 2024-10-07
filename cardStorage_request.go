@@ -7,12 +7,10 @@ import (
 	"github.com/JspBack/iyzipay-go/utils"
 )
 
-// Abonelik ürünü oluşturmak için kullanılır.
+// Kart saklama işlemi için yeni kullanıcı ile kart saklama isteği
 //
-// Şuan hata dönmektedir.
-// Alternatif: Ödeme yapılan kartı cardStorage servisi ile kaydedip referansını kendi database'inize kaydedin,
-// sonra düzenli olarak yeni istek oluşturun.
-func (i *IyzipayClient) CreatSubscriptionProduct(req CreateSubscriptionProductRequest) (response SubscriptionProductResponse, err error) {
+// Response içerisinde dönen cardUserKey ve cardToken saklanmalıdır.
+func (i *IyzipayClient) CreateCardStorageNewUser(req *CardStorageNewUserRequest) (response CardStorageNewUserResponse, err error) {
 	if err = req.validate(); err != nil {
 		return response, err
 	}
@@ -22,7 +20,7 @@ func (i *IyzipayClient) CreatSubscriptionProduct(req CreateSubscriptionProductRe
 		return response, errors.New("failed to marshal request")
 	}
 
-	httpresp, err := utils.DoRequest(requestData, i.client, "POST", i.baseURI, i.apiKey, i.apiSecret, utils.SubscriptionProductURI)
+	httpresp, err := utils.DoRequest(requestData, i.client, "POST", i.baseURI, i.apiKey, i.apiSecret, utils.CardStorageURI)
 	if err != nil {
 		return response, err
 	}
@@ -40,10 +38,10 @@ func (i *IyzipayClient) CreatSubscriptionProduct(req CreateSubscriptionProductRe
 	return response, nil
 }
 
-// Abonelik ürünü güncellemek için kullanılır.
+// Kart saklama işlemi için mevcut kullanıcı ile kart saklama isteği
 //
-// Şuan hata dönmektedir.
-func (i *IyzipayClient) UpdateSubscriptionProduct(req UpdateSubscriptionProductRequest) (response SubscriptionProductResponse, err error) {
+// Response içerisinde dönen cardToken saklanmalıdır.
+func (i *IyzipayClient) CreateCardStorageExUser(req *CardStorageExUserRequest) (response CardStorageExUserResponse, err error) {
 	if err = req.validate(); err != nil {
 		return response, err
 	}
@@ -53,9 +51,7 @@ func (i *IyzipayClient) UpdateSubscriptionProduct(req UpdateSubscriptionProductR
 		return response, errors.New("failed to marshal request")
 	}
 
-	UpdatedPath := utils.SubscriptionProductURI + "/" + req.ProductReferenceCode
-
-	httpresp, err := utils.DoRequest(requestData, i.client, "POST", i.baseURI, i.apiKey, i.apiSecret, UpdatedPath)
+	httpresp, err := utils.DoRequest(requestData, i.client, "POST", i.baseURI, i.apiKey, i.apiSecret, utils.CardStorageURI)
 	if err != nil {
 		return response, err
 	}
@@ -73,10 +69,8 @@ func (i *IyzipayClient) UpdateSubscriptionProduct(req UpdateSubscriptionProductR
 	return response, nil
 }
 
-// Abonelik ürünü silmek için kullanılır.
-//
-// Şuan hata dönmektedir.
-func (i *IyzipayClient) DeleteSubscriptionProduct(req DeleteSubscriptionProductRequest) (response SubscriptionProductResponse, err error) {
+// Kart saklama işlemi için kart silme isteği
+func (i *IyzipayClient) DeleteCardStorageCard(req *CardStorageDeleteRequest) (response CardStorageDeleteResponse, err error) {
 	if err = req.validate(); err != nil {
 		return response, err
 	}
@@ -86,10 +80,7 @@ func (i *IyzipayClient) DeleteSubscriptionProduct(req DeleteSubscriptionProductR
 		return response, errors.New("failed to marshal request")
 	}
 
-	// Sanırım bu şekilde kullanılması lazım ?
-	DeletedPath := utils.SubscriptionProductURI + "/" + req.ProductReferenceCode
-
-	httpresp, err := utils.DoRequest(requestData, i.client, "DELETE", i.baseURI, i.apiKey, i.apiSecret, DeletedPath)
+	httpresp, err := utils.DoRequest(requestData, i.client, "DELETE", i.baseURI, i.apiKey, i.apiSecret, utils.CardStorageURI)
 	if err != nil {
 		return response, err
 	}
@@ -104,13 +95,5 @@ func (i *IyzipayClient) DeleteSubscriptionProduct(req DeleteSubscriptionProductR
 		}
 	}
 
-	return response, nil
-}
-
-func (i *IyzipayClient) GetSubscriptionProductDetail(req GetSubscriptionProductDetailRequest) (response GetSubscriptionProductDetailResponse, err error) {
-	return response, nil
-}
-
-func (i *IyzipayClient) GetSubscriptionProductList(req GetSubscriptionProductListRequest) (response GetSubscriptionProductListResponse, err error) {
 	return response, nil
 }
