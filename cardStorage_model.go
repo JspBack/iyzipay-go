@@ -29,6 +29,35 @@ type CardStorageCard struct {
 	CardHolderName string `json:"cardHolderName" validate:"required"`
 }
 
+type StoredCard struct {
+	// Saklanan kartın sahibinin kart saklama servisindeki kartın tokeni
+	CardToken string `json:"cardToken"`
+
+	// Saklanana kartın adı
+	CardAlias string `json:"cardAlias"`
+
+	// Saklana kartın ilk 6 hanesi
+	BinNumber string `json:"binNumber"`
+
+	// Saklanan kartın son 4 hanesi
+	LastFourDigits string `json:"lastFourDigits"`
+
+	// Saklanan kartın ait olduğu kart tipi. Geçerli değerler: CREDIT_CARD, DEBIT_CARD, PREPAID_CARD
+	CardType string `json:"cardType"`
+
+	// Saklanan kartın ait olduğu kuruluş. Geçerli değerler: VISA, MASTER_CARD, AMERICAN_EXPRESS, TROY
+	CardAssociation string `json:"cardAssociation"`
+
+	// Saklanan kartın ait olduğu aile. Geçerli değerler: Bonus, Axess, World, Maximum, Paraf, CardFinans, Advantage
+	CardFamily string `json:"cardFamily"`
+
+	// Saklanan kartın ait olduğu bankayı temsil eden kod.
+	CardBankCode int `json:"cardBankCode"`
+
+	// Saklanan kartın ait olduğu banka adı
+	CardBankName string `json:"cardBankName"`
+}
+
 type CardStorageNewUserRequest struct {
 	// Saklanacak karta verilecek isim
 	//
@@ -85,6 +114,23 @@ type CardStorageExUserRequest struct {
 	//
 	// zorunlu değil.
 	ConversationId string `json:"conversationId" validate:"omitempty"`
+}
+
+type CardStorageRetrieveRequest struct {
+	// Iyzico istek sonucunda dönen metinlerin dilini ayarlamak için kullanılır
+	//
+	// zorunlu
+	Locale string `json:"locale" validate:"omitempty,oneof=tr en"`
+
+	// İstek esnasında gönderip, sonuçta alabileceğiniz bir değer, request/response eşleşmesi yapmak için kullanılabilir
+	//
+	// zorunlu değil.
+	ConversationId string `json:"conversationId" validate:"omitempty"`
+
+	// Saklanan kartların sahibinin kart saklama servisindeki kullanıcı kimliği.
+	//
+	// zorunlu
+	CardUserKey string `json:"cardUserKey" validate:"required"`
 }
 
 type CardStorageDeleteRequest struct {
@@ -181,6 +227,20 @@ type CardStorageDeleteResponse struct {
 	ConversationID string `json:"conversationId"`
 }
 
+type CardStorageRetrieveResponse struct {
+	Status string `json:"status"`
+
+	Locale string `json:"locale"`
+
+	SystemTime int64 `json:"systemTime"`
+
+	ConversationID string `json:"conversationId"`
+
+	CardUserKey string `json:"cardUserKey"`
+
+	CardDetails []StoredCard `json:"cardDetails"`
+}
+
 func (r *CardStorageNewUserRequest) validate() error {
 	validate := validator.New()
 
@@ -214,6 +274,22 @@ func (r *CardStorageExUserRequest) validate() error {
 }
 
 func (r *CardStorageDeleteRequest) validate() error {
+	validate := validator.New()
+
+	err := validate.Struct(r)
+	if err != nil {
+		var errs []string
+		for _, e := range err.(validator.ValidationErrors) {
+			field := e.Field()
+			tag := e.Tag()
+			errs = append(errs, fmt.Sprintf("Validation error at field '%s' with tag '%s'", field, tag))
+		}
+		return fmt.Errorf("validation errors: %s", strings.Join(errs, ", "))
+	}
+	return nil
+}
+
+func (r *CardStorageRetrieveRequest) validate() error {
 	validate := validator.New()
 
 	err := validate.Struct(r)

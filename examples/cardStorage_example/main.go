@@ -8,10 +8,10 @@ import (
 )
 
 func main() {
-	apikey := os.Getenv("IYZIPAY_API_KEY")
+	apiKey := os.Getenv("IYZIPAY_API_KEY")
 	apiSecret := os.Getenv("IYZIPAY_API_SECRET")
 
-	client, err := iyzipay.New(apikey, apiSecret)
+	client, err := iyzipay.New(apiKey, apiSecret)
 	if err != nil {
 		fmt.Println(err)
 	}
@@ -78,7 +78,24 @@ func main() {
 	}
 
 	if delres.Status == "success" {
-		fmt.Println("Card Deleted")
+		fmt.Println(" Newest Card Deleted")
+	}
+
+	retrieveReq := &iyzipay.CardStorageRetrieveRequest{
+		Locale:         "tr",
+		ConversationId: "123456789",
+		CardUserKey:    exres.CardUserKey,
+	}
+
+	// Retrieve stored cards
+	retrieveres, err := client.GetCardStorageCards(retrieveReq)
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	// In this case ,only first created card will be retrieved (if you run this code only once)
+	if retrieveres.Status == "success" {
+		fmt.Printf("Cards: %v\n", retrieveres.CardDetails)
 		return
 	}
 

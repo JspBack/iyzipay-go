@@ -32,7 +32,7 @@ func TestCardStorageNewUser(t *testing.T) {
 
 	response, err := client.CreateCardStorageNewUser(&request)
 	if err != nil {
-		t.Errorf("Error creating payment: %v", err)
+		t.Errorf("Error creating card: %v", err)
 		return
 	}
 
@@ -65,7 +65,7 @@ func TestCardStorageExUser(t *testing.T) {
 
 	response, err := client.CreateCardStorageExUser(&request)
 	if err != nil {
-		t.Errorf("Error creating payment: %v", err)
+		t.Errorf("Error creating card: %v", err)
 		return
 	}
 
@@ -91,7 +91,32 @@ func TestCardStorageDeleteCard(t *testing.T) {
 
 	response, err := client.DeleteCardStorageCard(&request)
 	if err != nil {
-		t.Errorf("Error creating payment: %v", err)
+		t.Errorf("Error deleting card: %v", err)
+		return
+	}
+
+	t.Logf("Card Storage Response: %v", response)
+}
+
+func TestCardStorageRetrieveCard(t *testing.T) {
+	apikey := "sandbox-..."
+	secretkey := "sandbox-..."
+
+	client, err := iyzipay.New(apikey, secretkey)
+	if err != nil {
+		t.Errorf("Error creating client: %v", err)
+		return
+	}
+
+	request := iyzipay.CardStorageRetrieveRequest{
+		Locale:         "tr",
+		ConversationId: "123456789",
+		CardUserKey:    "f1436803-789d-a7d4-0a15-9a3b14672aa5",
+	}
+
+	response, err := client.GetCardStorageCards(&request)
+	if err != nil {
+		t.Errorf("Error getting cards: %v", err)
 		return
 	}
 

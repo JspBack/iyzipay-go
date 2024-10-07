@@ -23,7 +23,8 @@ const (
 	DisapproveProductURI   = "/payment/iyzipos/item/disapprove" // Ürün onay kaldırma isteği için URI yolu
 	SubscriptionProductURI = "/v2/subscription/products"        // Abonelik ürün oluşturma, düzenleme ve silme isteği için URI yolu
 
-	CardStorageURI = "/cardstorage/card" // Kart saklama isteği için URI yolu
+	CardStorageURI  = "/cardstorage/card"  // Kart saklama isteği için URI yolu
+	CardsStorageURI = "/cardstorage/cards" // Kart saklama sorgulama isteği için URI yolu
 )
 
 var (
