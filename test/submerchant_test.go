@@ -34,7 +34,7 @@ func TestCreateIndividualSubMerchant(t *testing.T) {
 		SubMerchantType: "PERSONAL",
 	}
 
-	response, err := client.CreateIndividualSubMerchant(*req)
+	response, err := client.CreateIndividualSubMerchant(req)
 	if err != nil {
 		t.Errorf("Error getting response: %v", err)
 		return
@@ -71,7 +71,7 @@ func TestCreatePrivateSubMerchant(t *testing.T) {
 		SubMerchantType: "PRIVATE_COMPANY",
 	}
 
-	response, err := client.CreatePrivateSubMerchant(*req)
+	response, err := client.CreatePrivateSubMerchant(req)
 	if err != nil {
 		t.Errorf("Error getting response: %v", err)
 		return
@@ -95,7 +95,7 @@ func TestCreateLimitedCompanySubMerchant(t *testing.T) {
 		SubMerchantType:                        "LIMITED_OR_JOINT_STOCK_COMPANY",
 	}
 
-	response, err := client.CreateLimitedCompanySubMerchant(*req)
+	response, err := client.CreateLimitedCompanySubMerchant(req)
 	if err != nil {
 		t.Errorf("Error getting response: %v", err)
 		return
@@ -129,7 +129,7 @@ func TestUpdateIndividualSubMerchant(t *testing.T) {
 		IdentityNumber:        "31300864726",
 	}
 
-	response, err := client.UpdateIndividualSubMerchant(*req)
+	response, err := client.UpdateIndividualSubMerchant(req)
 	if err != nil {
 		t.Errorf("Error getting response: %v", err)
 		return
@@ -163,7 +163,7 @@ func TestUpdatePrivateSubMerchant(t *testing.T) {
 		IdentityNumber:        "31300864726",
 	}
 
-	response, err := client.UpdatePrivateSubMerchant(*req)
+	response, err := client.UpdatePrivateSubMerchant(req)
 	if err != nil {
 		t.Errorf("Error getting response: %v", err)
 		return
@@ -197,7 +197,7 @@ func TestUpdateLimitedCompanySubMerchant(t *testing.T) {
 		SubMerchantExternalId: "S49222",
 	}
 
-	response, err := client.UpdateLimitedCompanySubMerchant(*req)
+	response, err := client.UpdateLimitedCompanySubMerchant(req)
 	if err != nil {
 		t.Errorf("Error getting response: %v", err)
 		return
@@ -222,7 +222,7 @@ func TestSubMerchantInquiry(t *testing.T) {
 		SubMerchantExternalId: "S49222",
 	}
 
-	response, err := client.SubMerchantInquiry(*req)
+	response, err := client.SubMerchantInquiry(req)
 	if err != nil {
 		t.Errorf("Error getting response: %v", err)
 		return
@@ -249,7 +249,7 @@ func TestUpdateSubMerchantProduct(t *testing.T) {
 		SubMerchantKey:       "1",
 	}
 
-	response, err := client.UpdateSubMerchantProduct(*req)
+	response, err := client.UpdateSubMerchantProduct(req)
 	if err != nil {
 		t.Errorf("Error getting response: %v", err)
 		return

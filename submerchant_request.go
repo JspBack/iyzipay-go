@@ -10,7 +10,7 @@ import (
 // Bireysel Alt Üye Oluşturma İsteği (Pazaryeri müşterisi olmanız gerekmektedir)
 //
 // SubMerchantKey alanı için dönen sonuç saklanmalıdır.
-func (i *IyzipayClient) CreateIndividualSubMerchant(req IndividualSubMerchantRequest) (response SubMerchantResponse, err error) {
+func (i *IyzipayClient) CreateIndividualSubMerchant(req *IndividualSubMerchantRequest) (response SubMerchantResponse, err error) {
 	if err = req.validate(); err != nil {
 		return
 	}
@@ -41,7 +41,7 @@ func (i *IyzipayClient) CreateIndividualSubMerchant(req IndividualSubMerchantReq
 // Şahıs Şirketi Alt Üye Oluşturma (Pazaryeri müşterisi olmanız gerekmektedir)
 //
 // SubMerchantKey alanı için dönen sonuç saklanmalıdır.
-func (i *IyzipayClient) CreatePrivateSubMerchant(req PrivateSubMerchantRequest) (response SubMerchantResponse, err error) {
+func (i *IyzipayClient) CreatePrivateSubMerchant(req *PrivateSubMerchantRequest) (response SubMerchantResponse, err error) {
 	if err = req.validate(); err != nil {
 		return
 	}
@@ -72,7 +72,7 @@ func (i *IyzipayClient) CreatePrivateSubMerchant(req PrivateSubMerchantRequest) 
 // Limited/Anonim Şirket Alt Üye Oluşturma (Pazaryeri müşterisi olmanız gerekmektedir)
 //
 // SubMerchantKey alanı için dönen sonuç saklanmalıdır.
-func (i *IyzipayClient) CreateLimitedCompanySubMerchant(req LimitedCompanySubMerchantRequest) (response SubMerchantResponse, err error) {
+func (i *IyzipayClient) CreateLimitedCompanySubMerchant(req *LimitedCompanySubMerchantRequest) (response SubMerchantResponse, err error) {
 	if err = req.validate(); err != nil {
 		return
 	}
@@ -101,7 +101,7 @@ func (i *IyzipayClient) CreateLimitedCompanySubMerchant(req LimitedCompanySubMer
 }
 
 // Bireysel Alt Üye Güncelleme İsteği (Pazaryeri müşterisi olmanız gerekmektedir)
-func (i *IyzipayClient) UpdateIndividualSubMerchant(req IndividualSubMerchantUpdateRequest) (response UpdateSubMerchantResponse, err error) {
+func (i *IyzipayClient) UpdateIndividualSubMerchant(req *IndividualSubMerchantUpdateRequest) (response UpdateSubMerchantResponse, err error) {
 	if err = req.validate(); err != nil {
 		return response, err
 	}
@@ -130,7 +130,7 @@ func (i *IyzipayClient) UpdateIndividualSubMerchant(req IndividualSubMerchantUpd
 }
 
 // Şahıs Şirketi Alt Üye Güncelleme İsteği (Pazaryeri müşterisi olmanız gerekmektedir)
-func (i *IyzipayClient) UpdatePrivateSubMerchant(req PrivateSubMerchantUpdateRequest) (response UpdateSubMerchantResponse, err error) {
+func (i *IyzipayClient) UpdatePrivateSubMerchant(req *PrivateSubMerchantUpdateRequest) (response UpdateSubMerchantResponse, err error) {
 	if err = req.validate(); err != nil {
 		return response, err
 	}
@@ -159,7 +159,7 @@ func (i *IyzipayClient) UpdatePrivateSubMerchant(req PrivateSubMerchantUpdateReq
 }
 
 // Limited/Anonim Şirket Alt Üye Güncelleme İsteği (Pazaryeri müşterisi olmanız gerekmektedir)
-func (i *IyzipayClient) UpdateLimitedCompanySubMerchant(req LimitedCompanySubMerchantUpdateRequest) (response UpdateSubMerchantResponse, err error) {
+func (i *IyzipayClient) UpdateLimitedCompanySubMerchant(req *LimitedCompanySubMerchantUpdateRequest) (response UpdateSubMerchantResponse, err error) {
 	if err = req.validate(); err != nil {
 		return response, err
 	}
@@ -188,7 +188,7 @@ func (i *IyzipayClient) UpdateLimitedCompanySubMerchant(req LimitedCompanySubMer
 }
 
 // Alt Üye Sorgulama İsteği (Pazaryeri müşterisi olmanız gerekmektedir)
-func (i *IyzipayClient) SubMerchantInquiry(req SubMerchantInquiryRequest) (response SubMerchantInquiryResponse, err error) {
+func (i *IyzipayClient) SubMerchantInquiry(req *SubMerchantInquiryRequest) (response SubMerchantInquiryResponse, err error) {
 	if err = req.validate(); err != nil {
 		return response, err
 	}
@@ -216,7 +216,7 @@ func (i *IyzipayClient) SubMerchantInquiry(req SubMerchantInquiryRequest) (respo
 	return response, nil
 }
 
-func (i *IyzipayClient) UpdateSubMerchantProduct(req SubMerchantProductUpdateRequest) (response SubMerchantProductUpdateResponse, err error) {
+func (i *IyzipayClient) UpdateSubMerchantProduct(req *SubMerchantProductUpdateRequest) (response SubMerchantProductUpdateResponse, err error) {
 	if err = req.validate(); err != nil {
 		return response, err
 	}

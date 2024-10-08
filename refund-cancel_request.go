@@ -7,12 +7,10 @@ import (
 	"github.com/JspBack/iyzipay-go/utils"
 )
 
-// Abone bilgilerini güncellemek için kullanılır.
-//
-// Not: Sandbox ortamında çalışmamaktadır.(Iyzico panelden eklentiler kısmından abonelik eklentisini aktif etmeniz gerekmektedir.)
-func (i *IyzipayClient) UpdateSubscriber(req *UpdateSubscriberRequest) (response SubscriberResponse, err error) {
+// Yapılan ödemenin iadesi için kullanılır.
+func (i *IyzipayClient) RefundPaymentV1(req *RefundPaymentV1Request) (response RefundPaymentResponse, err error) {
 	if err = req.validate(); err != nil {
-		return response, err
+		return
 	}
 
 	requestData, err := json.Marshal(req)
@@ -20,8 +18,7 @@ func (i *IyzipayClient) UpdateSubscriber(req *UpdateSubscriberRequest) (response
 		return response, errors.New("failed to marshal request")
 	}
 
-	updateSbscrbrURI := utils.SubscriptionSubscribersURI + "/" + req.CustomerReferenceCode
-	httpresp, err := utils.DoRequest(requestData, i.client, "POST", i.baseURI, i.apiKey, i.apiSecret, updateSbscrbrURI)
+	httpresp, err := utils.DoRequest(requestData, i.client, "POST", i.baseURI, i.apiKey, i.apiSecret, utils.RefundV1URI)
 	if err != nil {
 		return response, err
 	}
@@ -39,12 +36,12 @@ func (i *IyzipayClient) UpdateSubscriber(req *UpdateSubscriberRequest) (response
 	return response, nil
 }
 
-// Abone bilgilerini sorgulamak için kullanılır.
+// Yapılan ödemenin iadesi için kullanılır.
 //
-// Not: Sandbox ortamında çalışmamaktadır.(Iyzico panelden eklentiler kısmından abonelik eklentisini aktif etmeniz gerekmektedir.)
-func (i *IyzipayClient) GetSubscriberDetail(req *GetSubscriberDetailRequest) (response SubscriberResponse, err error) {
+// v1 ile benzerdir sadece paymentTransactionId yerine paymentId kullanır.
+func (i *IyzipayClient) RefundPaymentV2(req *RefundPaymentV2Request) (response RefundPaymentResponse, err error) {
 	if err = req.validate(); err != nil {
-		return response, err
+		return
 	}
 
 	requestData, err := json.Marshal(req)
@@ -52,8 +49,7 @@ func (i *IyzipayClient) GetSubscriberDetail(req *GetSubscriberDetailRequest) (re
 		return response, errors.New("failed to marshal request")
 	}
 
-	getSbscrbrURI := utils.SubscriptionSubscribersURI + "/" + req.CustomerReferenceCode
-	httpresp, err := utils.DoRequest(requestData, i.client, "GET", i.baseURI, i.apiKey, i.apiSecret, getSbscrbrURI)
+	httpresp, err := utils.DoRequest(requestData, i.client, "POST", i.baseURI, i.apiKey, i.apiSecret, utils.RefundV2URI)
 	if err != nil {
 		return response, err
 	}
@@ -71,12 +67,10 @@ func (i *IyzipayClient) GetSubscriberDetail(req *GetSubscriberDetailRequest) (re
 	return response, nil
 }
 
-// Abone listesini sorgulamak için kullanılır.
-//
-// Not: Sandbox ortamında çalışmamaktadır.(Iyzico panelden eklentiler kısmından abonelik eklentisini aktif etmeniz gerekmektedir.)
-func (i *IyzipayClient) GetSubscriberList(req *GetSubscriberListRequest) (response GetSubscriberListRequestResponse, err error) {
+// Yapılan ödemenin iptali için kullanılır.
+func (i *IyzipayClient) CancelPayment(req *CancelPaymentRequest) (response CancelPaymentResponse, err error) {
 	if err = req.validate(); err != nil {
-		return response, err
+		return
 	}
 
 	requestData, err := json.Marshal(req)
@@ -84,7 +78,7 @@ func (i *IyzipayClient) GetSubscriberList(req *GetSubscriberListRequest) (respon
 		return response, errors.New("failed to marshal request")
 	}
 
-	httpresp, err := utils.DoRequest(requestData, i.client, "GET", i.baseURI, i.apiKey, i.apiSecret, utils.SubscriptionSubscribersURI)
+	httpresp, err := utils.DoRequest(requestData, i.client, "POST", i.baseURI, i.apiKey, i.apiSecret, utils.CancelURI)
 	if err != nil {
 		return response, err
 	}

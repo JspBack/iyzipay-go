@@ -22,7 +22,7 @@ func TestApproveProduct(t *testing.T) {
 		PaymentTransactionId: "123456789",
 	}
 
-	response, err := client.ApproveProduct(*request)
+	response, err := client.ApproveProduct(request)
 	if err != nil {
 		t.Errorf("Error approving product: %v", err)
 		return
@@ -47,7 +47,7 @@ func TestDisapproveProduct(t *testing.T) {
 		PaymentTransactionId: "123456789",
 	}
 
-	response, err := client.DisapproveProduct(*request)
+	response, err := client.DisapproveProduct(request)
 	if err != nil {
 		t.Errorf("Error approving product: %v", err)
 		return

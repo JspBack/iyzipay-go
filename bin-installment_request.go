@@ -7,11 +7,10 @@ import (
 	"github.com/JspBack/iyzipay-go/utils"
 )
 
-// Pazaryeri çözümünde, ödeme iyzico’dan geçtikten sonra, üye işyeri ödeme içinde yer alan kırılıma / ürüne onay verene dek para korumalı havuz hesapta bekletilir.
-// Üye işyeri bu sürede ödemeyi iptal edebilir, ödemenin kırılımını iade edebilir ya da ürün alıcıya ulaştı ve işlem sorunsuz tamamlandıysa para transferi için ürüne onay verebilir veya verdiği ürün onayını geri çekebilir.
+// Kart bilgilerini öğrenmek için kullanılır.
 //
-// Ürün onayı vermek için kullanılır.
-func (i *IyzipayClient) ApproveProduct(req *MarketplaceProductRequest) (response MarketplaceProductResponse, err error) {
+// Talepte BIN numarası belirtilmemişse, mevcut tüm taksit seçenekleri görüntülenecektir. Ancak, BIN numarası verilirse, yalnızca ilgili ve o karta özel taksit seçeneklerini içerecektir.
+func (i *IyzipayClient) BinControlRequest(req *BinRequest) (response BinResponse, err error) {
 	if err = req.validate(); err != nil {
 		return response, err
 	}
@@ -21,7 +20,7 @@ func (i *IyzipayClient) ApproveProduct(req *MarketplaceProductRequest) (response
 		return response, errors.New("failed to marshal request")
 	}
 
-	httpresp, err := utils.DoRequest(requestData, i.client, "POST", i.baseURI, i.apiKey, i.apiSecret, utils.ApproveProductURI)
+	httpresp, err := utils.DoRequest(requestData, i.client, "POST", i.baseURI, i.apiKey, i.apiSecret, utils.BinCheckURI)
 	if err != nil {
 		return response, err
 	}
@@ -39,8 +38,10 @@ func (i *IyzipayClient) ApproveProduct(req *MarketplaceProductRequest) (response
 	return response, nil
 }
 
-// Ürün onayını geri çekmek için kullanılır.
-func (i *IyzipayClient) DisapproveProduct(req *MarketplaceProductRequest) (response MarketplaceProductResponse, err error) {
+// Kartın taksit bilgilerini sorgulamak için kullanılır.
+//
+// force3ds değeri 1 olarak dönerse, işlemin 3DS ile işlenmesi gerektiği anlamına gelir. 0 ise tercihlere göre işlem yapılabilir. İşyeri hesabında 3DS zorunlu olarak ayarlanmışsa, bu değer sürekli olarak 1 döndürür.
+func (i *IyzipayClient) InstallmentControlRequest(req *InstallmentRequest) (response InstallmentResponse, err error) {
 	if err = req.validate(); err != nil {
 		return response, err
 	}
@@ -50,7 +51,7 @@ func (i *IyzipayClient) DisapproveProduct(req *MarketplaceProductRequest) (respo
 		return response, errors.New("failed to marshal request")
 	}
 
-	httpresp, err := utils.DoRequest(requestData, i.client, "POST", i.baseURI, i.apiKey, i.apiSecret, utils.DisapproveProductURI)
+	httpresp, err := utils.DoRequest(requestData, i.client, "POST", i.baseURI, i.apiKey, i.apiSecret, utils.InstallmentCheckURI)
 	if err != nil {
 		return response, err
 	}

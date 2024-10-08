@@ -11,7 +11,8 @@ const (
 
 	NonTDSURI              = "/payment/auth"                                      // 3DS olmayan ödeme isteği için URI yolu
 	InquiryURI             = "/payment/detail"                                    // Ödeme sorgulama isteği için URI yolu
-	BinControlURI          = "/payment/bin/check"                                 // Bin kontrol isteği için URI yolu
+	BinCheckURI            = "/payment/bin/check"                                 // Bin kontrol isteği için URI yolu
+	InstallmentCheckURI    = "/payment/iyzipos/installment"                       // Taksit kontrol isteği için URI yolu
 	TDSInitilizeURI        = "/payment/3dsecure/initialize"                       // 3DS ödeme başlatma isteği için URI yolu
 	TDSFinalizeURI         = "/payment/3dsecure/auth"                             // 3DS ödeme isteği için URI yolu
 	InitPWIURI             = "/payment/pay-with-iyzico/initialize"                // PWI başlatma isteği için URI yolu
@@ -34,6 +35,10 @@ const (
 
 	CardStorageURI  = "/cardstorage/card"  // Kart saklama isteği için URI yolu
 	CardsStorageURI = "/cardstorage/cards" // Kart saklama sorgulama isteği için URI yolu
+
+	RefundV1URI = "/payment/refund"    // İade isteği için URI yolu
+	RefundV2URI = "/v2/payment/refund" // İade isteği için URI yolu
+	CancelURI   = "/payment/cancel"    // İptal isteği için URI yolu
 )
 
 var (
