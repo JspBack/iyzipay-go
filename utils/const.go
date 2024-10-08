@@ -6,6 +6,9 @@ const (
 	letterIdxMask = 1<<letterIdxBits - 1
 	letterIdxMax  = 63 / letterIdxBits
 
+	SandboxAPIURL = "https://sandbox-api.iyzipay.com" // Sandbox API URL
+	APIURL        = "https://api.iyzipay.com"         // API URL
+
 	NonTDSURI              = "/payment/auth"                                      // 3DS olmayan ödeme isteği için URI yolu
 	InquiryURI             = "/payment/detail"                                    // Ödeme sorgulama isteği için URI yolu
 	BinControlURI          = "/payment/bin/check"                                 // Bin kontrol isteği için URI yolu

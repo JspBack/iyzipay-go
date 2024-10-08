@@ -4,6 +4,8 @@ import (
 	"errors"
 	"net/http"
 	"strings"
+
+	"github.com/JspBack/iyzipay-go/utils"
 )
 
 // Iyzıco's documentation is whole another level. Words can't describe the struggle 💀
@@ -34,18 +36,15 @@ func New(apiKey, apiSecret string) (*IyzipayClient, error) {
 		return nil, errors.New("API secret is required")
 	}
 
-	baseURI := "https://api.iyzipay.com"
-
+	baseURI := utils.APIURL
 	if strings.HasPrefix(apiKey, "sandbox-") {
-		baseURI = "https://sandbox-api.iyzipay.com"
+		baseURI = utils.SandboxAPIURL
 	}
 
-	client := &IyzipayClient{
+	return &IyzipayClient{
 		apiKey:    apiKey,
 		apiSecret: apiSecret,
 		baseURI:   baseURI,
 		client:    &http.Client{},
-	}
-
-	return client, nil
+	}, nil
 }
