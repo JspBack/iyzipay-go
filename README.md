@@ -49,8 +49,6 @@ Bir pull request oluşturarak projeye destek olabilirsiniz. 🙂
 
 ## Bilinen Problemler
 
-- Saklı kartlarla ödeme için ayrı bir yöntem kullanılmalı.
-- Postmande olan ama dökümantasyon da olmayan checkout form içindeki carduserKey parametresi.
 - Unauthorized (401) hataları panic oluşturuyor (hata formatı farklı olduğu için).
 
 ## Lisans
