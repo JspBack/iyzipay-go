@@ -148,36 +148,45 @@ type Buyer struct {
 }
 
 type PaymentCard struct {
+	// Saklı kartın sahibinin kart saklama servisindeki kullanıcı kimliği. Eğer saklı kart ile ödeme yapılacaksa zorunludur.
+	//
+	// zorunlu değil.
+	CardUserKey string `json:"cardUserKey,omitempty" validate:"omitempty"`
+
+	// Ödemenin alınacağı saklı kartın token’ı. Eğer saklı kart ile ödeme yapılacaksa zorunludur.
+	//
+	// zorunlu değil.
+	CardToken string `json:"cardToken,omitempty" validate:"omitempty"`
 
 	// Ödemenin alınacağı kart sahibinin adı soyadı. Eğer saklı kart ile ödeme yapılmıyorsa zorunludur.
 	//
-	// zorunlu.
-	CardHolderName string `json:"cardHolderName" validate:"required"`
+	// zorunlu değil.
+	CardHolderName string `json:"cardHolderName,omitempty" omitempty:"required"`
 
 	// Ödemenin alınacağı kart numarası. Eğer saklı kart ile ödeme yapılmıyorsa zorunludur.
 	//
-	// zorunlu.
-	CardNumber string `json:"cardNumber" validate:"required,creditcard"`
+	// zorunlu değil.
+	CardNumber string `json:"cardNumber,omitempty" validate:"omitempty,creditcard"`
 
 	// Ödemenin alınacağı kartın son kullanma tarihi yılı. Eğer saklı kart ile ödeme yapılmıyorsa zorunludur
 	//
-	// zorunlu.
-	ExpireYear string `json:"expireYear" validate:"required,numeric,len=4"`
+	// zorunlu değil.
+	ExpireYear string `json:"expireYear,omitempty" validate:"omitempty,numeric,len=4"`
 
 	// Ödemenin alınacağı kartın son kullanma tarihi ayı. Eğer saklı kart ile ödeme yapılmıyorsa zorunludur.
 	//
-	// zorunlu.
-	ExpireMonth string `json:"expireMonth" validate:"required,numeric,len=2,oneof=01 02 03 04 05 06 07 08 09 10 11 12"`
+	// zorunlu değil.
+	ExpireMonth string `json:"expireMonth,omitempty" validate:"omitempty,numeric,len=2,oneof=01 02 03 04 05 06 07 08 09 10 11 12"`
 
 	// Ödemenin alınacağı kartın güvenlik kodu. Eğer saklı kart ile ödeme yapılmıyorsa zorunludur. Saklı kartla ödeme yapılırken gönderilirse aynen bankaya iletilir
 	//
-	// zorunlu.
-	CVC string `json:"cvc" validate:"required,numeric,len=3"`
+	// zorunlu değil.
+	CVC string `json:"cvc,omitempty" validate:"omitempty,numeric,len=3"`
 
 	// Ödeme esnasında kartın kaydedilip kaydedilmeyeceğini belirleyen parametre. Varsayılan değeri 0 olup, geçerli değerler 0 ve 1’dir
 	//
 	// zorunlu değil.
-	RegisterCard int `json:"registerCard" validate:"omitempty,oneof=0 1"`
+	RegisterCard int `json:"registerCard,omitempty" validate:"omitempty,oneof=0 1"`
 }
 
 type BillingAddress struct {

@@ -32,7 +32,8 @@ func WithHtmlDecodeRequest(htmlDecodeRequest bool) tdsOptions {
 // BONUS, WORLD, MAXIMUM, AXESS, CARDFINANS, PARAF, ADVANTAGE gibi taksit programlarına katılmış olan kartlara 2, 3, 6, 9 ve 12 taksit seçenekleri sunulmaktadır.
 // Response da dönen paymentId saklanmalıdır.
 //
-// Bincontrol işlemi otomatik olarak yapılyor eğer bin kontrol yapmak istemiyorsanız binRequest parametresini false yapabilirsiniz.
+// Bincontrol işlemi otomatik olarak yapılyor eğer bin kontrol yapmak istemiyorsanız binRequest parametresini false yapabilirsiniz.(Eğer kayıtlı kart ile ödeme yapılıyorsa bin kontrolü yapılmıyor.)
+//
 // Html içeriği otomatik olarak decode ediliyor eğer decode etmek istemiyorsanız htmlDecodeRequest parametresini false yapabilirsiniz.
 func (i *IyzipayClient) InitializeTDSPayment(req *InitTDSRequest, opts ...tdsOptions) (response InitTDSResponse, decodedHtmlContent string, err error) {
 	options := &tdsRequestOptions{
@@ -42,6 +43,10 @@ func (i *IyzipayClient) InitializeTDSPayment(req *InitTDSRequest, opts ...tdsOpt
 
 	for _, opt := range opts {
 		opt(options)
+	}
+
+	if req.PaymentCard.CardUserKey != "" && req.PaymentCard.CardToken != "" {
+		options.binRequest = false
 	}
 
 	if err = req.validate(); err != nil {

@@ -26,13 +26,17 @@ func TestInitTDSPaymentRequest(t *testing.T) {
 			PaymentChannel: "WEB",
 			BasketID:       "B67832",
 			PaymentGroup:   "PRODUCT",
+			// PaymentCard: iyzipay.PaymentCard{
+			// 	CardHolderName: "John Doe",
+			// 	CardNumber:     "5528790000000008",
+			// 	ExpireYear:     "2030",
+			// 	ExpireMonth:    "12",
+			// 	CVC:            "123",
+			// 	RegisterCard:   0,
+			// },
 			PaymentCard: iyzipay.PaymentCard{
-				CardHolderName: "John Doe",
-				CardNumber:     "5528790000000008",
-				ExpireYear:     "2030",
-				ExpireMonth:    "12",
-				CVC:            "123",
-				RegisterCard:   0,
+				CardUserKey: "a1083b27-fc26-805a-74ba-80c1460a9a0d",
+				CardToken:   "1dbb182a-a5ea-9f6b-bb2e-39b8a5c15cd5",
 			},
 			Buyer: iyzipay.Buyer{
 				ID:                  "BY789",

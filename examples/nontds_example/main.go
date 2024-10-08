@@ -17,6 +17,7 @@ func main() {
 		return
 	}
 
+	// If you have saved card, you can use CardUserKey and CardToken inside PaymentCard struct.
 	ntdsReq := &iyzipay.PaymentRequest{
 		Locale:         "tr",
 		ConversationID: "123456789",
@@ -34,6 +35,10 @@ func main() {
 			CVC:            "123",
 			RegisterCard:   0,
 		},
+		// PaymentCard: iyzipay.PaymentCard{
+		// 	CardUserKey: "card user key",
+		// 	CardToken:   "card token",
+		// },
 		Buyer: iyzipay.Buyer{
 			ID:                  "BY789",
 			Name:                "John",
