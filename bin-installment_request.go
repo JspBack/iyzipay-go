@@ -8,8 +8,6 @@ import (
 )
 
 // Kart bilgilerini öğrenmek için kullanılır.
-//
-// Talepte BIN numarası belirtilmemişse, mevcut tüm taksit seçenekleri görüntülenecektir. Ancak, BIN numarası verilirse, yalnızca ilgili ve o karta özel taksit seçeneklerini içerecektir.
 func (i *IyzipayClient) BinControlRequest(req *BinRequest) (response BinResponse, err error) {
 	if err = req.validate(); err != nil {
 		return response, err
@@ -39,6 +37,8 @@ func (i *IyzipayClient) BinControlRequest(req *BinRequest) (response BinResponse
 }
 
 // Kartın taksit bilgilerini sorgulamak için kullanılır.
+//
+// Talepte BIN numarası belirtilmemişse, mevcut tüm taksit seçenekleri görüntülenecektir. Ancak, BIN numarası verilirse, yalnızca ilgili ve o karta özel taksit seçeneklerini içerecektir.
 //
 // force3ds değeri 1 olarak dönerse, işlemin 3DS ile işlenmesi gerektiği anlamına gelir. 0 ise tercihlere göre işlem yapılabilir. İşyeri hesabında 3DS zorunlu olarak ayarlanmışsa, bu değer sürekli olarak 1 döndürür.
 func (i *IyzipayClient) InstallmentControlRequest(req *InstallmentRequest) (response InstallmentResponse, err error) {

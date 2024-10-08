@@ -103,7 +103,7 @@ type InstallmentDetail struct {
 	BinNumber string `json:"binNumber"`
 
 	// Toplam tutar.
-	Price string `json:"price"`
+	Price float32 `json:"price"`
 
 	// Eğer ödeme yapılan kart yerel bir kart ise, kartın ait olduğu tipi. Geçerli değerler: CREDIT_CARD, DEBIT_CARD, PREPAID_CARD
 	CardType string `json:"cardType"`
@@ -132,13 +132,13 @@ type InstallmentDetail struct {
 
 type InstallmentPrice struct {
 	// Taksit başına düşen tutar.
-	InstallmentPrice string `json:"installmentPrice"`
+	InstallmentPrice float32 `json:"installmentPrice"`
 
 	// Toplam taksitli tutar.
-	TotalPrice string `json:"totalPrice"`
+	TotalPrice float32 `json:"totalPrice"`
 
 	// Taksit sayısı.
-	InstallmentNumber string `json:"installmentNumber"`
+	InstallmentNumber int `json:"installmentNumber"`
 }
 
 func (r BinRequest) validate() error {

@@ -50,6 +50,7 @@ Bir pull request oluşturarak projeye destek olabilirsiniz. 🙂
 ## Bilinen Problemler
 
 - Unauthorized (401) hataları panic oluşturuyor (hata formatı farklı olduğu için).
+- Pazaryeri, Abonelik, İptal ve iade örnekleri yok (test edilmediler).
 
 ## Lisans
 

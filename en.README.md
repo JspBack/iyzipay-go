@@ -50,6 +50,7 @@ You can support the project by creating a pull request. 🙂
 ## Known Problems
 
 - Unauthorized (401) errors cause panic (because the error format is different).
+- MarketPlace, Subscription, Cancel, and Refund examples are missing (not tested yet).
 
 ## License
 
