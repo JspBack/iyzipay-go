@@ -24,7 +24,9 @@ const (
 
 	SubscriptionProductURI       = "/v2/subscription/products"      // Abonelik ürün oluşturma, düzenleme ve silme isteği için URI yolu
 	SubscriptionPlanURI          = "/v2/subscription/pricing-plans" // Abonelik ürün fiyatlandırma planı oluşturma, düzenleme ve silme isteği için URI yolu
-	SubscriptionPricingPlanAddon = "pricing-plans"                  // Abonelik planı oluştururken gerekiyor (URI+{reference}+addon)
+	SubscriptionCheckoutFormURI  = "/v2/subscription/checkoutform/" // Abonelik ödeme başlatma isteği için URI yolu
+	SubscriptionNonTDSURI        = "/v2/subscription/initialize"    // Abonelik ödeme isteği için URI yolu
+	SubscriptionSubscriptionsURI = "/v2/subscription/subscriptions" // Abonelik sorgulama isteği için URI yolu
 
 	CardStorageURI  = "/cardstorage/card"  // Kart saklama isteği için URI yolu
 	CardsStorageURI = "/cardstorage/cards" // Kart saklama sorgulama isteği için URI yolu

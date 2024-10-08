@@ -179,7 +179,7 @@ func (i *IyzipayClient) CreateSubscriptionPlan(req CreateSubscriptionPlanRequest
 		return response, errors.New("failed to marshal request")
 	}
 
-	subscriptionPlanURI := utils.SubscriptionProductURI + "/" + req.ProductReferenceCode + "/" + utils.SubscriptionPricingPlanAddon
+	subscriptionPlanURI := utils.SubscriptionProductURI + "/" + req.ProductReferenceCode + "/" + "pricing-plans"
 	httpresp, err := utils.DoRequest(requestData, i.client, "POST", i.baseURI, i.apiKey, i.apiSecret, subscriptionPlanURI)
 	if err != nil {
 		return response, err
