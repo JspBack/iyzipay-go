@@ -155,8 +155,31 @@ type PaymentCard struct {
 
 	// Ödemenin alınacağı saklı kartın token’ı. Eğer saklı kart ile ödeme yapılacaksa zorunludur.
 	//
+	// Abonelik servisinde de geçerlidir.
+	//
 	// zorunlu değil.
 	CardToken string `json:"cardToken,omitempty" validate:"omitempty"`
+
+	// Saklı kartın kullanılabilmesi için kullanıcı için oluşturulmuş token. Geçerlilik süresi 30 dakikadır.
+	//
+	// Abonelik servisinde geçerlidir.
+	//
+	// zorunlu değil.
+	ConsumerToken string `json:"consumerToken,omitempty" validate:"omitempty"`
+
+	// Kartın iyzico ortamında çözümlenmesi için kullanıcı için oluşturulmul değer. Geçerlilik süresi 30 dakikadır.
+	//
+	// Abonelik servisinde geçerlidir.
+	//
+	// zorunlu değil.
+	UCSToken string `json:"ucstoken,omitempty" validate:"omitempty"`
+
+	// Kartın saklanması için gerekli değer.
+	//
+	// Abonelik servisinde geçerlidir.
+	//
+	// Abonelik servisinde zorunludur ve true olmalıdır.
+	RegisterConsumerCard bool `json:"registerConsumerCard,omitempty" validate:"omitempty"`
 
 	// Ödemenin alınacağı kart sahibinin adı soyadı. Eğer saklı kart ile ödeme yapılmıyorsa zorunludur.
 	//
