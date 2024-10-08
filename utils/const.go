@@ -30,6 +30,7 @@ const (
 	SubscriptionCheckoutFormURI  = "/v2/subscription/checkoutform/" // Abonelik ödeme başlatma isteği için URI yolu
 	SubscriptionNonTDSURI        = "/v2/subscription/initialize"    // Abonelik ödeme isteği için URI yolu
 	SubscriptionSubscriptionsURI = "/v2/subscription/subscriptions" // Abonelik sorgulama isteği için URI yolu
+	SubscriptionSubscribersURI   = "/v2/subscription/customers"     // Abonelik müşteri oluşturma ve sorgulama isteği için URI yolu
 
 	CardStorageURI  = "/cardstorage/card"  // Kart saklama isteği için URI yolu
 	CardsStorageURI = "/cardstorage/cards" // Kart saklama sorgulama isteği için URI yolu

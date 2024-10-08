@@ -7,18 +7,10 @@ import (
 	"github.com/JspBack/iyzipay-go/utils"
 )
 
-// CheckoutForm ile Abonelik başlatma isteği yapmak için kullanılır.
-//
-// Abonelik süreci her zaman için ACTIVE veya PENDING durumu ile başlar. Eğer durum PENDING ise veya durum ACTIVE ancak ödeme planında bir deneme süresi belirtilmişse, iyzico abonelik isteğinde sadece kartın validasyonunu gerçekleştirir. Kart validasyonu 1 TL’lik bir çekim ve akabinde iade ile gerçekleşir. Bunun dışında herhangi bir işlem veya ödeme gerçekleşmez.
-//
-// Istekten dönen script etiketi ile birlikte bu 2 divi kullanabilirsiniz:
-//
-// <div id="iyzipay-checkout-form" class="responsive"></div>
-//
-// <div id="iyzipay-checkout-form" class="popup"></div>
+// Abone bilgilerini güncellemek için kullanılır.
 //
 // Not: Sandbox ortamında çalışmamaktadır.(Iyzico panelden eklentiler kısmından abonelik eklentisini aktif etmeniz gerekmektedir.)
-func (i *IyzipayClient) InitializeSubscriptionWithCheckoutForm(req InitSubscriptionWithCheckoutFormRequest) (response InitSubscriptionWithCheckoutFormResponse, err error) {
+func (i *IyzipayClient) UpdateSubscriber(req UpdateSubscriberRequest) (response SubscriberResponse, err error) {
 	if err = req.validate(); err != nil {
 		return response, err
 	}
@@ -28,8 +20,8 @@ func (i *IyzipayClient) InitializeSubscriptionWithCheckoutForm(req InitSubscript
 		return response, errors.New("failed to marshal request")
 	}
 
-	initCFURI := utils.SubscriptionCheckoutFormURI + "/initialize"
-	httpresp, err := utils.DoRequest(requestData, i.client, "POST", i.baseURI, i.apiKey, i.apiSecret, initCFURI)
+	updateSbscrbrURI := utils.SubscriptionSubscribersURI + "/" + req.CustomerReferenceCode
+	httpresp, err := utils.DoRequest(requestData, i.client, "POST", i.baseURI, i.apiKey, i.apiSecret, updateSbscrbrURI)
 	if err != nil {
 		return response, err
 	}
@@ -47,12 +39,10 @@ func (i *IyzipayClient) InitializeSubscriptionWithCheckoutForm(req InitSubscript
 	return response, nil
 }
 
-// CheckoutForm ile Abonelik sorgulama isteği yapmak için kullanılır.
-//
-// Ödemenin tamamlanması gerekli.
+// Abone bilgilerini sorgulamak için kullanılır.
 //
 // Not: Sandbox ortamında çalışmamaktadır.(Iyzico panelden eklentiler kısmından abonelik eklentisini aktif etmeniz gerekmektedir.)
-func (i *IyzipayClient) InquirySubscriptionWithCheckoutForm(req InquirySubscriptionWithCheckoutFormRequest) (response SubscriptionPaymentResponse, err error) {
+func (i *IyzipayClient) GetSubscriberDetail(req GetSubscriberDetailRequest) (response SubscriberResponse, err error) {
 	if err = req.validate(); err != nil {
 		return response, err
 	}
@@ -62,8 +52,8 @@ func (i *IyzipayClient) InquirySubscriptionWithCheckoutForm(req InquirySubscript
 		return response, errors.New("failed to marshal request")
 	}
 
-	initCFURI := utils.SubscriptionCheckoutFormURI + "/" + req.Token
-	httpresp, err := utils.DoRequest(requestData, i.client, "POST", i.baseURI, i.apiKey, i.apiSecret, initCFURI)
+	getSbscrbrURI := utils.SubscriptionSubscribersURI + "/" + req.CustomerReferenceCode
+	httpresp, err := utils.DoRequest(requestData, i.client, "GET", i.baseURI, i.apiKey, i.apiSecret, getSbscrbrURI)
 	if err != nil {
 		return response, err
 	}
@@ -81,10 +71,10 @@ func (i *IyzipayClient) InquirySubscriptionWithCheckoutForm(req InquirySubscript
 	return response, nil
 }
 
-// 3D Secure olmayan Abonelik başlatma isteği yapmak için kullanılır.
+// Abone listesini sorgulamak için kullanılır.
 //
 // Not: Sandbox ortamında çalışmamaktadır.(Iyzico panelden eklentiler kısmından abonelik eklentisini aktif etmeniz gerekmektedir.)
-func (i *IyzipayClient) InitializeSubscriptionWithNonTDS(req InitSubscriptionWithNonTDSRequest) (response SubscriptionPaymentResponse, err error) {
+func (i *IyzipayClient) GetSubscriberList(req GetSubscriberListRequest) (response GetSubscriberListRequestResponse, err error) {
 	if err = req.validate(); err != nil {
 		return response, err
 	}
@@ -94,7 +84,7 @@ func (i *IyzipayClient) InitializeSubscriptionWithNonTDS(req InitSubscriptionWit
 		return response, errors.New("failed to marshal request")
 	}
 
-	httpresp, err := utils.DoRequest(requestData, i.client, "POST", i.baseURI, i.apiKey, i.apiSecret, utils.SubscriptionNonTDSURI)
+	httpresp, err := utils.DoRequest(requestData, i.client, "GET", i.baseURI, i.apiKey, i.apiSecret, utils.SubscriptionSubscribersURI)
 	if err != nil {
 		return response, err
 	}
