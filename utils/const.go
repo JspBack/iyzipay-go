@@ -36,9 +36,10 @@ const (
 	CardStorageURI  = "/cardstorage/card"  // Kart saklama isteği için URI yolu
 	CardsStorageURI = "/cardstorage/cards" // Kart saklama sorgulama isteği için URI yolu
 
-	RefundV1URI = "/payment/refund"    // İade isteği için URI yolu
-	RefundV2URI = "/v2/payment/refund" // İade isteği için URI yolu
-	CancelURI   = "/payment/cancel"    // İptal isteği için URI yolu
+	RefundV1URI              = "/payment/refund"    // İade isteği için URI yolu
+	RefundV2URI              = "/v2/payment/refund" // İade isteği için URI yolu
+	CancelURI                = "/payment/cancel"    // İptal isteği için URI yolu
+	RefundToIyzicoAccountURI = "/payment/iyzipos/item/approve"
 )
 
 var (

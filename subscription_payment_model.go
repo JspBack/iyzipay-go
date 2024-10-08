@@ -2,6 +2,7 @@ package iyzipay
 
 import (
 	"fmt"
+	"net/url"
 	"strings"
 
 	"gopkg.in/go-playground/validator.v9"
@@ -200,6 +201,15 @@ type CfSubscriptionData struct {
 
 func (r *InitSubscriptionWithCheckoutFormRequest) validate() error {
 	validate := validator.New()
+
+	validate.RegisterValidation("httpsurl", func(fl validator.FieldLevel) bool {
+		field := fl.Field().String()
+		parsedURL, err := url.Parse(field)
+		if err != nil {
+			return false
+		}
+		return parsedURL.Scheme == "https"
+	})
 
 	err := validate.Struct(r)
 	if err != nil {
