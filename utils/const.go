@@ -49,8 +49,10 @@ const (
 
 	IyzilinkURI = "/v2/iyzilink/products" // Iyzilink oluşturma isteği için URI yolu
 
-	A2AListURI   = "/v2/in-store/user-info/list" // App2App kullanıcı listeleme işlemi için URI yolu
-	A2ACreateURI = "/v2/in-store/payment"        // App2App ödeme oluşturma işlemi için URI yolu
+	A2AListURI    = "/v2/in-store/user-info/list" // App2App kullanıcı listeleme işlemi için URI yolu
+	A2ACreateURI  = "/v2/in-store/payment"        // App2App ödeme oluşturma işlemi için URI yolu
+	A2ARefundURI  = "/v2/in-store/payment/refund" // App2App iade işlemi için URI yolu
+	A2AInquiryURI = "/v2/in-store/crypt/decrypt"  // App2App ödeme sorgulama işlemi için URI yolu
 
 )
 

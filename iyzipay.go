@@ -74,7 +74,7 @@ func New(apiKey, apiSecret string) (*IyzipayClient, error) {
 }
 
 // NewApp2AppClient, yeni bir App2App clientı oluşturur.
-func NewApp2AppClient(apiKey, apiSecret string) (*App2AppClient, error) {
+func NewApp2AppClient(apiKey, apiSecret, a2AapiKey, a2AsecretKey, merchantId string) (*App2AppClient, error) {
 	if apiKey == "" {
 		return nil, errors.New("API key is required")
 	}
@@ -89,9 +89,12 @@ func NewApp2AppClient(apiKey, apiSecret string) (*App2AppClient, error) {
 	}
 
 	return &App2AppClient{
-		apiKey:    apiKey,
-		apiSecret: apiSecret,
-		baseURI:   baseURI,
-		client:    &http.Client{},
+		apiKey:       apiKey,
+		apiSecret:    apiSecret,
+		A2AapiKey:    a2AapiKey,
+		A2AsecretKey: a2AsecretKey,
+		merchantId:   merchantId,
+		baseURI:      baseURI,
+		client:       &http.Client{},
 	}, nil
 }
