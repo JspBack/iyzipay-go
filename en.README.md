@@ -29,12 +29,12 @@ go get github.com/JspBack/iyzipay-go
 - Card Storage: Securely store users' credit card information and use it for recurring payments.
 - Subscription APIs: Manage subscription services.
 - Iyzilink APIs: Integration with Iyzilink services.
+- Ceppos App2App integration
 
 ## Planned Features
 
 - EFT APIs: Support for Electronic Funds Transfer.
 - Additional Services: Other extra services will be added.
-- Ceppos App2App integration
 - Alışveriş Kredisi integration
 
 ## Simple Usage
@@ -84,7 +84,7 @@ You can support the project by creating a pull request. 🙂
 [GENERAL]
 
 - Unauthorized (401) errors cause panic (because the error format is different).
-- MarketPlace, Subscription, Cancel, Refund, and Iyzilink examples are missing (not tested yet or not working properly).
+- MarketPlace, Subscription, Cancel, Refund, App2App and Iyzilink examples are missing (not tested yet or not working properly).
 
 [IYZILINK]
 

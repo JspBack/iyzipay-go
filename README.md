@@ -29,12 +29,12 @@ go get github.com/JspBack/iyzipay-go
 - Kart Saklama: Kullanıcıların kredi kartı bilgilerini güvenli bir şekilde saklayın ve tekrar eden ödemeler için kullanın.
 - Abonelik API'leri: Abonelik hizmetlerini yönetin.
 - Iyzilink API'leri: Iyzilink hizmetleri ile entegrasyon.
+- Ceppos App2App entegrasyonu
 
 ## Planlanan Özellikler
 
 - EFT API'leri: Elektronik Fon Transferi desteği.
 - Ekstra Hizmetler: Diğer ekstra hizmetler eklenecektir.
-- Ceppos App2App entegrasyonu
 - Alışveriş Kredisi entegrasyonu
 
 ## Basit Kullanımı
@@ -84,7 +84,7 @@ Bir pull request oluşturarak projeye destek olabilirsiniz. 🙂
 [GENEL]
 
 - Unauthorized (401) hataları panic oluşturuyor (hata formatı farklı olduğu için).
-- Pazaryeri, Abonelik, İptal ve iade, Iyzilink örnekleri yok (test edilmediler veya hatalı çalışıyorlar).
+- Pazaryeri, Abonelik, İptal ve iade, Iyzilink, App2App örnekleri yok (test edilmediler veya hatalı çalışıyorlar).
 
 [IYZILINK]
 
