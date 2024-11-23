@@ -18,7 +18,7 @@ func (i *IyzipayClient) RefundPaymentV1(req *RefundPaymentV1Request) (response R
 		return response, errors.New("failed to marshal request")
 	}
 
-	httpresp, err := utils.DoRequest(requestData, i.client, "POST", i.baseURI, i.apiKey, i.apiSecret, utils.RefundV1URI)
+	httpresp, err := utils.DoRequest(requestData, i.client, utils.RPst, i.baseURI, i.apiKey, i.apiSecret, utils.RefundV1URI)
 	if err != nil {
 		return response, err
 	}
@@ -49,7 +49,7 @@ func (i *IyzipayClient) RefundPaymentV2(req *RefundPaymentV2Request) (response R
 		return response, errors.New("failed to marshal request")
 	}
 
-	httpresp, err := utils.DoRequest(requestData, i.client, "POST", i.baseURI, i.apiKey, i.apiSecret, utils.RefundV2URI)
+	httpresp, err := utils.DoRequest(requestData, i.client, utils.RPst, i.baseURI, i.apiKey, i.apiSecret, utils.RefundV2URI)
 	if err != nil {
 		return response, err
 	}
@@ -78,7 +78,7 @@ func (i *IyzipayClient) CancelPayment(req *CancelPaymentRequest) (response Cance
 		return response, errors.New("failed to marshal request")
 	}
 
-	httpresp, err := utils.DoRequest(requestData, i.client, "POST", i.baseURI, i.apiKey, i.apiSecret, utils.CancelURI)
+	httpresp, err := utils.DoRequest(requestData, i.client, utils.RPst, i.baseURI, i.apiKey, i.apiSecret, utils.CancelURI)
 	if err != nil {
 		return response, err
 	}
@@ -107,7 +107,7 @@ func (i *IyzipayClient) RefundPaymentToIyzicoAccount(req *RefundPaymentIyzicoReq
 		return response, errors.New("failed to marshal request")
 	}
 
-	httpresp, err := utils.DoRequest(requestData, i.client, "POST", i.baseURI, i.apiKey, i.apiSecret, utils.RefundToIyzicoAccountURI)
+	httpresp, err := utils.DoRequest(requestData, i.client, utils.RPst, i.baseURI, i.apiKey, i.apiSecret, utils.RefundToIyzicoAccountURI)
 	if err != nil {
 		return response, err
 	}

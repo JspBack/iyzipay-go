@@ -20,7 +20,7 @@ func (i *IyzipayClient) CheckoutFormPaymentRequest(req *CFRequest, CFFormType st
 		return response, errors.New("failed to marshal request")
 	}
 
-	httpresp, err := utils.DoRequest(requestData, i.client, "POST", i.baseURI, i.apiKey, i.apiSecret, utils.CheckoutFormURI)
+	httpresp, err := utils.DoRequest(requestData, i.client, utils.RPst, i.baseURI, i.apiKey, i.apiSecret, utils.CheckoutFormURI)
 	if err != nil {
 		return response, err
 	}
@@ -58,7 +58,7 @@ func (i *IyzipayClient) CheckoutFormPaymentInquiryRequest(req *CFInquiryRequest)
 		return response, errors.New("failed to marshal request")
 	}
 
-	httpresp, err := utils.DoRequest(requestData, i.client, "POST", i.baseURI, i.apiKey, i.apiSecret, utils.CheckoutFormInquiryURI)
+	httpresp, err := utils.DoRequest(requestData, i.client, utils.RPst, i.baseURI, i.apiKey, i.apiSecret, utils.CheckoutFormInquiryURI)
 	if err != nil {
 		return response, err
 	}

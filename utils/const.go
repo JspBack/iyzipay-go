@@ -6,6 +6,12 @@ const (
 	letterIdxMask = 1<<letterIdxBits - 1
 	letterIdxMax  = 63 / letterIdxBits
 
+	RPst = "POST"   // POST methodu
+	RGet = "GET"    // GET methodu
+	RDel = "DELETE" // DELETE methodu
+	RPut = "PUT"    // PUT methodu
+	RPtc = "PATCH"  // PATCH methodu
+
 	SandboxAPIURL = "https://sandbox-api.iyzipay.com" // Sandbox API URL
 	APIURL        = "https://api.iyzipay.com"         // API URL
 
@@ -36,14 +42,18 @@ const (
 	CardStorageURI  = "/cardstorage/card"  // Kart saklama isteği için URI yolu
 	CardsStorageURI = "/cardstorage/cards" // Kart saklama sorgulama isteği için URI yolu
 
-	RefundV1URI              = "/payment/refund"    // İade isteği için URI yolu
-	RefundV2URI              = "/v2/payment/refund" // İade isteği için URI yolu
-	CancelURI                = "/payment/cancel"    // İptal isteği için URI yolu
-	RefundToIyzicoAccountURI = "/payment/iyzipos/item/approve"
+	RefundV1URI              = "/payment/refund"               // İade isteği için URI yolu
+	RefundV2URI              = "/v2/payment/refund"            // İade isteği için URI yolu
+	CancelURI                = "/payment/cancel"               // İptal isteği için URI yolu
+	RefundToIyzicoAccountURI = "/payment/iyzipos/item/approve" // Iyzico hesabına iade isteği için URI yolu
+
+	IyzilinkURI = "/v2/iyzilink/products" // Iyzilink oluşturma isteği için URI yolu
+
 )
 
 var (
-	TDSAcceptedCardAssociations = map[string]bool{ // 3DS işlemi için desteklenen kart tipleri
+	// 3DS işlemi için desteklenen kart tipleri
+	TDSAcceptedCardAssociations = map[string]bool{
 		"TROY":        true,
 		"MASTER_CARD": true,
 		"MASTERCARD":  true,
@@ -51,16 +61,10 @@ var (
 		"AMEX":        true,
 	}
 
-	AcceptedCFTypes = map[string]bool{ // Checkout form için desteklenen form tipleri
+	// Checkout form için desteklenen form tipleri
+	AcceptedCFTypes = map[string]bool{
 		"iframe":     true,
 		"responsive": true,
 		"popup":      true,
-	}
-
-	AcceptedRequestMethods = map[string]bool{ // İstek metodları
-		"POST":   true,
-		"GET":    true,
-		"PUT":    true,
-		"DELETE": true,
 	}
 )

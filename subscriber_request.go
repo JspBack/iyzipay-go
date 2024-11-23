@@ -21,7 +21,7 @@ func (i *IyzipayClient) UpdateSubscriber(req *UpdateSubscriberRequest) (response
 	}
 
 	updateSbscrbrURI := utils.SubscriptionSubscribersURI + "/" + req.CustomerReferenceCode
-	httpresp, err := utils.DoRequest(requestData, i.client, "POST", i.baseURI, i.apiKey, i.apiSecret, updateSbscrbrURI)
+	httpresp, err := utils.DoRequest(requestData, i.client, utils.RPst, i.baseURI, i.apiKey, i.apiSecret, updateSbscrbrURI)
 	if err != nil {
 		return response, err
 	}
@@ -53,7 +53,7 @@ func (i *IyzipayClient) GetSubscriberDetail(req *GetSubscriberDetailRequest) (re
 	}
 
 	getSbscrbrURI := utils.SubscriptionSubscribersURI + "/" + req.CustomerReferenceCode
-	httpresp, err := utils.DoRequest(requestData, i.client, "GET", i.baseURI, i.apiKey, i.apiSecret, getSbscrbrURI)
+	httpresp, err := utils.DoRequest(requestData, i.client, utils.RGet, i.baseURI, i.apiKey, i.apiSecret, getSbscrbrURI)
 	if err != nil {
 		return response, err
 	}
@@ -84,7 +84,7 @@ func (i *IyzipayClient) GetSubscriberList(req *GetSubscriberListRequest) (respon
 		return response, errors.New("failed to marshal request")
 	}
 
-	httpresp, err := utils.DoRequest(requestData, i.client, "GET", i.baseURI, i.apiKey, i.apiSecret, utils.SubscriptionSubscribersURI)
+	httpresp, err := utils.DoRequest(requestData, i.client, utils.RGet, i.baseURI, i.apiKey, i.apiSecret, utils.SubscriptionSubscribersURI)
 	if err != nil {
 		return response, err
 	}

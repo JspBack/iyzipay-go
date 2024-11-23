@@ -20,7 +20,7 @@ func (i *IyzipayClient) CreateCardStorageNewUser(req *CardStorageNewUserRequest)
 		return response, errors.New("failed to marshal request")
 	}
 
-	httpresp, err := utils.DoRequest(requestData, i.client, "POST", i.baseURI, i.apiKey, i.apiSecret, utils.CardStorageURI)
+	httpresp, err := utils.DoRequest(requestData, i.client, utils.RPst, i.baseURI, i.apiKey, i.apiSecret, utils.CardStorageURI)
 	if err != nil {
 		return response, err
 	}
@@ -51,7 +51,7 @@ func (i *IyzipayClient) CreateCardStorageExUser(req *CardStorageExUserRequest) (
 		return response, errors.New("failed to marshal request")
 	}
 
-	httpresp, err := utils.DoRequest(requestData, i.client, "POST", i.baseURI, i.apiKey, i.apiSecret, utils.CardStorageURI)
+	httpresp, err := utils.DoRequest(requestData, i.client, utils.RPst, i.baseURI, i.apiKey, i.apiSecret, utils.CardStorageURI)
 	if err != nil {
 		return response, err
 	}
@@ -80,7 +80,7 @@ func (i *IyzipayClient) DeleteCardStorageCard(req *CardStorageDeleteRequest) (re
 		return response, errors.New("failed to marshal request")
 	}
 
-	httpresp, err := utils.DoRequest(requestData, i.client, "DELETE", i.baseURI, i.apiKey, i.apiSecret, utils.CardStorageURI)
+	httpresp, err := utils.DoRequest(requestData, i.client, utils.RDel, i.baseURI, i.apiKey, i.apiSecret, utils.CardStorageURI)
 	if err != nil {
 		return response, err
 	}
@@ -108,7 +108,7 @@ func (i *IyzipayClient) GetCardStorageCards(req *CardStorageRetrieveRequest) (re
 		return response, errors.New("failed to marshal request")
 	}
 
-	httpresp, err := utils.DoRequest(requestData, i.client, "POST", i.baseURI, i.apiKey, i.apiSecret, utils.CardsStorageURI)
+	httpresp, err := utils.DoRequest(requestData, i.client, utils.RPst, i.baseURI, i.apiKey, i.apiSecret, utils.CardsStorageURI)
 	if err != nil {
 		return response, err
 	}

@@ -29,7 +29,7 @@ func (i *IyzipayClient) InitializeSubscriptionWithCheckoutForm(req InitSubscript
 	}
 
 	initCFURI := utils.SubscriptionCheckoutFormURI + "/initialize"
-	httpresp, err := utils.DoRequest(requestData, i.client, "POST", i.baseURI, i.apiKey, i.apiSecret, initCFURI)
+	httpresp, err := utils.DoRequest(requestData, i.client, utils.RPst, i.baseURI, i.apiKey, i.apiSecret, initCFURI)
 	if err != nil {
 		return response, err
 	}
@@ -63,7 +63,7 @@ func (i *IyzipayClient) InquirySubscriptionWithCheckoutForm(req InquirySubscript
 	}
 
 	initCFURI := utils.SubscriptionCheckoutFormURI + "/" + req.Token
-	httpresp, err := utils.DoRequest(requestData, i.client, "POST", i.baseURI, i.apiKey, i.apiSecret, initCFURI)
+	httpresp, err := utils.DoRequest(requestData, i.client, utils.RPst, i.baseURI, i.apiKey, i.apiSecret, initCFURI)
 	if err != nil {
 		return response, err
 	}
@@ -94,7 +94,7 @@ func (i *IyzipayClient) InitializeSubscriptionWithNonTDS(req InitSubscriptionWit
 		return response, errors.New("failed to marshal request")
 	}
 
-	httpresp, err := utils.DoRequest(requestData, i.client, "POST", i.baseURI, i.apiKey, i.apiSecret, utils.SubscriptionNonTDSURI)
+	httpresp, err := utils.DoRequest(requestData, i.client, utils.RPst, i.baseURI, i.apiKey, i.apiSecret, utils.SubscriptionNonTDSURI)
 	if err != nil {
 		return response, err
 	}

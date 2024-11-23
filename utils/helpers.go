@@ -19,10 +19,6 @@ func DoRequest(requestData []byte, client *http.Client, method, baseURI, apiKey,
 	randomStr := randString(8)
 	authorizationString := generateAuthorizationString(apiKey, secretKey, string(requestData), uriPath)
 
-	if !AcceptedRequestMethods[method] {
-		return nil, fmt.Errorf("invalid request method: %s", method)
-	}
-
 	req, err := http.NewRequest(method, baseURI+uriPath, bytes.NewBuffer(requestData))
 	if err != nil {
 		return nil, err

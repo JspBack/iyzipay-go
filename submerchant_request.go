@@ -20,7 +20,7 @@ func (i *IyzipayClient) CreateIndividualSubMerchant(req *IndividualSubMerchantRe
 		return response, errors.New("failed to marshal request")
 	}
 
-	httpresp, err := utils.DoRequest(requestData, i.client, "POST", i.baseURI, i.apiKey, i.apiSecret, utils.SubMerchantURI)
+	httpresp, err := utils.DoRequest(requestData, i.client, utils.RPst, i.baseURI, i.apiKey, i.apiSecret, utils.SubMerchantURI)
 	if err != nil {
 		return response, err
 	}
@@ -51,7 +51,7 @@ func (i *IyzipayClient) CreatePrivateSubMerchant(req *PrivateSubMerchantRequest)
 		return response, errors.New("failed to marshal request")
 	}
 
-	httpresp, err := utils.DoRequest(requestData, i.client, "POST", i.baseURI, i.apiKey, i.apiSecret, utils.SubMerchantURI)
+	httpresp, err := utils.DoRequest(requestData, i.client, utils.RPst, i.baseURI, i.apiKey, i.apiSecret, utils.SubMerchantURI)
 	if err != nil {
 		return response, err
 	}
@@ -82,7 +82,7 @@ func (i *IyzipayClient) CreateLimitedCompanySubMerchant(req *LimitedCompanySubMe
 		return response, errors.New("failed to marshal request")
 	}
 
-	httpresp, err := utils.DoRequest(requestData, i.client, "POST", i.baseURI, i.apiKey, i.apiSecret, utils.SubMerchantURI)
+	httpresp, err := utils.DoRequest(requestData, i.client, utils.RPst, i.baseURI, i.apiKey, i.apiSecret, utils.SubMerchantURI)
 	if err != nil {
 		return response, err
 	}
@@ -111,7 +111,7 @@ func (i *IyzipayClient) UpdateIndividualSubMerchant(req *IndividualSubMerchantUp
 		return response, errors.New("failed to marshal request")
 	}
 
-	httpresp, err := utils.DoRequest(requestData, i.client, "PUT", i.baseURI, i.apiKey, i.apiSecret, utils.SubMerchantURI)
+	httpresp, err := utils.DoRequest(requestData, i.client, utils.RPut, i.baseURI, i.apiKey, i.apiSecret, utils.SubMerchantURI)
 	if err != nil {
 		return response, err
 	}
@@ -140,7 +140,7 @@ func (i *IyzipayClient) UpdatePrivateSubMerchant(req *PrivateSubMerchantUpdateRe
 		return response, errors.New("failed to marshal request")
 	}
 
-	httpresp, err := utils.DoRequest(requestData, i.client, "PUT", i.baseURI, i.apiKey, i.apiSecret, utils.SubMerchantURI)
+	httpresp, err := utils.DoRequest(requestData, i.client, utils.RPut, i.baseURI, i.apiKey, i.apiSecret, utils.SubMerchantURI)
 	if err != nil {
 		return response, err
 	}
@@ -169,7 +169,7 @@ func (i *IyzipayClient) UpdateLimitedCompanySubMerchant(req *LimitedCompanySubMe
 		return response, errors.New("failed to marshal request")
 	}
 
-	httpresp, err := utils.DoRequest(requestData, i.client, "PUT", i.baseURI, i.apiKey, i.apiSecret, utils.SubMerchantURI)
+	httpresp, err := utils.DoRequest(requestData, i.client, utils.RPut, i.baseURI, i.apiKey, i.apiSecret, utils.SubMerchantURI)
 	if err != nil {
 		return response, err
 	}
@@ -198,7 +198,7 @@ func (i *IyzipayClient) SubMerchantInquiry(req *SubMerchantInquiryRequest) (resp
 		return response, errors.New("failed to marshal request")
 	}
 
-	httpresp, err := utils.DoRequest(requestData, i.client, "POST", i.baseURI, i.apiKey, i.apiSecret, utils.SubMerchantInquiryURI)
+	httpresp, err := utils.DoRequest(requestData, i.client, utils.RPst, i.baseURI, i.apiKey, i.apiSecret, utils.SubMerchantInquiryURI)
 	if err != nil {
 		return response, err
 	}
@@ -226,7 +226,7 @@ func (i *IyzipayClient) UpdateSubMerchantProduct(req *SubMerchantProductUpdateRe
 		return response, errors.New("failed to marshal request")
 	}
 
-	httpresp, err := utils.DoRequest(requestData, i.client, "PUT", i.baseURI, i.apiKey, i.apiSecret, utils.SubMerchantProductURI)
+	httpresp, err := utils.DoRequest(requestData, i.client, utils.RPut, i.baseURI, i.apiKey, i.apiSecret, utils.SubMerchantProductURI)
 	if err != nil {
 		return response, err
 	}

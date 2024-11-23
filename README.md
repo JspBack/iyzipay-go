@@ -28,12 +28,43 @@ go get github.com/JspBack/iyzipay-go
 - MarketPlace API'leri: MarketPlace API'leri ile etkileşim. (yada MerchantPlace)
 - Kart Saklama: Kullanıcıların kredi kartı bilgilerini güvenli bir şekilde saklayın ve tekrar eden ödemeler için kullanın.
 - Abonelik API'leri: Abonelik hizmetlerini yönetin.
+- Iyzilink API'leri: Iyzilink hizmetleri ile entegrasyon.
 
 ## Planlanan Özellikler
 
-- Iyzilink API'leri: Iyzilink hizmetleri ile entegrasyon.
 - EFT API'leri: Elektronik Fon Transferi desteği.
 - Ekstra Hizmetler: Diğer ekstra hizmetler eklenecektir.
+- Ceppos App2App entegrasyonu
+- Alışveriş Kredisi entegrasyonu
+
+## Basit Kullanımı
+
+```go
+// Olabildiğince basit tuttum 😎
+apikey := os.Getenv("IYZIPAY_API_KEY")
+apiSecret := os.Getenv("IYZIPAY_API_SECRET")
+
+client, err := iyzipay.New(apikey, apiSecret)
+if err != nil {
+    fmt.Println(err)
+}
+
+binReq := &iyzipay.BinRequest{
+    Locale:         "tr",
+    BinNumber:      "454671",
+    ConversationId: "123456789",
+}
+
+binRes, err := client.BinControlRequest(binReq)
+if err != nil {
+    fmt.Println(err)
+}
+
+if binRes.Status == "success" {
+    fmt.Println("Bin Number: ", binRes.CardAssociation) // VISA
+    return
+}
+```
 
 ## Örnekler
 
@@ -49,8 +80,15 @@ Bir pull request oluşturarak projeye destek olabilirsiniz. 🙂
 
 ## Bilinen Problemler
 
+[GENEL]
+
 - Unauthorized (401) hataları panic oluşturuyor (hata formatı farklı olduğu için).
-- Pazaryeri, Abonelik, İptal ve iade örnekleri yok (test edilmediler).
+- Pazaryeri, Abonelik, İptal ve iade, Iyzilink örnekleri yok (test edilmediler veya hatalı çalışıyorlar).
+
+[IYZILINK]
+
+- Iyzilink entegrasyonunda IyzilinkUpdate,IyzilinkDelete çalışmıyor 'sistem hatası' dönüyor.
+- Iyzilink entegrasyonunda IyzilinkGetDetail, IyzilinkGetList'ten gelen veri filtrelenerek alınıyor. Bu doğru bir kullanım değil ama geçici bir çözüm, çünkü IyzilinkGetDetail'den dönen veri IyzilinkGetList'ten dönen veri tipinde yani doğru çalışmıyor.
 
 ## Lisans
 

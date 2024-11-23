@@ -18,7 +18,7 @@ func (i *IyzipayClient) PaymentInquiryRequest(req *InquiryRequest) (response Inq
 		return response, errors.New("failed to marshal request")
 	}
 
-	httpresp, err := utils.DoRequest(requestData, i.client, "POST", i.baseURI, i.apiKey, i.apiSecret, utils.InquiryURI)
+	httpresp, err := utils.DoRequest(requestData, i.client, utils.RPst, i.baseURI, i.apiKey, i.apiSecret, utils.InquiryURI)
 	if err != nil {
 		return response, err
 	}

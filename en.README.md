@@ -34,6 +34,37 @@ go get github.com/JspBack/iyzipay-go
 - Iyzilink APIs: Integration with Iyzilink services.
 - EFT APIs: Support for Electronic Funds Transfer.
 - Additional Services: Other extra services will be added.
+- Ceppos App2App integration
+- Alışveriş Kredisi integration
+
+## Simple Usage
+
+```go
+// I tried to keep it simple 😎
+apikey := os.Getenv("IYZIPAY_API_KEY")
+apiSecret := os.Getenv("IYZIPAY_API_SECRET")
+
+client, err := iyzipay.New(apikey, apiSecret)
+if err != nil {
+    fmt.Println(err)
+}
+
+binReq := &iyzipay.BinRequest{
+    Locale:         "tr",
+    BinNumber:      "454671",
+    ConversationId: "123456789",
+}
+
+binRes, err := client.BinControlRequest(binReq)
+if err != nil {
+    fmt.Println(err)
+}
+
+if binRes.Status == "success" {
+    fmt.Println("Bin Number: ", binRes.CardAssociation) // VISA
+    return
+}
+```
 
 ## Examples
 
@@ -49,8 +80,15 @@ You can support the project by creating a pull request. 🙂
 
 ## Known Problems
 
+[GENERAL]
+
 - Unauthorized (401) errors cause panic (because the error format is different).
-- MarketPlace, Subscription, Cancel, and Refund examples are missing (not tested yet).
+- MarketPlace, Subscription, Cancel, Refund, and Iyzilink examples are missing (not tested yet or not working properly).
+
+[IYZILINK]
+
+- Iyzilink integration has issues with IyzilinkUpdate and IyzilinkDelete returning 'system error'.
+- IyzilinkGetDetail and IyzilinkGetList data are filtered incorrectly. This is a temporary solution as the data returned by IyzilinkGetDetail is of the same type as IyzilinkGetList, which is not correct.
 
 ## License
 

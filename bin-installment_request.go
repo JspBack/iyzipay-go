@@ -18,7 +18,7 @@ func (i *IyzipayClient) BinControlRequest(req *BinRequest) (response BinResponse
 		return response, errors.New("failed to marshal request")
 	}
 
-	httpresp, err := utils.DoRequest(requestData, i.client, "POST", i.baseURI, i.apiKey, i.apiSecret, utils.BinCheckURI)
+	httpresp, err := utils.DoRequest(requestData, i.client, utils.RPst, i.baseURI, i.apiKey, i.apiSecret, utils.BinCheckURI)
 	if err != nil {
 		return response, err
 	}
@@ -51,7 +51,7 @@ func (i *IyzipayClient) InstallmentControlRequest(req *InstallmentRequest) (resp
 		return response, errors.New("failed to marshal request")
 	}
 
-	httpresp, err := utils.DoRequest(requestData, i.client, "POST", i.baseURI, i.apiKey, i.apiSecret, utils.InstallmentCheckURI)
+	httpresp, err := utils.DoRequest(requestData, i.client, utils.RPst, i.baseURI, i.apiKey, i.apiSecret, utils.InstallmentCheckURI)
 	if err != nil {
 		return response, err
 	}

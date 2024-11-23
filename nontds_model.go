@@ -299,7 +299,7 @@ type BasketItem struct {
 }
 
 type Non3DSPaymentResponse struct {
-	// Üye işyeri tarafındaki sepetteki ürüne ait tip. Geçerli enum değerler: PHYSICAL ve VIRTUAL.
+	// İşlem sonucu başarılı ise success, başarısız ise failure döner.
 	Status string `json:"status"`
 
 	// İstekte belirtilen locale değeri geri dönülür, varsayılan değeri tr’dir.

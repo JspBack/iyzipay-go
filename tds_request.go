@@ -79,7 +79,7 @@ func (i *IyzipayClient) InitializeTDSPayment(req *InitTDSRequest, opts ...tdsOpt
 		return response, decodedHtmlContent, errors.New("failed to marshal request")
 	}
 
-	httpresp, err := utils.DoRequest(requestData, i.client, "POST", i.baseURI, i.apiKey, i.apiSecret, utils.TDSInitilizeURI)
+	httpresp, err := utils.DoRequest(requestData, i.client, utils.RPst, i.baseURI, i.apiKey, i.apiSecret, utils.TDSInitilizeURI)
 	if err != nil {
 		return response, decodedHtmlContent, err
 	}
@@ -117,7 +117,7 @@ func (i *IyzipayClient) FinalizeTDSPayment(req *TDSPaymentRequest) (response TDS
 		return response, errors.New("failed to marshal request")
 	}
 
-	httpresp, err := utils.DoRequest(requestData, i.client, "POST", i.baseURI, i.apiKey, i.apiSecret, utils.TDSFinalizeURI)
+	httpresp, err := utils.DoRequest(requestData, i.client, utils.RPst, i.baseURI, i.apiKey, i.apiSecret, utils.TDSFinalizeURI)
 	if err != nil {
 		return response, err
 	}
