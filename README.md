@@ -34,7 +34,6 @@ go get github.com/JspBack/iyzipay-go
 ## Planlanan Özellikler
 
 - Ekstra Hizmetler: Diğer ekstra hizmetler eklenecektir.
-- Alışveriş Kredisi entegrasyonu
 
 ## Basit Kullanımı
 
