@@ -33,7 +33,6 @@ go get github.com/JspBack/iyzipay-go
 
 ## Planned Features
 
-- EFT APIs: Support for Electronic Funds Transfer.
 - Additional Services: Other extra services will be added.
 - Alışveriş Kredisi integration
 

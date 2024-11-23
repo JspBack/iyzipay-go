@@ -33,7 +33,6 @@ go get github.com/JspBack/iyzipay-go
 
 ## Planlanan Özellikler
 
-- EFT API'leri: Elektronik Fon Transferi desteği.
 - Ekstra Hizmetler: Diğer ekstra hizmetler eklenecektir.
 - Alışveriş Kredisi entegrasyonu
 
