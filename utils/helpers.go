@@ -42,6 +42,56 @@ func DoRequest(requestData []byte, client *http.Client, method, baseURI, apiKey,
 	return responseBody, nil
 }
 
+// App2App için istek oluşturmak için kullanılan fonksiyon
+func A2ADoRequest(requestData *[]byte, client *http.Client, method, baseURI, apiKey, secretKey, uriPath, A2AapiKey, A2AsecretKey, A2AmerchantId string, callBackUrl *string) (response []byte, err error) {
+	randomStr := randString(8)
+
+	var reqRef string
+	if requestData == nil {
+		reqRef = ""
+	} else {
+		reqRef = string(*requestData)
+	}
+
+	authorizationString := generateAuthorizationString(apiKey, secretKey, reqRef, uriPath)
+
+	var body io.Reader
+	if requestData != nil {
+		body = bytes.NewBuffer(*requestData)
+	} else {
+		body = nil
+	}
+
+	req, err := http.NewRequest(method, baseURI+uriPath, body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Set("Content-Type", "application/json")
+	req.Header.Set("Authorization", authorizationString)
+	req.Header.Set("x-iyzi-rnd", randomStr)
+
+	req.Header.Set("x-api-key", A2AapiKey)
+	req.Header.Set("x-secret-key", A2AsecretKey)
+	req.Header.Set("x-merchant-id", A2AmerchantId)
+	if callBackUrl != nil {
+		req.Header.Set("x-callback-url", *callBackUrl)
+	}
+
+	resp, err := client.Do(req)
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+
+	responseBody, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return nil, err
+	}
+
+	return responseBody, nil
+}
+
 // n uzunluğunda random string oluşturur
 func randString(n int) string {
 	var src = rand.NewSource(time.Now().UnixNano())

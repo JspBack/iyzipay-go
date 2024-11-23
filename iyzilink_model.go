@@ -4,152 +4,240 @@ import "gopkg.in/go-playground/validator.v9"
 
 type IyzilinkCreateRequest struct {
 	// İstek ve yanıtı eşleştirmek için kullanılan Konuşma ID'si.
+	//
+	// zorunlu değil
 	ConversationID string `json:"conversationId" validate:"omitempty"`
 
 	// iyzico istek sonucunda dönen metinlerin dilini ayarlamak için kullanılır. Varsayılan değeri tr’dir. en olarak kullanılabilir.
+	//
+	// zorunlu değil
 	Locale string `json:"locale" validate:"omitempty,oneof=tr en"`
 
 	// Ürünün ekranda görünen ismi.
+	//
+	// zorunlu
 	Name string `json:"name" validate:"required"`
 
 	// Ürün fiyatı.
+	//
+	// zorunlu
 	Price string `json:"price" validate:"required"`
 
 	// Taksitli Satış Durumu. Gönderilmezse false değeri alır.
+	//
+	// zorunlu değil
 	InstallmentRequested string `json:"installmentRequested" validate:"omitempty,oneof=true false"`
 
 	// Ürün satın alınırken adres isteme parametresi. Gönderilmese true değerini alır.
+	//
+	// zorunlu değil
 	AddressIgnorable string `json:"addressIgnorable" validate:"omitempty,oneof=true false"`
 
 	// Ürünün para birimi.
+	//
+	// zorunlu
 	CurrencyCode string `json:"currencyCode" validate:"required"`
 
 	// Ürünün base64 formatında resmi.
+	//
+	// zorunlu
 	EncodedImageFile string `json:"encodedImageFile" validate:"required,base64"`
 
 	// Ürünün ekranda görünen açıklaması.
+	//
+	// zorunlu
 	Description string `json:"description" validate:"required"`
 
 	ProductBuyerInfo *ProductBuyerInfo `json:"productBuyerInfo" validate:"omitempty"`
 
 	// Stok sayısı.
+	//
+	// zorunlu
 	StockCount int `json:"stockCount" validate:"required"`
 
 	// Stok onayı, normalde gelen değer FALSE.
+	//
+	// zorunlu
 	StockEnabled bool `json:"stockEnabled" validate:"required"`
 }
 
 type ProductBuyerInfo struct {
 	// Alıcı ismi
+	//
+	// zorunlu değil
 	BuyerName string `json:"buyerName" validate:"omitempty"`
 
 	// Alıcı soy ismi.
+	//
+	// zorunlu değil
 	BuyerSurname string `json:"buyerSurname" validate:"omitempty"`
 
 	// Alıcı şehri.
+	//
+	// zorunlu değil
 	BuyerCity string `json:"buyerCity" validate:"omitempty"`
 
 	// Alıcı ülkesi.
+	//
+	// zorunlu değil
 	BuyerCountry string `json:"buyerCountry" validate:"omitempty"`
 
 	// Alıcı GSM.
+	//
+	// zorunlu değil
 	BuyerGsmNumber string `json:"buyerGsmNumber" validate:"omitempty"`
 
 	// Alıcı email adresi.
+	//
+	// zorunlu değil
 	BuyerEmail string `json:"buyerEmail" validate:"omitempty,email"`
 
 	// Alıcı adresi.
+	//
+	// zorunlu değil
 	BuyerAddress string `json:"buyerAddress" validate:"omitempty"`
 }
 
 type IyzilinkUpdateRequest struct {
 	// İstek ve yanıtı eşleştirmek için kullanılan Konuşma ID'si.
+	//
+	// zorunlu değil
 	ConversationID string `json:"conversationId" validate:"omitempty"`
 
 	// iyzico istek sonucunda dönen metinlerin dilini ayarlamak için kullanılır. Varsayılan değeri tr’dir. en olarak kullanılabilir.
+	//
+	// zorunlu değil
 	Locale string `json:"locale" validate:"omitempty,oneof=tr en"`
 
 	// Ürünün ekranda görünen ismi.
+	//
+	// zorunlu
 	Name string `json:"name" validate:"required"`
 
 	// Ürün fiyatı.
+	//
+	// zorunlu
 	Price string `json:"price" validate:"required"`
 
 	// Taksitli Satış Durumu. Gönderilmezse false değeri alır.
+	//
+	// zorunlu değil
 	InstallmentRequested string `json:"installmentRequested" validate:"omitempty,oneof=true false"`
 
 	// ???
 	SoldLimit string `json:"soldLimit" validate:"omitempty"`
 
 	// Ürün satın alınırken adres isteme parametresi. Gönderilmese true değerini alır.
+	//
+	// zorunlu değil
 	AddressIgnorable string `json:"addressIgnorable" validate:"omitempty,oneof=true false"`
 
 	// Ürünün para birimi.
+	//
+	// zorunlu
 	CurrencyCode string `json:"currencyCode" validate:"required"`
 
 	// Ürünün para birimi.
+	//
+	// zorunlu
 	EncodedImageFile string `json:"encodedImageFile" validate:"required,base64"`
 
 	// Ürünün ekranda görünen açıklaması.
+	//
+	// zorunlu
 	Description string `json:"description" validate:"required"`
 
 	// Iyzilink'e ait token.
+	//
+	// zorunlu
 	Token string `json:"token" validate:"required"`
 }
 
 type IyzilinkDeleteRequest struct {
 	// İstek ve yanıtı eşleştirmek için kullanılan Konuşma ID'si.
+	//
+	// zorunlu değil
 	ConversationID string `json:"conversationId" validate:"omitempty"`
 
 	// iyzico istek sonucunda dönen metinlerin dilini ayarlamak için kullanılır. Varsayılan değeri tr’dir. en olarak kullanılabilir.
+	//
+	// zorunlu değil
 	Locale string `json:"locale" validate:"omitempty,oneof=tr en"`
 
 	// Iyzilink'e ait token.
+	//
+	// zorunlu
 	Token string `json:"token" validate:"required"`
 }
 
 type IyzilinkGetDetailRequest struct {
 	// İstek ve yanıtı eşleştirmek için kullanılan Konuşma ID'si.
+	//
+	// zorunlu değil
 	ConversationID string `json:"conversationId" validate:"omitempty"`
 
 	// iyzico istek sonucunda dönen metinlerin dilini ayarlamak için kullanılır. Varsayılan değeri tr’dir. en olarak kullanılabilir.
+	//
+	// zorunlu değil
 	Locale string `json:"locale" validate:"omitempty,oneof=tr en"`
 
 	// Sayfa numarası.
+	//
+	// zorunlu
 	Page int `json:"page" validate:"required"`
 
 	// Sayfada görüntülenen ürün sayısı.
+	//
+	// zorunlu
 	Count int `json:"count" validate:"required"`
 
 	// Iyzilink'e ait token.
+	//
+	// zorunlu
 	Token string `json:"token" validate:"required"`
 }
 
 type IyzilinkGetListRequest struct {
 	// İstek ve yanıtı eşleştirmek için kullanılan Konuşma ID'si.
+	//
+	// zorunlu değil
 	ConversationID string `json:"conversationId" validate:"omitempty"`
 
 	// iyzico istek sonucunda dönen metinlerin dilini ayarlamak için kullanılır. Varsayılan değeri tr’dir. en olarak kullanılabilir.
+	//
+	// zorunlu değil
 	Locale string `json:"locale" validate:"omitempty,oneof=tr en"`
 
 	// Sayfa numarası.
+	//
+	// zorunlu
 	Page int `json:"page" validate:"required"`
 
 	// Sayfada görüntülenen ürün sayısı.
+	//
+	// zorunlu
 	Count int `json:"count" validate:"required"`
 }
 
 type IyzilinkStatusUpdateRequest struct {
 	// İstek ve yanıtı eşleştirmek için kullanılan Konuşma ID'si.
+	//
+	// zorunlu değil
 	ConversationID string `json:"conversationId" validate:"omitempty"`
 
 	// iyzico istek sonucunda dönen metinlerin dilini ayarlamak için kullanılır. Varsayılan değeri tr’dir. en olarak kullanılabilir.
+	//
+	// zorunlu değil
 	Locale string `json:"locale" validate:"omitempty,oneof=tr en"`
 
 	// Iyzilink'e ait token.
+	//
+	// zorunlu
 	Token string `json:"token" validate:"required"`
 
 	// Iyzilink'in durumu.
+	//
+	// zorunlu
 	ProductStatus string `json:"productStatus" validate:"required,oneof=ACTIVE PASSIVE"`
 }
 

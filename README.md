@@ -72,7 +72,8 @@ if binRes.Status == "success" {
 
 ## Notlar
 
-Şu an hala geliştirme aşamasında muhtemelen hatalara denk gelebilirsiniz.(Ayrıca ilk go paketim 😄)
+Şu an hala geliştirme aşamasında muhtemelen hatalara denk gelebilirsiniz.(Ayrıca ilk go paketim 😄). \
+App2App entegrasyonu mobile özel geliştirilmiş sanırım ama go'da da mobile build alınabildiği için ekledim.
 
 ## Katkıda Bulunma
 

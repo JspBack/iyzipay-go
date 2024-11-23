@@ -72,7 +72,8 @@ Examples are in the /examples file.
 
 ## Notes
 
-This project is still in development, and you may encounter some issues. (Also, it's my first Go package 😄)
+This project is still in development, and you may encounter some issues. (Also, it's my first Go package 😄) \
+App2App integration is specifically developed for mobile(i think), but I included it since Go can also be used to build mobile applications.
 
 ## How to Contribute
 

@@ -26,6 +26,30 @@ type IyzipayClient struct {
 	client *http.Client
 }
 
+// App2AppClient, Iyzipay App2App API ile etkileşim kurmak için kullanılan istemciyi temsil eder.
+type App2AppClient struct {
+	// APIKey, Iyzipay'den aldığınız anahtardır.
+	apiKey string
+
+	// APISecret, Iyzipay'den aldığınız gizli anahtardır.
+	apiSecret string
+
+	// App2App APIKey, Iyzipay'den aldığınız App2App işlemler için özel anahtardır.
+	A2AapiKey string
+
+	// App2App APISecret, Iyzipay'den aldığınız App2App işlemler için özel gizli anahtardır.
+	A2AsecretKey string
+
+	// BaseURI, Iyzipay API'si için temel URI'dir.
+	baseURI string
+
+	// App2App işlemler için kullanılacak satıcı kimliği
+	merchantId string
+
+	// App2App istekleri için kullanılacak client
+	client *http.Client
+}
+
 // New, yeni bir Iyzipay clientı oluşturur.
 func New(apiKey, apiSecret string) (*IyzipayClient, error) {
 	if apiKey == "" {
@@ -42,6 +66,29 @@ func New(apiKey, apiSecret string) (*IyzipayClient, error) {
 	}
 
 	return &IyzipayClient{
+		apiKey:    apiKey,
+		apiSecret: apiSecret,
+		baseURI:   baseURI,
+		client:    &http.Client{},
+	}, nil
+}
+
+// NewApp2AppClient, yeni bir App2App clientı oluşturur.
+func NewApp2AppClient(apiKey, apiSecret string) (*App2AppClient, error) {
+	if apiKey == "" {
+		return nil, errors.New("API key is required")
+	}
+
+	if apiSecret == "" {
+		return nil, errors.New("API secret is required")
+	}
+
+	baseURI := utils.APIURL
+	if strings.HasPrefix(apiKey, "sandbox-") {
+		baseURI = utils.SandboxAPIURL
+	}
+
+	return &App2AppClient{
 		apiKey:    apiKey,
 		apiSecret: apiSecret,
 		baseURI:   baseURI,
