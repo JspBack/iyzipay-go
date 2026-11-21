@@ -2,7 +2,6 @@ package iyzilink
 
 import (
 	"context"
-	"errors"
 	"net/http"
 	"net/url"
 
@@ -33,7 +32,8 @@ func (i *Service) IyzilinkUpdate(ctx context.Context, req *IyzilinkUpdateRequest
 		return response, err
 	}
 
-	err = i.Transport.Do(ctx, http.MethodPut, iyzilinkURI, req, &response)
+	path := iyzilinkURI + "/" + url.PathEscape(req.Token)
+	err = i.Transport.Do(ctx, http.MethodPut, path, req, &response)
 	return response, err
 }
 
@@ -63,24 +63,12 @@ func (i *Service) IyzilinkDelete(ctx context.Context, req *IyzilinkDeleteRequest
 		return response, err
 	}
 
-	path := iyzilinkURI + "/" + url.PathEscape(req.Token)
-	query := url.Values{}
-	if req.Locale != "" {
-		query.Set("locale", req.Locale)
-	}
-	if req.ConversationID != "" {
-		query.Set("conversationId", req.ConversationID)
-	}
-	if len(query) > 0 {
-		path += "?" + query.Encode()
-	}
+	path := linkPath(req.Token, req.Locale, req.ConversationID)
 	err = i.Transport.Do(ctx, http.MethodDelete, path, nil, &response)
 	return response, err
 }
 
-// Iyzilink detay sorgulama isteği
-// Token bazlı çalışmıyor nedense o yüzden clientta filtreleme ile çözdüm(şimdilik).[liste içerisinden token ile arama yapılıyor]
-// Veri sayısı çok olursa bu yöntem performansı düşürebilir.
+// IyzilinkGetDetail, bağlantı bilgilerini token ile sorgular.
 func (i *Service) IyzilinkGetDetail(ctx context.Context, req *IyzilinkGetDetailRequest) (response IyzilinkGetDetailResponse, err error) {
 	if req == nil {
 		return response, transport.ErrNilRequest
@@ -90,27 +78,9 @@ func (i *Service) IyzilinkGetDetail(ctx context.Context, req *IyzilinkGetDetailR
 		return response, err
 	}
 
-	resp, err := i.IyzilinkGetList(ctx, &IyzilinkGetListRequest{
-		ConversationID: req.ConversationID,
-		Locale:         req.Locale,
-		Page:           req.Page,
-		Count:          req.Count,
-	})
-	if err != nil {
-		return response, err
-	}
-
-	for _, item := range resp.Data.Items {
-		if item.Token == req.Token {
-			response = IyzilinkGetDetailResponse{
-				Status: "success",
-				Locale: req.Locale,
-				Data:   item,
-			}
-			return response, nil
-		}
-	}
-	return response, errors.New("token not found")
+	path := linkPath(req.Token, req.Locale, req.ConversationID)
+	err = i.Transport.Do(ctx, http.MethodGet, path, nil, &response)
+	return response, err
 }
 
 // Iyzilink listeleme isteği
@@ -125,4 +95,19 @@ func (i *Service) IyzilinkGetList(ctx context.Context, req *IyzilinkGetListReque
 
 	err = i.Transport.Do(ctx, http.MethodGet, iyzilinkURI, req, &response)
 	return response, err
+}
+
+func linkPath(token, locale, conversationID string) string {
+	path := iyzilinkURI + "/" + url.PathEscape(token)
+	query := url.Values{}
+	if locale != "" {
+		query.Set("locale", locale)
+	}
+	if conversationID != "" {
+		query.Set("conversationId", conversationID)
+	}
+	if len(query) > 0 {
+		path += "?" + query.Encode()
+	}
+	return path
 }

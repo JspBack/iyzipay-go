@@ -79,15 +79,13 @@ Bir pull request oluşturarak projeye destek olabilirsiniz. 🙂
 
 ## Bilinen Problemler
 
-[GENEL]
+[GENERAL]
 
-- Unauthorized (401) hataları panic oluşturuyor (hata formatı farklı olduğu için).
-- Pazaryeri, Abonelik, İptal ve iade, Iyzilink, App2App örnekleri yok (test edilmediler veya hatalı çalışıyorlar).
+- Pazaryeri, ödeme iptali, iade ve App2App için ayrı örnek programlar henüz yok.
 
 [IYZILINK]
 
-- Iyzilink entegrasyonunda IyzilinkUpdate,IyzilinkDelete çalışmıyor 'sistem hatası' dönüyor.
-- Iyzilink entegrasyonunda IyzilinkGetDetail, IyzilinkGetList'ten gelen veri filtrelenerek alınıyor. Bu doğru bir kullanım değil ama geçici bir çözüm, çünkü IyzilinkGetDetail'den dönen veri IyzilinkGetList'ten dönen veri tipinde yani doğru çalışmıyor.
+- Iyzilink sorgulama, güncelleme ve silme istekleri yerel testlerle doğrulandı. Canlı sandbox doğrulaması bekleniyor.
 
 ## Lisans
 

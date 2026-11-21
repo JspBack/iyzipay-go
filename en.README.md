@@ -81,13 +81,11 @@ You can support the project by creating a pull request. 🙂
 
 [GENERAL]
 
-- Unauthorized (401) errors cause panic (because the error format is different).
-- MarketPlace, Subscription, Cancel, Refund, App2App and Iyzilink examples are missing (not tested yet or not working properly).
+- Marketplace, payment cancellation, refunds, and App2App still lack standalone examples.
 
 [IYZILINK]
 
-- Iyzilink integration has issues with IyzilinkUpdate and IyzilinkDelete returning 'system error'.
-- IyzilinkGetDetail and IyzilinkGetList data are filtered incorrectly. This is a temporary solution as the data returned by IyzilinkGetDetail is of the same type as IyzilinkGetList, which is not correct.
+- Local tests verify the Iyzilink lookup, update, and delete requests. Live sandbox verification is pending.
 
 ## License
 

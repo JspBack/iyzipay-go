@@ -382,9 +382,7 @@ func (i *Client) IyzilinkDelete(ctx context.Context, req *IyzilinkDeleteRequest)
 	return service.IyzilinkDelete(ctx, req)
 }
 
-// Iyzilink detay sorgulama isteği
-// Token bazlı çalışmıyor nedense o yüzden clientta filtreleme ile çözdüm(şimdilik).[liste içerisinden token ile arama yapılıyor]
-// Veri sayısı çok olursa bu yöntem performansı düşürebilir.
+// IyzilinkGetDetail, bağlantı bilgilerini token ile sorgular.
 func (i *Client) IyzilinkGetDetail(ctx context.Context, req *IyzilinkGetDetailRequest) (IyzilinkGetDetailResponse, error) {
 	service := iyzilink.Service{Transport: i.transport(), Validator: i.config.validator}
 	return service.IyzilinkGetDetail(ctx, req)

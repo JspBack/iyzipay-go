@@ -60,9 +60,8 @@ func TestIyzilink(t *testing.T) {
 	detail1Req := &iyzipay.IyzilinkGetDetailRequest{
 		ConversationID: convId,
 		Locale:         "tr",
-		Page:           1,
-		Count:          10,
-		Token:          "AAC8RQ",
+
+		Token: cResp.Data.Token,
 	}
 
 	det1Resp, err := client.IyzilinkGetDetail(context.Background(), detail1Req)
@@ -98,14 +97,15 @@ func TestIyzilink(t *testing.T) {
 		return
 	}
 
+	installmentRequested, addressIgnorable := false, true
 	updateReq := &iyzipay.IyzilinkUpdateRequest{
 		ConversationID:       convId,
 		Locale:               "tr",
 		Name:                 "Test Iyzilink Updated",
 		Price:                "123.1",
-		InstallmentRequested: "false",
+		InstallmentRequested: &installmentRequested,
 		SoldLimit:            "10",
-		AddressIgnorable:     "true",
+		AddressIgnorable:     &addressIgnorable,
 		CurrencyCode:         "TRY",
 		EncodedImageFile:     img2b64,
 		Description:          "Test Iyzilink Description Updated",

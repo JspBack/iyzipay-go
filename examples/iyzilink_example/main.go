@@ -40,8 +40,6 @@ func main() {
 
 	detail, err := client.IyzilinkGetDetail(ctx, &iyzipay.IyzilinkGetDetailRequest{
 		Token: token,
-		Page:  1,
-		Count: 50,
 	})
 	if err != nil {
 		fmt.Println("Get link:", err)
