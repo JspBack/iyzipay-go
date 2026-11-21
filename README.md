@@ -90,10 +90,6 @@ Bir pull request oluşturarak projeye destek olabilirsiniz. 🙂
 
 - Pazaryeri, ödeme iptali, iade ve App2App için ayrı örnek programlar henüz yok.
 
-[IYZILINK]
-
-- Iyzilink sorgulama, güncelleme ve silme istekleri yerel testlerle doğrulandı. Canlı sandbox doğrulaması bekleniyor.
-
 ## Lisans
 
 MIT Lisansı altında dağıtılmaktadır, daha fazla ayrıntı için lütfen kod içindeki lisans dosyasına bakın.

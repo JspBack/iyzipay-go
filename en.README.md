@@ -90,10 +90,6 @@ You can support the project by creating a pull request. 🙂
 
 - Marketplace, payment cancellation, refunds, and App2App still lack standalone examples.
 
-[IYZILINK]
-
-- Local tests verify the Iyzilink lookup, update, and delete requests. Live sandbox verification is pending.
-
 ## License
 
 Distributed under MIT License, please see license file within the code for more details.
