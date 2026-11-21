@@ -116,21 +116,22 @@ type (
 )
 
 type (
-	IyzilinkCreateRequest        = iyzilink.IyzilinkCreateRequest
-	ProductBuyerInfo             = iyzilink.ProductBuyerInfo
-	IyzilinkUpdateRequest        = iyzilink.IyzilinkUpdateRequest
-	IyzilinkDeleteRequest        = iyzilink.IyzilinkDeleteRequest
-	IyzilinkGetDetailRequest     = iyzilink.IyzilinkGetDetailRequest
-	IyzilinkGetListRequest       = iyzilink.IyzilinkGetListRequest
-	IyzilinkStatusUpdateRequest  = iyzilink.IyzilinkStatusUpdateRequest
-	IyzilinkResponse             = iyzilink.IyzilinkResponse
-	ResponseData                 = iyzilink.ResponseData
-	IyzilinkDeleteResponse       = iyzilink.IyzilinkDeleteResponse
-	IyzilinkGetDetailResponse    = iyzilink.IyzilinkGetDetailResponse
-	DetailResponseData           = iyzilink.DetailResponseData
-	IyzilinkGetListResponse      = iyzilink.IyzilinkGetListResponse
-	ListResponseData             = iyzilink.ListResponseData
-	IyzilinkStatusUpdateResponse = iyzilink.IyzilinkStatusUpdateResponse
+	IyzilinkCreateRequest         = iyzilink.IyzilinkCreateRequest
+	IyzilinkCreateFastLinkRequest = iyzilink.IyzilinkCreateFastLinkRequest
+	ProductBuyerInfo              = iyzilink.ProductBuyerInfo
+	IyzilinkUpdateRequest         = iyzilink.IyzilinkUpdateRequest
+	IyzilinkDeleteRequest         = iyzilink.IyzilinkDeleteRequest
+	IyzilinkGetDetailRequest      = iyzilink.IyzilinkGetDetailRequest
+	IyzilinkGetListRequest        = iyzilink.IyzilinkGetListRequest
+	IyzilinkStatusUpdateRequest   = iyzilink.IyzilinkStatusUpdateRequest
+	IyzilinkResponse              = iyzilink.IyzilinkResponse
+	ResponseData                  = iyzilink.ResponseData
+	IyzilinkDeleteResponse        = iyzilink.IyzilinkDeleteResponse
+	IyzilinkGetDetailResponse     = iyzilink.IyzilinkGetDetailResponse
+	DetailResponseData            = iyzilink.DetailResponseData
+	IyzilinkGetListResponse       = iyzilink.IyzilinkGetListResponse
+	ListResponseData              = iyzilink.ListResponseData
+	IyzilinkStatusUpdateResponse  = iyzilink.IyzilinkStatusUpdateResponse
 )
 
 type (

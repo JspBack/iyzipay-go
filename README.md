@@ -33,7 +33,14 @@ go get github.com/JspBack/iyzipay-go
 
 ## Planlanan Özellikler
 
-- Ekstra Hizmetler: Diğer ekstra hizmetler eklenecektir.
+- Ön Provizyon: Ödemeyi ayırma ve sonradan tahsil etme.
+- Abonelik Yönetimi: Abonelik işlemleri ve kart güncelleme.
+- Raporlama: İşlem detaylarını sorgulama ve listeleme.
+- Webhook: Bildirim imzalarını doğrulama.
+- Banka Transferi: Transfer başlatma ve sorgulama.
+- Toplu Ödeme: Birden fazla alıcıya ödeme yapma.
+- Alışveriş Kredisi: Kredili ödeme başlatma ve sorgulama.
+- Tokenizasyon: Ödeme oturumlarını yönetme.
 
 ## Basit Kullanımı
 

@@ -120,3 +120,62 @@ func TestIyzilinkGetDetailRequest(t *testing.T) {
 		t.Fatalf("unexpected detail response: %+v", response)
 	}
 }
+
+func TestIyzilinkListRequest(t *testing.T) {
+	httpClient := &http.Client{Transport: roundTripFunc(func(req *http.Request) (*http.Response, error) {
+		if req.Method != http.MethodGet || req.URL.Path != "/v2/iyzilink/products" {
+			t.Errorf("unexpected request: %s %s", req.Method, req.URL)
+		}
+		query := req.URL.Query()
+		if query.Get("page") != "2" || query.Get("count") != "10" ||
+			query.Get("locale") != "tr" || query.Get("conversationId") != "order + 1" {
+			t.Errorf("unexpected query: %v", query)
+		}
+		if req.Body != nil && req.Body != http.NoBody {
+			t.Error("list request must have an empty body")
+		}
+		return &http.Response{
+			StatusCode: http.StatusOK,
+			Body:       io.NopCloser(strings.NewReader(`{"status":"success","data":{"currentPage":2}}`)),
+		}, nil
+	})}
+	client, err := iyzipay.New("key", "secret", iyzipay.WithHTTPClient(httpClient))
+	if err != nil {
+		t.Fatal(err)
+	}
+	response, err := client.IyzilinkGetList(t.Context(), &iyzipay.IyzilinkGetListRequest{
+		Locale: "tr", ConversationID: "order + 1", Page: 2, Count: 10,
+	})
+	if err != nil || response.Data.CurrentPage != 2 {
+		t.Fatalf("list returned %+v, %v", response, err)
+	}
+}
+
+func TestIyzilinkCreateFastLinkRequest(t *testing.T) {
+	httpClient := &http.Client{Transport: roundTripFunc(func(req *http.Request) (*http.Response, error) {
+		if req.Method != http.MethodPost || req.URL.Path != "/v2/iyzilink/fast-link/products" {
+			t.Errorf("unexpected request: %s %s", req.Method, req.URL)
+		}
+		var payload map[string]string
+		if err := json.NewDecoder(req.Body).Decode(&payload); err != nil {
+			return nil, err
+		}
+		if payload["price"] != "2.50" || payload["currencyCode"] != "TRY" || len(payload) != 2 {
+			t.Errorf("unexpected Fast Link payload: %v", payload)
+		}
+		return &http.Response{
+			StatusCode: http.StatusOK,
+			Body:       io.NopCloser(strings.NewReader(`{"status":"success","data":{"token":"fast-token"}}`)),
+		}, nil
+	})}
+	client, err := iyzipay.New("key", "secret", iyzipay.WithHTTPClient(httpClient))
+	if err != nil {
+		t.Fatal(err)
+	}
+	response, err := client.IyzilinkCreateFastLink(t.Context(), &iyzipay.IyzilinkCreateFastLinkRequest{
+		Price: "2.50", CurrencyCode: "TRY",
+	})
+	if err != nil || response.Data.Token != "fast-token" {
+		t.Fatalf("Fast Link returned %+v, %v", response, err)
+	}
+}

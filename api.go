@@ -364,6 +364,12 @@ func (i *Client) IyzilinkCreate(ctx context.Context, req *IyzilinkCreateRequest)
 	return service.IyzilinkCreate(ctx, req)
 }
 
+// IyzilinkCreateFastLink, hızlı ödeme bağlantısı oluşturur.
+func (i *Client) IyzilinkCreateFastLink(ctx context.Context, req *IyzilinkCreateFastLinkRequest) (IyzilinkResponse, error) {
+	service := iyzilink.Service{Transport: i.transport(), Validator: i.config.validator}
+	return service.IyzilinkCreateFastLink(ctx, req)
+}
+
 // Iyzilink güncelleme isteği
 func (i *Client) IyzilinkUpdate(ctx context.Context, req *IyzilinkUpdateRequest) (IyzilinkResponse, error) {
 	service := iyzilink.Service{Transport: i.transport(), Validator: i.config.validator}

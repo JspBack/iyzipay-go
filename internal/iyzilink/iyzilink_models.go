@@ -1,5 +1,14 @@
 package iyzilink
 
+// IyzilinkCreateFastLinkRequest, hızlı ödeme bağlantısı oluşturmak için kullanılır.
+type IyzilinkCreateFastLinkRequest struct {
+	ConversationID string `json:"conversationId,omitempty"`
+	Locale         string `json:"locale,omitempty" validate:"omitempty,oneof=tr en"`
+	Description    string `json:"description,omitempty"`
+	Price          string `json:"price" validate:"required,numeric"`
+	CurrencyCode   string `json:"currencyCode" validate:"required,oneof=TRY USD EUR GBP RUB CHF NOK"`
+}
+
 type IyzilinkCreateRequest struct {
 	// İstek ve yanıtı eşleştirmek için kullanılan Konuşma ID'si.
 	//
@@ -198,13 +207,13 @@ type IyzilinkGetListRequest struct {
 
 	// Sayfa numarası.
 	//
-	// zorunlu
-	Page int `json:"page" validate:"required"`
+	// zorunlu değil
+	Page int `json:"page,omitempty" validate:"omitempty,min=1"`
 
 	// Sayfada görüntülenen ürün sayısı.
 	//
-	// zorunlu
-	Count int `json:"count" validate:"required"`
+	// zorunlu değil
+	Count int `json:"count,omitempty" validate:"omitempty,min=1,max=100"`
 }
 
 type IyzilinkStatusUpdateRequest struct {

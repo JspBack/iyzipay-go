@@ -33,7 +33,14 @@ go get github.com/JspBack/iyzipay-go
 
 ## Planned Features
 
-- Additional Services: Other extra services will be added.
+- Preauthorization: Reserve funds and capture them later.
+- Subscription Management: Manage subscriptions and update payment cards.
+- Reporting: Retrieve and list transaction details.
+- Webhook: Verify notification signatures.
+- Bank Transfer: Initiate and retrieve transfers.
+- Mass Payout: Pay multiple recipients.
+- Shopping Credit: Initiate and retrieve credit payments.
+- Tokenization: Manage payment sessions.
 
 ## Simple Usage
 

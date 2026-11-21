@@ -3,6 +3,7 @@ package subscriptions
 import (
 	"context"
 	"net/http"
+	"net/url"
 )
 
 // CheckoutForm ile Abonelik başlatma isteği yapmak için kullanılır.
@@ -36,7 +37,7 @@ func (i *Service) InquirySubscriptionWithCheckoutForm(ctx context.Context, req I
 		return response, err
 	}
 
-	initCFURI := subscriptionCheckoutFormURI + "/" + req.Token
+	initCFURI := subscriptionCheckoutFormURI + "/" + url.PathEscape(req.Token)
 	err = i.Transport.Do(ctx, http.MethodPost, initCFURI, req, &response)
 	return response, err
 }
