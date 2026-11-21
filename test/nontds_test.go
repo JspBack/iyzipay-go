@@ -1,14 +1,16 @@
+//go:build integration
+
 package test
 
 import (
+	"context"
 	"testing"
 
 	"github.com/JspBack/iyzipay-go"
 )
 
 func TestNTdsPaymentRequest(t *testing.T) {
-	apikey := "sandbox-..."
-	secretkey := "sandbox-..."
+	apikey, secretkey := sandboxCredentials(t)
 
 	client, err := iyzipay.New(apikey, secretkey)
 	if err != nil {
@@ -90,7 +92,7 @@ func TestNTdsPaymentRequest(t *testing.T) {
 		},
 		Currency: "TRY",
 	}
-	response, err := client.NonTDSPaymentRequest(request)
+	response, err := client.CreatePayment(context.Background(), request)
 	if err != nil {
 		t.Errorf("Error creating payment: %v", err)
 		return

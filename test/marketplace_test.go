@@ -1,14 +1,16 @@
+//go:build integration
+
 package test
 
 import (
+	"context"
 	"testing"
 
 	"github.com/JspBack/iyzipay-go"
 )
 
 func TestApproveProduct(t *testing.T) {
-	apikey := "sandbox-..."
-	secretkey := "sandbox-..."
+	apikey, secretkey := sandboxCredentials(t)
 
 	client, err := iyzipay.New(apikey, secretkey)
 	if err != nil {
@@ -22,7 +24,7 @@ func TestApproveProduct(t *testing.T) {
 		PaymentTransactionId: "123456789",
 	}
 
-	response, err := client.ApproveProduct(request)
+	response, err := client.ApproveProduct(context.Background(), request)
 	if err != nil {
 		t.Errorf("Error approving product: %v", err)
 		return
@@ -32,8 +34,7 @@ func TestApproveProduct(t *testing.T) {
 }
 
 func TestDisapproveProduct(t *testing.T) {
-	apikey := "sandbox-..."
-	secretkey := "sandbox-..."
+	apikey, secretkey := sandboxCredentials(t)
 
 	client, err := iyzipay.New(apikey, secretkey)
 	if err != nil {
@@ -47,7 +48,7 @@ func TestDisapproveProduct(t *testing.T) {
 		PaymentTransactionId: "123456789",
 	}
 
-	response, err := client.DisapproveProduct(request)
+	response, err := client.DisapproveProduct(context.Background(), request)
 	if err != nil {
 		t.Errorf("Error approving product: %v", err)
 		return

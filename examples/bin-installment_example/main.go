@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	"fmt"
 	"os"
 
@@ -14,6 +15,7 @@ func main() {
 	client, err := iyzipay.New(apikey, apiSecret)
 	if err != nil {
 		fmt.Println(err)
+		return
 	}
 
 	binReq := &iyzipay.BinRequest{
@@ -22,15 +24,13 @@ func main() {
 		ConversationId: "123456789",
 	}
 
-	binRes, err := client.BinControlRequest(binReq)
+	binRes, err := client.BinControlRequest(context.Background(), binReq)
 	if err != nil {
 		fmt.Println(err)
-	}
-
-	if binRes.Status == "success" {
-		fmt.Println("Bin Number: ", binRes.CardAssociation) // VISA
 		return
 	}
+
+	fmt.Println("Card association:", binRes.CardAssociation)
 
 	instReq := &iyzipay.InstallmentRequest{
 		Locale:         "tr",
@@ -39,15 +39,11 @@ func main() {
 		BinNumber:      "454671", // yollamazsanız mevcut tüm taksit seçenekleri gelecektir.
 	}
 
-	instRes, err := client.InstallmentControlRequest(instReq)
+	instRes, err := client.InstallmentControlRequest(context.Background(), instReq)
 	if err != nil {
 		fmt.Println(err)
-	}
-
-	if instRes.Status == "success" {
-		fmt.Println("Installment Response: ", instRes.InstallmentDetails)
 		return
 	}
 
-	fmt.Println("Bin Control Request Failed")
+	fmt.Println("Installment details:", instRes.InstallmentDetails)
 }

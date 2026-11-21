@@ -1,6 +1,9 @@
+//go:build integration
+
 package test
 
 import (
+	"context"
 	"testing"
 
 	"github.com/JspBack/iyzipay-go"
@@ -10,8 +13,7 @@ import (
 //
 // Dökümantasyonda YOK.
 func TestCreateSubscriptionProduct(t *testing.T) {
-	apikey := "sandbox-..."
-	secretkey := "sandbox-..."
+	apikey, secretkey := sandboxCredentials(t)
 
 	client, err := iyzipay.New(apikey, secretkey)
 	if err != nil {
@@ -26,7 +28,7 @@ func TestCreateSubscriptionProduct(t *testing.T) {
 		Description:    "Prime subscription",
 	}
 
-	response, err := client.CreatSubscriptionProduct(*req)
+	response, err := client.CreateSubscriptionProduct(context.Background(), *req)
 	if err != nil {
 		t.Errorf("Error getting response: %v", err)
 		return
@@ -39,8 +41,7 @@ func TestCreateSubscriptionProduct(t *testing.T) {
 //
 // Dökümantasyonda YOK.
 func TestUpdateSubscriptionProduct(t *testing.T) {
-	apikey := "sandbox-..."
-	secretkey := "sandbox-..."
+	apikey, secretkey := sandboxCredentials(t)
 
 	client, err := iyzipay.New(apikey, secretkey)
 	if err != nil {
@@ -55,7 +56,7 @@ func TestUpdateSubscriptionProduct(t *testing.T) {
 		Description:          "Prime subscription",
 	}
 
-	response, err := client.UpdateSubscriptionProduct(*req)
+	response, err := client.UpdateSubscriptionProduct(context.Background(), *req)
 	if err != nil {
 		t.Errorf("Error getting response: %v", err)
 		return
@@ -68,8 +69,7 @@ func TestUpdateSubscriptionProduct(t *testing.T) {
 //
 // Dökümantasyonda YOK.
 func TestDeleteSubscriptionProduct(t *testing.T) {
-	apikey := "sandbox-..."
-	secretkey := "sandbox-..."
+	apikey, secretkey := sandboxCredentials(t)
 
 	client, err := iyzipay.New(apikey, secretkey)
 	if err != nil {
@@ -81,7 +81,7 @@ func TestDeleteSubscriptionProduct(t *testing.T) {
 		ProductReferenceCode: "S49222",
 	}
 
-	response, err := client.DeleteSubscriptionProduct(*req)
+	response, err := client.DeleteSubscriptionProduct(context.Background(), *req)
 	if err != nil {
 		t.Errorf("Error getting response: %v", err)
 		return

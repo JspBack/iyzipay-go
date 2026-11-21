@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	"fmt"
 	"os"
 
@@ -84,10 +85,10 @@ func main() {
 			},
 		},
 		PaymentSource: "SHOPIFY",
-		// CardUserKey:  "cardUserKey", // Bu keyin ne yaptığını henüz çözemedim dökümantasyona da eklenmemiş.
+		// CardUserKey:  "cardUserKey", // Kart kaydetme sonrası oluşan kullanıcı anahtarı.
 	}
 
-	resp, err := client.CheckoutFormPaymentRequest(req, "iframe")
+	resp, err := client.CheckoutFormPaymentRequest(context.Background(), req, "iframe")
 	if err != nil {
 		fmt.Println(err)
 		return
@@ -104,7 +105,7 @@ func main() {
 		ConversationId: "123456789",
 	}
 
-	InquiryResp, err := client.CheckoutFormPaymentInquiryRequest(InquiryReq)
+	InquiryResp, err := client.CheckoutFormPaymentInquiryRequest(context.Background(), InquiryReq)
 	if err != nil {
 		fmt.Println(err)
 		return

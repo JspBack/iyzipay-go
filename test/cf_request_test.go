@@ -1,14 +1,16 @@
+//go:build integration
+
 package test
 
 import (
+	"context"
 	"testing"
 
 	"github.com/JspBack/iyzipay-go"
 )
 
 func TestCFPaymentRequest(t *testing.T) {
-	apikey := "sandbox-..."
-	secretkey := "sandbox-..."
+	apikey, secretkey := sandboxCredentials(t)
 
 	client, err := iyzipay.New(apikey, secretkey)
 	if err != nil {
@@ -85,7 +87,7 @@ func TestCFPaymentRequest(t *testing.T) {
 		PaymentSource: "SHOPIFY",
 	}
 
-	response, err := client.CheckoutFormPaymentRequest(request, "iframe")
+	response, err := client.CheckoutFormPaymentRequest(context.Background(), request, "iframe")
 	if err != nil {
 		t.Errorf("Error creating payment: %v", err)
 		return

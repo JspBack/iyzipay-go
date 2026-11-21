@@ -2,8 +2,8 @@
 
 <img align="right" width="300" src="gopher.png" alt="gopher">
 
-![Proje Durumu](https://img.shields.io/badge/version-1.0.0-green.svg)
-[![Go Rapor Kartı](https://goreportcard.com/badge/github.com/JspBack/iyzipay-go)](https://goreportcard.com/report/github.com/JspBack/iyzipay-go)
+[![Sürüm](https://img.shields.io/github/v/tag/JspBack/iyzipay-go?sort=semver&label=s%C3%BCr%C3%BCm&color=green)](https://github.com/JspBack/iyzipay-go/tags)
+[![CI](https://github.com/JspBack/iyzipay-go/actions/workflows/ci-cd.yml/badge.svg?branch=main)](https://github.com/JspBack/iyzipay-go/actions/workflows/ci-cd.yml)
 [![GoDoc](https://godoc.org/github.com/JspBack/iyzipay-go?status.svg)](https://pkg.go.dev/github.com/JspBack/iyzipay-go)
 ![Lisans](https://img.shields.io/badge/license-MIT-blue.svg)
 

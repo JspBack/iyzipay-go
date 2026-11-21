@@ -1,14 +1,16 @@
+//go:build integration
+
 package test
 
 import (
+	"context"
 	"testing"
 
 	"github.com/JspBack/iyzipay-go"
 )
 
 func TestCardStorageNewUser(t *testing.T) {
-	apikey := "sandbox-..."
-	secretkey := "sandbox-..."
+	apikey, secretkey := sandboxCredentials(t)
 
 	client, err := iyzipay.New(apikey, secretkey)
 	if err != nil {
@@ -30,7 +32,7 @@ func TestCardStorageNewUser(t *testing.T) {
 		// ExternalId: "external id",
 	}
 
-	response, err := client.CreateCardStorageNewUser(&request)
+	response, err := client.CreateCardStorageNewUser(context.Background(), &request)
 	if err != nil {
 		t.Errorf("Error creating card: %v", err)
 		return
@@ -40,8 +42,7 @@ func TestCardStorageNewUser(t *testing.T) {
 }
 
 func TestCardStorageExUser(t *testing.T) {
-	apikey := "sandbox-..."
-	secretkey := "sandbox-..."
+	apikey, secretkey := sandboxCredentials(t)
 
 	client, err := iyzipay.New(apikey, secretkey)
 	if err != nil {
@@ -63,7 +64,7 @@ func TestCardStorageExUser(t *testing.T) {
 		ExternalId: "12345",
 	}
 
-	response, err := client.CreateCardStorageExUser(&request)
+	response, err := client.CreateCardStorageExUser(context.Background(), &request)
 	if err != nil {
 		t.Errorf("Error creating card: %v", err)
 		return
@@ -73,8 +74,8 @@ func TestCardStorageExUser(t *testing.T) {
 }
 
 func TestCardStorageDeleteCard(t *testing.T) {
-	apikey := "sandbox-..."
-	secretkey := "sandbox-..."
+	apikey, secretkey := sandboxCredentials(t)
+	cardUserKey, cardToken := sandboxStoredCard(t, "IYZIPAY_DELETE_CARD")
 
 	client, err := iyzipay.New(apikey, secretkey)
 	if err != nil {
@@ -85,11 +86,11 @@ func TestCardStorageDeleteCard(t *testing.T) {
 	request := iyzipay.CardStorageDeleteRequest{
 		Locale:         "tr",
 		ConversationId: "123456789",
-		CardUserKey:    "f1436803-789d-a7d4-0a15-9a3b14672aa5",
-		CardToken:      "d68ce209-35f1-5631-9481-e003a7c3c75b",
+		CardUserKey:    cardUserKey,
+		CardToken:      cardToken,
 	}
 
-	response, err := client.DeleteCardStorageCard(&request)
+	response, err := client.DeleteCardStorageCard(context.Background(), &request)
 	if err != nil {
 		t.Errorf("Error deleting card: %v", err)
 		return
@@ -99,8 +100,7 @@ func TestCardStorageDeleteCard(t *testing.T) {
 }
 
 func TestCardStorageRetrieveCard(t *testing.T) {
-	apikey := "sandbox-..."
-	secretkey := "sandbox-..."
+	apikey, secretkey := sandboxCredentials(t)
 
 	client, err := iyzipay.New(apikey, secretkey)
 	if err != nil {
@@ -114,7 +114,7 @@ func TestCardStorageRetrieveCard(t *testing.T) {
 		CardUserKey:    "f1436803-789d-a7d4-0a15-9a3b14672aa5",
 	}
 
-	response, err := client.GetCardStorageCards(&request)
+	response, err := client.GetCardStorageCards(context.Background(), &request)
 	if err != nil {
 		t.Errorf("Error getting cards: %v", err)
 		return

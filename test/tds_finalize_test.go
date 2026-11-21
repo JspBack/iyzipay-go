@@ -1,14 +1,16 @@
+//go:build integration
+
 package test
 
 import (
+	"context"
 	"testing"
 
 	"github.com/JspBack/iyzipay-go"
 )
 
 func TestFinalizeTDSPaymentRequest(t *testing.T) {
-	apikey := "sandbox-..."
-	secretkey := "sandbox-..."
+	apikey, secretkey := sandboxCredentials(t)
 	PaymentID := "1"
 	ConversationID := "123456789"
 
@@ -25,7 +27,7 @@ func TestFinalizeTDSPaymentRequest(t *testing.T) {
 		PaymentConversationId: ConversationID,
 	}
 
-	response, err := client.FinalizeTDSPayment(FinalizeRequest)
+	response, err := client.FinalizeTDSPayment(context.Background(), FinalizeRequest)
 	if err != nil {
 		t.Errorf("Error creating payment request: %v", err)
 		return

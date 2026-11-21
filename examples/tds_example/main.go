@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	"fmt"
 	"os"
 
@@ -104,10 +105,10 @@ func main() {
 		CallbackUrl: "https://www.merchant.com/callback",
 	}
 
-	res, decodedHtmlContent, err := client.InitializeTDSPayment(
+	res, decodedHtmlContent, err := client.InitializeTDSPayment(context.Background(),
 		req,
-		iyzipay.WithBinRequest(false),        // Bin kontrolü yapmak istemiyorsanız false yapabilirsiniz.
-		iyzipay.WithHtmlDecodeRequest(false), // Html içeriğini decode etmek istemiyorsanız false yapabilirsiniz.
+		iyzipay.WithBinRequest(true),        // Bin kontrolü yapmak istemiyorsanız false yapabilirsiniz.
+		iyzipay.WithHtmlDecodeRequest(true), // Html içeriğini decode etmek istemiyorsanız false yapabilirsiniz.
 	)
 
 	if err != nil {
@@ -128,7 +129,7 @@ func main() {
 	}
 
 	// Bu örneği direk çalıştırırsanız hata alırsınız. Öncelikle decodedHtmlContent'e gidip işlemi tamamlamanız gerekmektedir.
-	finalizeRes, err := client.FinalizeTDSPayment(finalizeReq)
+	finalizeRes, err := client.FinalizeTDSPayment(context.Background(), finalizeReq)
 	if err != nil {
 		fmt.Println(err)
 		return

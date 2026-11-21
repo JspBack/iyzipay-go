@@ -1,0 +1,111 @@
+package payments
+
+type InitPWIRequest struct {
+	// İstek yapılan dil bilgisidir. İki karakterli dil kodu olarak gönderilir. Örnek: tr, en
+	//
+	// zorunlu değil
+	Locale string `json:"locale" validate:"omitempty"`
+
+	// İstek esnasında gönderip, sonuçta alabileceğiniz bir değer, request/response eşleşmesi yapmak için kullanılabilir
+	//
+	// zorunlu değil
+	ConversationID string `json:"conversationId" validate:"omitempty"`
+
+	// Ödeme sepet tutarı. Kırılım tutarlar toplamı, sepet tutarına eşit olmalı.
+	//
+	// zorunlu
+	Price string `json:"price" validate:"required,numeric"`
+
+	// Üye işyeri sepet id’si.
+	//
+	// zorunlu değil
+	BasketId string `json:"basketId" validate:"omitempty"`
+
+	// Ödeme grubu, varsayılan PRODUCT. Geçerli değerler enum içinde sunulmaktadır: PRODUCT, LISTING, SUBSCRIPTION
+	//
+	// zorunlu değil
+	PaymentGroup string `json:"paymentGroup" validate:"omitempty,oneof=PRODUCT LISTING SUBSCRIPTION"`
+
+	// Ödeme akışında üye işyerine başarılı ve hatalı sonucu bildirmek üzere alınan URL adresi. Geçerli bir ssl sertifikasına sahip olmalıdır.
+	//
+	// zorunlu
+	CallbackUrl string `json:"callbackUrl" validate:"required,httpsurl"`
+
+	// Para birimi. Default değeri TL’dir. Kullanılabilen diğer değerler ise USD, EUR, GBP ve IRR’dir.
+	//
+	// zorunlu
+	Currency string `json:"currency" validate:"required,oneof=TRY USD EUR GBP IRR"`
+
+	// İndirim, vergi, taksit komisyonları gibi değerlerin dahil edildiği tutar.
+	//
+	// zorunlu
+	PaidPrice string `json:"paidPrice" validate:"required,numeric"`
+
+	// Taksit bilgisi, tek çekim için 1 gönderilmelidir. Geçerli değerler: 1, 2, 3, 6, 9.
+	//
+	// zorunlu değil
+	EnabledInstallments []string `json:"enabledInstallments" validate:"omitempty,dive,oneof=1 2 3 6 9"`
+
+	// Alıcı bilgileri
+	Buyer Buyer `json:"buyer" validate:"required"`
+
+	// Kargo adresi (PHYSICAL product tipi seçilmişse zorunlu)
+	ShippingAddress ShippingAddress `json:"shippingAddress" validate:"omitempty"`
+
+	// Fatura adresi
+	BillingAddress BillingAddress `json:"billingAddress" validate:"required"`
+
+	// Sepet içerikleri
+	BasketItems []BasketItem `json:"basketItems" validate:"required,dive"`
+}
+
+type InitPWIResponse struct {
+	// Yapılan isteğin sonucunu bildirir. İşlem başarılı ise success, hatalı ise failure döner.
+	Status string `json:"status"`
+
+	// İstekte belirtilen locale değeri geri dönülür, varsayılan değeridir.
+	Locale string `json:"locale"`
+
+	// Dönen sonucun o anki unix timestamp değeridir
+	SystemTime int64 `json:"systemTime"`
+
+	// İstek esnasında gönderilmişse, sonuçta aynen geri iletilir.
+	ConversationID string `json:"conversationId"`
+
+	// iyzico ile ödeme için oluşturulan tekil değer. Her istek için özel üretilir ve işyerine dönülür.
+	// Ödemenin sonucunu öğrenmek için zorunlu bir alandır. Varsayılan olarak 1800 saniye geçerliliği vardır.
+	Token string `json:"token"`
+
+	// iyzico ile ödeme için üretilmiş olan token ve link değerinin geçerlilik süresi.
+	TokenExpireTime int64 `json:"tokenExpireTime"`
+
+	// iyzico ile ödeme sayfasının eşsiz linki. Son kullanıcının ödeme yapması için yönlendirilmesi gereken adres.
+	PayWithIyzicoPageUrl string `json:"payWithIyzicoPageUrl"`
+
+	// İmza bilgisi.
+	Signature string `json:"signature"`
+}
+
+type PWIInquiryRequest struct {
+	// İstek yapılan dil bilgisidir. İki karakterli dil kodu olarak gönderilir. Örnek: tr, en
+	//
+	// zorunlu değil
+	Locale string `json:"locale" validate:"omitempty,oneof=tr en"`
+
+	// İstek esnasında gönderip, sonuçta alabileceğiniz bir değer, request/response eşleşmesi yapmak için kullanılabilir
+	//
+	// zorunlu değil
+	ConversationID string `json:"conversationId" validate:"omitempty"`
+
+	// Checkout form için oluşturulan tekil değer. Her istek için özel üretilir ve işyerine dönülür. Ödemenin sonucunu öğrenmek için zorunlu bir alandır.
+	//
+	// zorunlu
+	Token string `json:"token" validate:"required"`
+}
+
+type PWIInquiryResponse struct {
+	Non3DSPaymentResponse
+
+	//Bankadan dönen değerdir. Sadece ödeme başarısız ise ve işlem 3ds ile yapılmışsa bu değer döner. 0,2,3,4,5,6,7 değerlerini alabilir.
+	MdStatus int `json:"mdStatus"`
+}

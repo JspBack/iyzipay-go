@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	"fmt"
 	"os"
 
@@ -31,7 +32,7 @@ func main() {
 	}
 
 	// Store card for a new user
-	newres, err := client.CreateCardStorageNewUser(createNew)
+	newres, err := client.CreateCardStorageNewUser(context.Background(), createNew)
 	if err != nil {
 		fmt.Println(err)
 	}
@@ -55,7 +56,7 @@ func main() {
 	}
 
 	// Store card for an existing user
-	exres, err := client.CreateCardStorageExUser(createOld)
+	exres, err := client.CreateCardStorageExUser(context.Background(), createOld)
 	if err != nil {
 		fmt.Println(err)
 	}
@@ -72,7 +73,7 @@ func main() {
 	}
 
 	// Delete the stored card
-	delres, err := client.DeleteCardStorageCard(deleteReq)
+	delres, err := client.DeleteCardStorageCard(context.Background(), deleteReq)
 	if err != nil {
 		fmt.Println(err)
 	}
@@ -88,7 +89,7 @@ func main() {
 	}
 
 	// Retrieve stored cards
-	retrieveres, err := client.GetCardStorageCards(retrieveReq)
+	retrieveres, err := client.GetCardStorageCards(context.Background(), retrieveReq)
 	if err != nil {
 		fmt.Println(err)
 	}

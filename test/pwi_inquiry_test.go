@@ -1,14 +1,16 @@
+//go:build integration
+
 package test
 
 import (
+	"context"
 	"testing"
 
 	"github.com/JspBack/iyzipay-go"
 )
 
 func TestCheckPWIPaymentRequest(t *testing.T) {
-	apikey := "sandbox-..."
-	secretkey := "sandbox-..."
+	apikey, secretkey := sandboxCredentials(t)
 	Token := "1"
 
 	client, err := iyzipay.New(apikey, secretkey)
@@ -23,7 +25,7 @@ func TestCheckPWIPaymentRequest(t *testing.T) {
 		Token:          Token,
 	}
 
-	response, err := client.CheckPWIPaymentRequest(CheckRequest)
+	response, err := client.CheckPWIPaymentRequest(context.Background(), CheckRequest)
 	if err != nil {
 		t.Errorf("Error creating payment request: %v", err)
 		return
