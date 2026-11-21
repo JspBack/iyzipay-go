@@ -1,0 +1,6 @@
+# virtual env folder
+.venv
+
+# ide folders
+.zed
+.vscode

@@ -1,0 +1,42 @@
+version: "2"
+
+run:
+  build-tags: [integration]
+
+linters:
+  default: standard
+  enable:
+    - asasalint
+    - asciicheck
+    - bidichk
+    - bodyclose
+    - canonicalheader
+    - copyloopvar
+    - durationcheck
+    - errorlint
+    - gocheckcompilerdirectives
+    - gomoddirectives
+    - gosec
+    - makezero
+    - musttag
+    - nilerr
+    - noctx
+    - nolintlint
+    - nosprintfhostport
+    - testableexamples
+    - unconvert
+    - usestdlibvars
+    - wastedassign
+    - whitespace
+  settings:
+    errcheck:
+      check-type-assertions: true
+    nolintlint:
+      require-explanation: true
+      require-specific: true
+  exclusions:
+    rules:
+      - path: internal/payments/const\.go$
+        linters: [gosec]
+        text: 'G101:'
+        source: '^\s*checkPWIURI\s*='

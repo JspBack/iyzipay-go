@@ -1,6 +1,6 @@
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v5.0.0
+    rev: v6.0.0
     hooks:
       - id: check-added-large-files
       - id: check-case-conflict
@@ -11,7 +11,36 @@ repos:
       - id: end-of-file-fixer
       - id: trailing-whitespace
   - repo: https://github.com/gitleaks/gitleaks
-    rev: v8.20.1
+    rev: v8.30.0
     hooks:
       - id: gitleaks
         language: golang
+  - repo: https://github.com/golangci/golangci-lint
+    rev: v2.14.0
+    hooks:
+      - id: golangci-lint-full
+      - id: golangci-lint-config-verify
+  - repo: local
+    hooks:
+      - id: go-vet
+        name: go vet
+        entry: go vet ./...
+        language: system
+        types_or: [go, go-mod, go-sum]
+        pass_filenames: false
+        require_serial: true
+      - id: go-test-race
+        name: Go race tests
+        entry: go test -race ./...
+        language: system
+        types_or: [go, go-mod, go-sum]
+        pass_filenames: false
+        require_serial: true
+      - id: go-test-integration
+        name: Go integration tests
+        entry: go test -tags=integration ./...
+        language: system
+        stages: [manual]
+        types_or: [go, go-mod, go-sum]
+        pass_filenames: false
+        require_serial: true
