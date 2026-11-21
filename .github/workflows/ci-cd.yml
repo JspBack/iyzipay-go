@@ -4,9 +4,16 @@ on:
   pull_request:
   push:
   workflow_dispatch:
-  # schedule:
-  #   - cron: "0 4 * * *" # run once a day at 4 AM
 jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: 'go.mod'
+      - run: go test -race ./...
+      - run: go vet ./...
   pre-commit:
     runs-on: ubuntu-latest
     steps:
