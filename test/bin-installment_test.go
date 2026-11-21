@@ -1,14 +1,16 @@
+//go:build integration
+
 package test
 
 import (
+	"context"
 	"testing"
 
 	"github.com/JspBack/iyzipay-go"
 )
 
 func TestBinControlRequest(t *testing.T) {
-	apikey := "sandbox-..."
-	secretkey := "sandbox-..."
+	apikey, secretkey := sandboxCredentials(t)
 
 	client, err := iyzipay.New(apikey, secretkey)
 	if err != nil {
@@ -22,7 +24,7 @@ func TestBinControlRequest(t *testing.T) {
 		ConversationId: "123456789",
 	}
 
-	binResp, err := client.BinControlRequest(binReq)
+	binResp, err := client.BinControlRequest(context.Background(), binReq)
 	if err != nil {
 		t.Errorf("Error bin check: %v", err)
 		return
@@ -35,7 +37,7 @@ func TestBinControlRequest(t *testing.T) {
 		// BinNumber:      "454360",
 	}
 
-	instResp, err := client.InstallmentControlRequest(instReq)
+	instResp, err := client.InstallmentControlRequest(context.Background(), instReq)
 	if err != nil {
 		t.Errorf("Error installment check: %v", err)
 		return

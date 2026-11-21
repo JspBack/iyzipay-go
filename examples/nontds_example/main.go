@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	"fmt"
 	"os"
 
@@ -97,7 +98,7 @@ func main() {
 		Currency: "TRY",
 	}
 
-	response, err := client.NonTDSPaymentRequest(ntdsReq)
+	response, err := client.CreatePayment(context.Background(), ntdsReq)
 
 	if err != nil {
 		fmt.Println("Error creating payment request: ", err)

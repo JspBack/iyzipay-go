@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	"fmt"
 	"os"
 
@@ -83,7 +84,7 @@ func main() {
 		},
 	}
 
-	res, err := client.InitilizePWIPaymentRequest(req)
+	res, err := client.InitializePWIPaymentRequest(context.Background(), req)
 	if err != nil {
 		fmt.Println(err)
 		return
@@ -101,7 +102,7 @@ func main() {
 	}
 
 	// Bu örneği direk çalıştırırsanız hata alırsınız. Öncelikle PayWithIyzicoPageUrl adresine gidip işlemi tamamlamanız gerekmektedir.
-	CheckRes, err := client.CheckPWIPaymentRequest(CheckReq)
+	CheckRes, err := client.CheckPWIPaymentRequest(context.Background(), CheckReq)
 	if err != nil {
 		fmt.Println(err)
 		return

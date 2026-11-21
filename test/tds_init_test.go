@@ -1,14 +1,17 @@
+//go:build integration
+
 package test
 
 import (
+	"context"
 	"testing"
 
 	"github.com/JspBack/iyzipay-go"
 )
 
 func TestInitTDSPaymentRequest(t *testing.T) {
-	apikey := "sandbox-..."
-	secretkey := "sandbox-..."
+	apikey, secretkey := sandboxCredentials(t)
+	cardUserKey, cardToken := sandboxStoredCard(t, "IYZIPAY_TDS_CARD")
 
 	client, err := iyzipay.New(apikey, secretkey)
 	if err != nil {
@@ -35,8 +38,8 @@ func TestInitTDSPaymentRequest(t *testing.T) {
 			// 	RegisterCard:   0,
 			// },
 			PaymentCard: iyzipay.PaymentCard{
-				CardUserKey: "a1083b27-fc26-805a-74ba-80c1460a9a0d",
-				CardToken:   "1dbb182a-a5ea-9f6b-bb2e-39b8a5c15cd5",
+				CardUserKey: cardUserKey,
+				CardToken:   cardToken,
 			},
 			Buyer: iyzipay.Buyer{
 				ID:                  "BY789",
@@ -98,7 +101,7 @@ func TestInitTDSPaymentRequest(t *testing.T) {
 		CallbackUrl: "https://www.merchant.com/callback",
 	}
 
-	response, decodedHtmlContent, err := client.InitializeTDSPayment(InitRequest, iyzipay.WithBinRequest(true), iyzipay.WithHtmlDecodeRequest(true))
+	response, decodedHtmlContent, err := client.InitializeTDSPayment(context.Background(), InitRequest, iyzipay.WithBinRequest(true), iyzipay.WithHtmlDecodeRequest(true))
 	if err != nil {
 		t.Errorf("Error creating payment request: %v", err)
 		return

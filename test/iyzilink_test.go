@@ -1,14 +1,16 @@
+//go:build integration
+
 package test
 
 import (
+	"context"
 	"testing"
 
 	"github.com/JspBack/iyzipay-go"
 )
 
 func TestIyzilink(t *testing.T) {
-	apikey := "sandbox-..."
-	secretkey := "sandbox-..."
+	apikey, secretkey := sandboxCredentials(t)
 	convId := "123456789"
 	img1b64 := ""
 	img2b64 := ""
@@ -42,7 +44,7 @@ func TestIyzilink(t *testing.T) {
 		StockEnabled: true,
 	}
 
-	cResp, err := client.IyzilinkCreate(createReq)
+	cResp, err := client.IyzilinkCreate(context.Background(), createReq)
 	if err != nil {
 		t.Errorf("Error create iyzilink: %v", err)
 		return
@@ -58,12 +60,11 @@ func TestIyzilink(t *testing.T) {
 	detail1Req := &iyzipay.IyzilinkGetDetailRequest{
 		ConversationID: convId,
 		Locale:         "tr",
-		Page:           1,
-		Count:          10,
-		Token:          "AAC8RQ",
+
+		Token: cResp.Data.Token,
 	}
 
-	det1Resp, err := client.IyzilinkGetDetail(detail1Req)
+	det1Resp, err := client.IyzilinkGetDetail(context.Background(), detail1Req)
 	if err != nil {
 		t.Errorf("Error detail check: %v", err)
 		return
@@ -83,7 +84,7 @@ func TestIyzilink(t *testing.T) {
 		ProductStatus:  "PASSIVE",
 	}
 
-	suResp, err := client.IyzilinkStatusUpdate(statusUReq)
+	suResp, err := client.IyzilinkStatusUpdate(context.Background(), statusUReq)
 	if err != nil {
 		t.Errorf("Error status update check: %v", err)
 		return
@@ -96,21 +97,22 @@ func TestIyzilink(t *testing.T) {
 		return
 	}
 
+	installmentRequested, addressIgnorable := false, true
 	updateReq := &iyzipay.IyzilinkUpdateRequest{
 		ConversationID:       convId,
 		Locale:               "tr",
 		Name:                 "Test Iyzilink Updated",
 		Price:                "123.1",
-		InstallmentRequested: "false",
+		InstallmentRequested: &installmentRequested,
 		SoldLimit:            "10",
-		AddressIgnorable:     "true",
+		AddressIgnorable:     &addressIgnorable,
 		CurrencyCode:         "TRY",
 		EncodedImageFile:     img2b64,
 		Description:          "Test Iyzilink Description Updated",
 		Token:                "AAC8RQ",
 	}
 
-	uResp, err := client.IyzilinkUpdate(updateReq)
+	uResp, err := client.IyzilinkUpdate(context.Background(), updateReq)
 	if err != nil {
 		t.Errorf("Error update check: %v", err)
 		return
@@ -129,7 +131,7 @@ func TestIyzilink(t *testing.T) {
 		Token:          "AAC8RQ",
 	}
 
-	dResp, err := client.IyzilinkDelete(deleteReq)
+	dResp, err := client.IyzilinkDelete(context.Background(), deleteReq)
 	if err != nil {
 		t.Errorf("Error delete check: %v", err)
 		return
@@ -165,7 +167,7 @@ func TestIyzilink(t *testing.T) {
 		StockEnabled: true,
 	}
 
-	c1Resp, err := client.IyzilinkCreate(c1Req)
+	c1Resp, err := client.IyzilinkCreate(context.Background(), c1Req)
 	if err != nil {
 		t.Errorf("Error iyzilink create: %v", err)
 		return
@@ -199,7 +201,7 @@ func TestIyzilink(t *testing.T) {
 		StockEnabled: true,
 	}
 
-	c2Resp, err := client.IyzilinkCreate(c2Req)
+	c2Resp, err := client.IyzilinkCreate(context.Background(), c2Req)
 	if err != nil {
 		t.Errorf("Error create2 iyzilink: %v", err)
 		return
@@ -217,7 +219,7 @@ func TestIyzilink(t *testing.T) {
 		Count:          10,
 	}
 
-	lResp, err := client.IyzilinkGetList(listReq)
+	lResp, err := client.IyzilinkGetList(context.Background(), listReq)
 	if err != nil {
 		t.Errorf("Error list check: %v", err)
 		return
@@ -229,5 +231,4 @@ func TestIyzilink(t *testing.T) {
 		t.Errorf("Iyzilink Get List Err Response: %v", lResp)
 		return
 	}
-
 }

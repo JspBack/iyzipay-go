@@ -1,6 +1,9 @@
+//go:build integration
+
 package test
 
 import (
+	"context"
 	"strconv"
 	"testing"
 
@@ -8,8 +11,7 @@ import (
 )
 
 func TestApp2AppRequests(t *testing.T) {
-	apikey := "sandbox-..."
-	secretkey := "sandbox-..."
+	apikey, secretkey := sandboxCredentials(t)
 	a2AapiKey := ""
 	a2Asecret := ""
 	merchantId := ""
@@ -20,7 +22,7 @@ func TestApp2AppRequests(t *testing.T) {
 		return
 	}
 
-	lsRsp, err := a2acl.App2AppListUsers()
+	lsRsp, err := a2acl.App2AppListUsers(context.Background())
 	if err != nil {
 		t.Errorf("Error listing users: %v", err)
 		return
@@ -39,7 +41,7 @@ func TestApp2AppRequests(t *testing.T) {
 		CallBackUrl:   "https://callback.url",
 	}
 
-	createRsp, err := a2acl.App2CreatePayment(createReq)
+	createRsp, err := a2acl.App2CreatePayment(context.Background(), createReq)
 	if err != nil {
 		t.Errorf("Error creating payment: %v", err)
 		return
@@ -62,7 +64,7 @@ func TestApp2AppRequests(t *testing.T) {
 		CallBackUrl:  "https://callback.url",
 	}
 
-	refundRsp, err := a2acl.App2RefundPayment(refundReq)
+	refundRsp, err := a2acl.App2RefundPayment(context.Background(), refundReq)
 	if err != nil {
 		t.Errorf("Error refunding payment: %v", err)
 		return
@@ -77,7 +79,7 @@ func TestApp2AppRequests(t *testing.T) {
 		PaymentSessionToken: "token",
 	}
 
-	inquiryRsp, err := a2acl.App2InquiryPayment(inquiryReq)
+	inquiryRsp, err := a2acl.App2InquiryPayment(context.Background(), inquiryReq)
 	if err != nil {
 		t.Errorf("Error inquiring payment: %v", err)
 		return

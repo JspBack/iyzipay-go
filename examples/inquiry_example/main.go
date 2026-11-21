@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	"fmt"
 	"os"
 
@@ -27,7 +28,7 @@ func main() {
 		PaymentConversationID: "123456789",
 	}
 
-	response, err := client.PaymentInquiryRequest(&request)
+	response, err := client.PaymentInquiryRequest(context.Background(), &request)
 	if err != nil {
 		fmt.Println(err)
 		return

@@ -2,8 +2,8 @@
 
 <img align="right" width="300" src="gopher.png" alt="gopher">
 
-![Project Status](https://img.shields.io/badge/version-1.0.0-green.svg)
-[![Go Report Card](https://goreportcard.com/badge/github.com/JspBack/iyzipay-go)](https://goreportcard.com/report/github.com/JspBack/iyzipay-go)
+[![Version](https://img.shields.io/github/v/tag/JspBack/iyzipay-go?sort=semver&label=version&color=green)](https://github.com/JspBack/iyzipay-go/tags)
+[![CI](https://github.com/JspBack/iyzipay-go/actions/workflows/ci-cd.yml/badge.svg?branch=main)](https://github.com/JspBack/iyzipay-go/actions/workflows/ci-cd.yml)
 [![GoDoc](https://godoc.org/github.com/JspBack/iyzipay-go?status.svg)](https://pkg.go.dev/github.com/JspBack/iyzipay-go)
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
 
@@ -33,7 +33,14 @@ go get github.com/JspBack/iyzipay-go
 
 ## Planned Features
 
-- Additional Services: Other extra services will be added.
+- Preauthorization: Reserve funds and capture them later.
+- Subscription Management: Manage subscriptions and update payment cards.
+- Reporting: Retrieve and list transaction details.
+- Webhook: Verify notification signatures.
+- Bank Transfer: Initiate and retrieve transfers.
+- Mass Payout: Pay multiple recipients.
+- Shopping Credit: Initiate and retrieve credit payments.
+- Tokenization: Manage payment sessions.
 
 ## Simple Usage
 
@@ -81,13 +88,11 @@ You can support the project by creating a pull request. 🙂
 
 [GENERAL]
 
-- Unauthorized (401) errors cause panic (because the error format is different).
-- MarketPlace, Subscription, Cancel, Refund, App2App and Iyzilink examples are missing (not tested yet or not working properly).
+- Marketplace, payment cancellation, refunds, and App2App still lack standalone examples.
 
 [IYZILINK]
 
-- Iyzilink integration has issues with IyzilinkUpdate and IyzilinkDelete returning 'system error'.
-- IyzilinkGetDetail and IyzilinkGetList data are filtered incorrectly. This is a temporary solution as the data returned by IyzilinkGetDetail is of the same type as IyzilinkGetList, which is not correct.
+- Local tests verify the Iyzilink lookup, update, and delete requests. Live sandbox verification is pending.
 
 ## License
 

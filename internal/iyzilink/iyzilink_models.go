@@ -1,0 +1,398 @@
+package iyzilink
+
+// IyzilinkCreateFastLinkRequest, hızlı ödeme bağlantısı oluşturmak için kullanılır.
+type IyzilinkCreateFastLinkRequest struct {
+	ConversationID string `json:"conversationId,omitempty"`
+	Locale         string `json:"locale,omitempty" validate:"omitempty,oneof=tr en"`
+	Description    string `json:"description,omitempty"`
+	Price          string `json:"price" validate:"required,numeric"`
+	CurrencyCode   string `json:"currencyCode" validate:"required,oneof=TRY USD EUR GBP RUB CHF NOK"`
+}
+
+type IyzilinkCreateRequest struct {
+	// İstek ve yanıtı eşleştirmek için kullanılan Konuşma ID'si.
+	//
+	// zorunlu değil
+	ConversationID string `json:"conversationId" validate:"omitempty"`
+
+	// iyzico istek sonucunda dönen metinlerin dilini ayarlamak için kullanılır. Varsayılan değeri tr’dir. en olarak kullanılabilir.
+	//
+	// zorunlu değil
+	Locale string `json:"locale" validate:"omitempty,oneof=tr en"`
+
+	// Ürünün ekranda görünen ismi.
+	//
+	// zorunlu
+	Name string `json:"name" validate:"required"`
+
+	// Ürün fiyatı.
+	//
+	// zorunlu
+	Price string `json:"price" validate:"required"`
+
+	// Taksitli Satış Durumu. Gönderilmezse false değeri alır.
+	//
+	// zorunlu değil
+	InstallmentRequested string `json:"installmentRequested" validate:"omitempty,oneof=true false"`
+
+	// Ürün satın alınırken adres isteme parametresi. Gönderilmese true değerini alır.
+	//
+	// zorunlu değil
+	AddressIgnorable string `json:"addressIgnorable" validate:"omitempty,oneof=true false"`
+
+	// Ürünün para birimi.
+	//
+	// zorunlu
+	CurrencyCode string `json:"currencyCode" validate:"required"`
+
+	// Ürünün base64 formatında resmi.
+	//
+	// zorunlu
+	EncodedImageFile string `json:"encodedImageFile" validate:"required,base64"`
+
+	// Ürünün ekranda görünen açıklaması.
+	//
+	// zorunlu
+	Description string `json:"description" validate:"required"`
+
+	ProductBuyerInfo *ProductBuyerInfo `json:"productBuyerInfo" validate:"omitempty"`
+
+	// Stok sayısı.
+	//
+	// zorunlu
+	StockCount int `json:"stockCount" validate:"required"`
+
+	// Stok onayı, normalde gelen değer FALSE.
+	//
+	// zorunlu
+	StockEnabled bool `json:"stockEnabled" validate:"required"`
+}
+
+type ProductBuyerInfo struct {
+	// Alıcı ismi
+	//
+	// zorunlu değil
+	BuyerName string `json:"buyerName" validate:"omitempty"`
+
+	// Alıcı soy ismi.
+	//
+	// zorunlu değil
+	BuyerSurname string `json:"buyerSurname" validate:"omitempty"`
+
+	// Alıcı şehri.
+	//
+	// zorunlu değil
+	BuyerCity string `json:"buyerCity" validate:"omitempty"`
+
+	// Alıcı ülkesi.
+	//
+	// zorunlu değil
+	BuyerCountry string `json:"buyerCountry" validate:"omitempty"`
+
+	// Alıcı GSM.
+	//
+	// zorunlu değil
+	BuyerGsmNumber string `json:"buyerGsmNumber" validate:"omitempty"`
+
+	// Alıcı email adresi.
+	//
+	// zorunlu değil
+	BuyerEmail string `json:"buyerEmail" validate:"omitempty,email"`
+
+	// Alıcı adresi.
+	//
+	// zorunlu değil
+	BuyerAddress string `json:"buyerAddress" validate:"omitempty"`
+}
+
+type IyzilinkUpdateRequest struct {
+	// İstek ve yanıtı eşleştirmek için kullanılan Konuşma ID'si.
+	//
+	// zorunlu değil
+	ConversationID string `json:"conversationId,omitempty" validate:"omitempty"`
+
+	// iyzico istek sonucunda dönen metinlerin dilini ayarlamak için kullanılır. Varsayılan değeri tr’dir. en olarak kullanılabilir.
+	//
+	// zorunlu değil
+	Locale string `json:"locale,omitempty" validate:"omitempty,oneof=tr en"`
+
+	// Ürünün ekranda görünen ismi.
+	//
+	// zorunlu
+	Name string `json:"name" validate:"required"`
+
+	// Ürün fiyatı.
+	//
+	// zorunlu
+	Price string `json:"price" validate:"required"`
+
+	// Taksitli Satış Durumu. Gönderilmezse false değeri alır.
+	//
+	// zorunlu değil
+	InstallmentRequested *bool `json:"installmentRequested,omitempty"`
+
+	// ???
+	SoldLimit string `json:"soldLimit,omitempty" validate:"omitempty"`
+
+	// Ürün satın alınırken adres isteme parametresi. Gönderilmese true değerini alır.
+	//
+	// zorunlu değil
+	AddressIgnorable *bool `json:"addressIgnorable,omitempty"`
+
+	// Ürünün para birimi.
+	//
+	// zorunlu
+	CurrencyCode string `json:"currencyCode" validate:"required"`
+
+	// Base64 biçiminde ürün görseli.
+	//
+	// zorunlu değil
+	EncodedImageFile string `json:"encodedImageFile,omitempty" validate:"omitempty,base64"`
+
+	// Ürünün ekranda görünen açıklaması.
+	//
+	// zorunlu
+	Description string `json:"description" validate:"required"`
+
+	// Iyzilink'e ait token.
+	//
+	// zorunlu
+	Token string `json:"-" validate:"required"`
+}
+
+type IyzilinkDeleteRequest struct {
+	// İstek ve yanıtı eşleştirmek için kullanılan Konuşma ID'si.
+	//
+	// zorunlu değil
+	ConversationID string `json:"conversationId" validate:"omitempty"`
+
+	// iyzico istek sonucunda dönen metinlerin dilini ayarlamak için kullanılır. Varsayılan değeri tr’dir. en olarak kullanılabilir.
+	//
+	// zorunlu değil
+	Locale string `json:"locale" validate:"omitempty,oneof=tr en"`
+
+	// Iyzilink'e ait token.
+	//
+	// zorunlu
+	Token string `json:"token" validate:"required"`
+}
+
+type IyzilinkGetDetailRequest struct {
+	// İstek ve yanıtı eşleştirmek için kullanılan Konuşma ID'si.
+	//
+	// zorunlu değil
+	ConversationID string `json:"conversationId" validate:"omitempty"`
+
+	// iyzico istek sonucunda dönen metinlerin dilini ayarlamak için kullanılır. Varsayılan değeri tr’dir. en olarak kullanılabilir.
+	//
+	// zorunlu değil
+	Locale string `json:"locale" validate:"omitempty,oneof=tr en"`
+
+	// Iyzilink'e ait token.
+	//
+	// zorunlu
+	Token string `json:"token" validate:"required"`
+}
+
+type IyzilinkGetListRequest struct {
+	// İstek ve yanıtı eşleştirmek için kullanılan Konuşma ID'si.
+	//
+	// zorunlu değil
+	ConversationID string `json:"conversationId" validate:"omitempty"`
+
+	// iyzico istek sonucunda dönen metinlerin dilini ayarlamak için kullanılır. Varsayılan değeri tr’dir. en olarak kullanılabilir.
+	//
+	// zorunlu değil
+	Locale string `json:"locale" validate:"omitempty,oneof=tr en"`
+
+	// Sayfa numarası.
+	//
+	// zorunlu değil
+	Page int `json:"page,omitempty" validate:"omitempty,min=1"`
+
+	// Sayfada görüntülenen ürün sayısı.
+	//
+	// zorunlu değil
+	Count int `json:"count,omitempty" validate:"omitempty,min=1,max=100"`
+}
+
+type IyzilinkStatusUpdateRequest struct {
+	// İstek ve yanıtı eşleştirmek için kullanılan Konuşma ID'si.
+	//
+	// zorunlu değil
+	ConversationID string `json:"conversationId" validate:"omitempty"`
+
+	// iyzico istek sonucunda dönen metinlerin dilini ayarlamak için kullanılır. Varsayılan değeri tr’dir. en olarak kullanılabilir.
+	//
+	// zorunlu değil
+	Locale string `json:"locale" validate:"omitempty,oneof=tr en"`
+
+	// Iyzilink'e ait token.
+	//
+	// zorunlu
+	Token string `json:"token" validate:"required"`
+
+	// Iyzilink'in durumu.
+	//
+	// zorunlu
+	ProductStatus string `json:"productStatus" validate:"required,oneof=ACTIVE PASSIVE"`
+}
+
+type IyzilinkResponse struct {
+	// İstek ve yanıtı eşleştirmek için kullanılan Konuşma ID'si.
+	ConversationID string `json:"conversationId"`
+
+	IyzilinkDeleteResponse
+
+	// iyzico istek sonucunda dönen metinlerin dilini ayarlamak için kullanılır. Varsayılan değeri tr’dir. en olarak kullanılabilir.
+	Locale string `json:"locale"`
+
+	// Başarılı işlem sonucu oluşan iyzilink verisi.
+	Data ResponseData `json:"data"`
+}
+
+type ResponseData struct {
+	// Başarılı işlem sonucu oluşan iyzilink tokeni.
+	Token string `json:"token"`
+
+	// Başarılı işlem sonucu oluşan iyzilink urli.
+	Url string `json:"url"`
+
+	// Başarılı işlem sonucu oluşan iyzilink resim urli.
+	ImageUrl string `json:"imageUrl"`
+}
+
+type IyzilinkDeleteResponse struct {
+	// İşlem sonucu başarılı ise success, başarısız ise failure döner.
+	Status string `json:"status"`
+
+	// Dönen sonucun o anki unix timestamp değeridir.
+	SystemTime int `json:"systemTime"`
+}
+
+type IyzilinkGetDetailResponse struct {
+	// Yapılan isteğin sonucunu belirtir. İşlem başarılı ise success değeri döner.
+	Status string `json:"status"`
+
+	// Kullanılan dil.
+	Locale string `json:"locale"`
+
+	// Dönen sonucun o anki unix timestamp değeridir
+	SystemTime int64 `json:"systemTime"`
+
+	// İstek ve yanıtı eşleştirmek için kullanılan Konuşma ID'si.
+	ConversationID string `json:"conversationId"`
+
+	// İşlem sonucu gelen iyzilink verisi.
+	Data DetailResponseData `json:"data"`
+}
+
+type DetailResponseData struct {
+	// Ürün ismi.
+	Name string `json:"name"`
+
+	// İstek esnasında gönderilmişse, sonuçta aynen geri iletilir.
+	ConversationID string `json:"conversationId"`
+
+	// Ürün açıklaması.
+	Description string `json:"description"`
+
+	// Ürün fiyatı.
+	Price float64 `json:"price"`
+
+	// Ürünün para birimi ID'si.
+	CurrencyId int `json:"currencyId"`
+
+	// Ürünün para birimi.
+	CurrencyCode string `json:"currencyCode"`
+
+	// iyzico tarafından üretilen değer.
+	Token string `json:"token"`
+
+	// iyzico tarafından kullanılan tip.
+	ProductType string `json:"productType"`
+
+	// Ürünün durumu.
+	ProductStatus string `json:"productStatus"`
+
+	// Üye işyeri numarası
+	MerchantId int `json:"merchantId"`
+
+	// Ürünün satın alma linki.
+	Url string `json:"url"`
+
+	// Ürün resmi.
+	ImageUrl string `json:"imageUrl"`
+
+	// Ürün adres durumu.
+	AddressIgnorable bool `json:"addressIgnorable"`
+
+	// Satılan ürün sayısı.
+	SoldCount int `json:"soldCount"`
+
+	// Taksit durumu.
+	InstallmentRequested bool `json:"installmentRequested"`
+
+	// Ürünün stok durumu.
+	StockEnabled bool `json:"stockEnabled"`
+
+	// Toplam stok sayısı.
+	StockCount int `json:"stockCount"`
+
+	// ???
+	PresetPriceValues []float64 `json:"presetPriceValues"`
+
+	// ???
+	FlexibleLink bool `json:"flexibleLink"`
+
+	// ???
+	CategoryType string `json:"categoryType"`
+}
+
+type IyzilinkGetListResponse struct {
+	// İşlem sonucu başarılı ise success, başarısız ise failure döner.
+	Status string `json:"status"`
+
+	// Kullanılan dil.
+	Locale string `json:"locale"`
+
+	// Dönen sonucun o anki unix timestamp değeridir.
+	SystemTime int `json:"systemTime"`
+
+	// İstek esnasında gönderilmişse, sonuçta aynen geri iletilir.
+	ConversationID string `json:"conversationId"`
+
+	// İşlem sonucu gelen iyzilink verisi.
+	Data ListResponseData `json:"data"`
+}
+
+type ListResponseData struct {
+	// Listeleme durumu.
+	ListingReviewed bool `json:"listingReviewed"`
+
+	// Toplam iyzilink sayısı.
+	TotalCount int `json:"totalCount"`
+
+	// Sayfa numarası.
+	CurrentPage int `json:"currentPage"`
+
+	// Toplam sayfa sayısı.
+	PageCount int `json:"pageCount"`
+
+	// Sayfada görüntülenen iyzilink verisi.
+	Items []DetailResponseData `json:"items"`
+}
+
+type IyzilinkStatusUpdateResponse struct {
+	// İşlem sonucu başarılı ise success, başarısız ise failure döner.
+	Status string `json:"status"`
+
+	// Kullanılan dil.
+	Locale string `json:"locale"`
+
+	// Dönen sonucun o anki unix timestamp değeridir.
+	SystemTime int `json:"systemTime"`
+
+	// İstek esnasında gönderilmişse, sonuçta aynen geri iletilir.
+	ConversationID string `json:"conversationId"`
+}
